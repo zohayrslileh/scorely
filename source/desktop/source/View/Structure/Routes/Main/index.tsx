@@ -30,11 +30,7 @@ export default function () {
     if (user.pending) return <Throw exception={new PendingException} />
 
     // Unauthorized status
-    if (
-        user.exception
-        && user.exception.current instanceof AxiosError
-        && user.exception.current.response?.status === 401
-    ) return <Navigate to="auth" />
+    if (user.exception && user.exception.current instanceof AxiosError && user.exception.current.response?.status === 401) return <Navigate to="auth" />
 
     // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
