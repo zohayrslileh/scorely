@@ -1,5 +1,6 @@
-import styled from "@emotion/styled"
+import { useEffect, useState } from "react"
 import Welcome from "./Welcome"
+import Routes from "./Routes"
 
 /**
  * Structure
@@ -8,14 +9,30 @@ import Welcome from "./Welcome"
  */
 export default function () {
 
-    return true ? <Welcome /> : <Container />
-}
+    /**
+     * Is ready
+     * 
+     */
+    const [isReady, setIsReady] = useState(false)
 
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    display: grid;
-    height: 100%;
-`
+    /**
+     * On load
+     * 
+     */
+    useEffect(function () {
+
+        // Timer
+        const timer = setTimeout(() => setIsReady(true), 1000)
+
+        /**
+         * On end
+         * 
+         */
+        return function () {
+
+            clearTimeout(timer)
+        }
+    })
+
+    return isReady ? <Routes /> : <Welcome />
+}
