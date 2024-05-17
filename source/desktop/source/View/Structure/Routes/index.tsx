@@ -1,4 +1,7 @@
-import styled from "@emotion/styled"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { lazy } from "react"
+
+const Auth = lazy(() => import("./Auth"))
 
 /**
  * Routes
@@ -7,16 +10,11 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
+    return <BrowserRouter>
 
-        <h1>Routes</h1>
+        <Routes>
+            <Route path="/auth" element={<Auth />} />
+        </Routes>
 
-    </Container>
+    </BrowserRouter>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`
