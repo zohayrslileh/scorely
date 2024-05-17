@@ -1,5 +1,6 @@
 import Authorization from "@/Models/Authorization"
 import request from "@/Models/Server/Request"
+import usePromise from "@/Tools/Promise"
 
 /*
 |-----------------------------
@@ -60,5 +61,15 @@ export default class Authentication {
         const response = await request<Response>({ method: "POST", url: "/auth" })
 
         return response
+    }
+
+    /**
+     * Use verify method
+     * 
+     * @returns
+     */
+    public useVerify() {
+
+        return usePromise(this.verify, [])
     }
 }
