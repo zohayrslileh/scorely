@@ -1,8 +1,10 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import Authentication from "@/Core/Authentication"
 import Authorization from "@/Models/Authorization"
+import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
+import { AxiosError } from "axios"
 import { useMemo } from "react"
 
 /**
@@ -24,10 +26,17 @@ export default function () {
      */
     const user = authentication.useVerify()
 
-    // Pending state
+    // Pending status
     if (user.pending) return <Throw exception={new PendingException} />
 
-    // Exception state
+    // Unauthorized status
+    if (
+        user.exception
+        && user.exception.current instanceof AxiosError
+        && user.exception.current.response?.status === 401
+    ) return <Navigate to="auth" />
+
+    // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
 
     return <Container>
