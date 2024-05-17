@@ -9,5 +9,5 @@ import { Context } from "hono"
 */
 export default function (context: Context) {
 
-    return context.json({ message: "Welcome to Application Programming Interface (API) 👋" })
+    return context.json({ message: "Welcome to API interface 👋" })
 }
