@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { lazy } from "react"
 
 const Auth = lazy(() => import("./Auth"))
+const Main = lazy(() => import("./Main"))
 
 /**
  * Routes
@@ -13,6 +14,7 @@ export default function () {
     return <BrowserRouter>
 
         <Routes>
+            <Route index element={<Main />} />
             <Route path="/auth" element={<Auth />} />
         </Routes>
 

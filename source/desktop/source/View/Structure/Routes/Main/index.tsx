@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 
 /**
- * Auth
+ * Main
  * 
  * @returns 
  */
@@ -9,7 +9,7 @@ export default function () {
 
     return <Container>
 
-        <h1>Auth</h1>
+        <h1>Main</h1>
 
     </Container>
 }
