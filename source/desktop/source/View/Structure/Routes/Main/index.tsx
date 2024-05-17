@@ -32,7 +32,7 @@ export default function () {
 
     return <Container>
 
-        <h1>Main</h1>
+        <h1>Main {user.solve.id}</h1>
 
     </Container>
 }
