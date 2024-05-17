@@ -9,7 +9,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
-        <Logo />
+        <Logo width={250} />
     </Container>
 }
 
@@ -18,4 +18,8 @@ export default function () {
  * 
  */
 const Container = styled.div`
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
 `

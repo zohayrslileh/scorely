@@ -8,9 +8,7 @@ import Welcome from "./Welcome"
  */
 export default function () {
 
-    return <Container>
-        <Welcome />
-    </Container>
+    return true ? <Welcome /> : <Container />
 }
 
 /**
@@ -18,4 +16,6 @@ export default function () {
  * 
  */
 const Container = styled.div`
+    display: grid;
+    height: 100%;
 `
