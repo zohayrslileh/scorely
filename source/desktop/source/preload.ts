@@ -9,13 +9,22 @@ import { appWindow } from "@tauri-apps/api/window"
 */
 appWindow.isVisible().then(function (visible) {
 
-    // CALNCEL IF IS VISIBLE
+    /*
+    |-----------------------------
+    |  CALNCEL IF IS VISIBLE
+    |-----------------------------
+    |
+    |
+    */
     if (visible) return
 
-    // SHOW WINDOW
+    /*
+    |-----------------------------
+    |  SHOW WINDOW
+    |-----------------------------
+    |
+    |
+    */
     appWindow.show()
-
-    // MAXIMIZE WINDOW
-    appWindow.maximize()
 
 })
