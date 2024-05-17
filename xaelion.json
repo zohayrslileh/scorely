@@ -1,0 +1,21 @@
+{
+    "devPaths": [
+        ".git",
+        "usage",
+        "source",
+        ".vscode",
+        "README.md",
+        ".gitignore",
+        "xaelion.json",
+        "tsconfig.json",
+        "package-lock.json"
+    ],
+    "renewablePaths": [
+        "release",
+        "node_modules"
+    ],
+    "localPaths": [
+        ".env",
+        "storage"
+    ]
+}

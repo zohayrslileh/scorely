@@ -1,0 +1,21 @@
+
+/*
+ |---------------------------------------------------------
+ |  Define Typescript Environment
+ |---------------------------------------------------------
+ |  For typescript environment use "npx ts-node console"
+ |  For javascript environment use "node console"
+ |
+ */
+const TS_ENV = process.execArgv.some(argument => argument.includes("ts-node"))
+
+/*
+ |-----------------------------
+ |  Require Application
+ |-----------------------------
+ |
+ |
+ */
+const application = require(TS_ENV ? "./source/controller/Console" : "./dist/controller/Console")
+
+application() // Done

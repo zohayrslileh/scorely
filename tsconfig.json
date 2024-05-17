@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "NodeNext",
+        "strict": true,
+        "jsx": "react-jsx",
+        "skipLibCheck": true,
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "noUnusedLocals": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "noUnusedParameters": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "jsxImportSource": "hono/jsx",
+        "moduleResolution": "NodeNext",
+        "baseUrl": "source/controller",
+        "outDir": "dist/controller",
+        "paths": {
+            "@/*": [
+                "*"
+            ]
+        }
+    },
+    "include": [
+        "source/controller"
+    ]
+}

@@ -1,0 +1,8 @@
+# Ignore
+
+/package-lock.json
+/node_modules
+/storage
+/release
+/dist
+/.env

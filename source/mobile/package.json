@@ -1,0 +1,39 @@
+{
+    "name": "xaelion-gui",
+    "version": "2.1.0",
+    "private": true,
+    "author": "Zohayr SLILEH",
+    "license": "ISC",
+    "scripts": {
+        "dev": "vite --host",
+        "build": "vite build && cap sync",
+        "assets": "capacitor-assets generate --android",
+        "preview": "set PREVIEW=true && cap sync && cap open android && vite --host"
+    },
+    "devDependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.0",
+        "@types/react": "^18.2.15",
+        "@types/react-dom": "^18.2.7",
+        "@vitejs/plugin-react-swc": "^3.3.2",
+        "axios": "^1.5.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-hot-toast": "^2.4.1",
+        "react-icons": "^4.12.0",
+        "react-router-dom": "^6.16.0",
+        "react-select": "^5.8.0",
+        "socket.io-client": "^4.7.2",
+        "typescript": "^4.9.5",
+        "vite": "^4.4.5",
+        "zod": "^3.22.4"
+    },
+    "dependencies": {
+        "@capacitor/android": "^6.0.0",
+        "@capacitor/assets": "^3.0.5",
+        "@capacitor/cli": "^6.0.0",
+        "@capacitor/core": "^6.0.0",
+        "@capacitor/keyboard": "^6.0.0",
+        "@capacitor/status-bar": "^6.0.0"
+    }
+}

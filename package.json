@@ -1,0 +1,55 @@
+{
+    "name": "scorely",
+    "version": "0.1.0",
+    "private": true,
+    "author": "Zohayr SLILEH",
+    "license": "ISC",
+    "main": "index.js",
+    "engines": {
+        "node": ">=16.14.0"
+    },
+    "scripts": {
+        "start": "ts-node index.js",
+        "dev": "ts-node console dev",
+        "sync": "ts-node console sync",
+        "test": "ts-node console test",
+        "build": "ts-node console build",
+        "release": "ts-node console release"
+    },
+    "proScripts": {
+        "start": "node index.js",
+        "sync": "node console sync"
+    },
+    "dependencies": {
+        "@hono/node-server": "^1.9.1",
+        "archiver": "^6.0.1",
+        "axios": "^1.6.8",
+        "bcrypt": "^5.1.1",
+        "chalk": "^4.1.2",
+        "chokidar": "^3.5.3",
+        "decompress": "^4.2.1",
+        "dotenv": "^16.3.1",
+        "enquirer": "^2.4.1",
+        "hono": "^4.2.1",
+        "node-rsa": "^1.1.1",
+        "nodemailer": "^6.9.12",
+        "pm2": "^5.3.1",
+        "socket.io": "^4.7.2",
+        "sqlite3": "^5.1.6",
+        "typeorm": "^0.3.20",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/archiver": "^5.3.2",
+        "@types/bcrypt": "^5.0.2",
+        "@types/decompress": "^4.2.4",
+        "@types/node": "^20.8.6",
+        "@types/node-rsa": "^1.1.4",
+        "@types/nodemailer": "^6.4.14",
+        "@types/uglify-js": "^3.17.2",
+        "reflect-metadata": "^0.2.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.2.2",
+        "uglify-js": "^3.17.4"
+    }
+}
