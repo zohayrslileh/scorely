@@ -11,7 +11,7 @@ import auth from "./auth"
 export default Router.create(function (routes) {
 
     /**
-     * Main
+     * Welcome
      * 
      */
     routes.all("/", context => context.json({ message: "Welcome to the API interface 👋" }))
