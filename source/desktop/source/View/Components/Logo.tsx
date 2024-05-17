@@ -1,5 +1,5 @@
-import lightLogo from "@/Assets/Media/light-logo.png"
-import darkLogo from "@/Assets/Media/dark-logo.png"
+import lightLogo from "@/View/Media/light-logo.png"
+import darkLogo from "@/View/Media/dark-logo.png"
 import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 

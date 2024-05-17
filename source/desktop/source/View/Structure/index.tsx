@@ -1,5 +1,5 @@
-import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
+import Welcome from "./Welcome"
 
 /**
  * Structure
@@ -9,7 +9,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
-        <Logo />
+        <Welcome />
     </Container>
 }
 
