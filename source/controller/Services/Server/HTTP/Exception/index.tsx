@@ -16,7 +16,7 @@ const ExceptionHandler: ErrorHandler = function (exception, context) {
      */
     const httpException = compiler(exception)
 
-    return context.html(<b>{httpException.message}</b>, httpException.status)
+    return context.html(<b style={{ border: "1px solid red" }}>{httpException.message}</b>, httpException.status)
 }
 
 export default ExceptionHandler
