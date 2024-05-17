@@ -3,7 +3,6 @@ import Authentication from "@/Core/Authentication"
 import Authorization from "@/Models/Authorization"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
-import styled from "@emotion/styled"
 import { AxiosError } from "axios"
 import { useMemo } from "react"
 
@@ -41,16 +40,5 @@ export default function () {
     // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
 
-    return <Container>
-
-        <h1>Main {user.solve.id}</h1>
-
-    </Container>
+    return <h1>Main {user.solve.id}</h1>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`
