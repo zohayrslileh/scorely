@@ -1,15 +1,14 @@
-import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
 
 /**
- * Structure
+ * Welcome
  * 
  * @returns 
  */
 export default function () {
 
     return <Container>
-        <Logo />
+        Welcome
     </Container>
 }
 
