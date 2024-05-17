@@ -10,7 +10,7 @@ import styled from "@emotion/styled"
  */
 export default function (props: Omit<React.ComponentProps<typeof Container>, "src" | "alt">) {
 
-    return <Container {...props} alt="" src={Appearance.theme.name === "dark" ? lightLogo : darkLogo} loading="eager" />
+    return <Container {...props} alt="" src={Appearance.theme.key === "dark" ? lightLogo : darkLogo} loading="eager" />
 }
 
 /**
