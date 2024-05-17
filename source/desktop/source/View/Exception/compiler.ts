@@ -1,6 +1,8 @@
 import WsEventException from "./Exceptions/WsEvent"
 import EventError from "@/Tools/Socket/EventError"
+import AxiosException from "./Exceptions/Axios"
 import ViewException from "./Exceptions"
+import { AxiosError } from "axios"
 
 /**
  * Compiler method
@@ -14,6 +16,12 @@ export default function (exception: unknown): ViewException {
      * 
      */
     if (exception instanceof ViewException) return exception
+
+    /**
+     * Axios Error
+     * 
+     */
+    if (exception instanceof AxiosError) return new AxiosException(exception)
 
     /**
      * Event Error
