@@ -1,4 +1,3 @@
-import Authorization from "@/Models/Authorization"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
 
@@ -43,8 +42,7 @@ export default class Authentication {
         // Set token
         this.token = response.token
 
-        // Save authorization
-        Authorization.value = this.token
+        return this.token
     }
 
     /**
