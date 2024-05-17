@@ -1,10 +1,8 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import Authentication from "@/Core/Authentication"
-import Authorization from "@/Models/Authorization"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import { AxiosError } from "axios"
-import { useMemo } from "react"
 import Login from "./Login"
 
 /**
@@ -15,16 +13,10 @@ import Login from "./Login"
 export default function () {
 
     /**
-     * Authentication
-     * 
-     */
-    const authentication = useMemo(() => new Authentication(Authorization.value), [])
-
-    /**
      * User
      * 
      */
-    const user = authentication.useVerify()
+    const user = Authentication.useVerify()
 
     /**
      * Unauthorized

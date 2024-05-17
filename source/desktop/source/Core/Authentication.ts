@@ -1,3 +1,4 @@
+import Authorization from "@/Models/Authorization"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
 
@@ -11,27 +12,11 @@ import usePromise from "@/Tools/Promise"
 export default class Authentication {
 
     /**
-     * Token
-     * 
-     */
-    private token: string | undefined
-
-    /**
-     * Constructor method
-     * 
-     */
-    public constructor(token?: string) {
-
-        // Set token
-        this.token = token
-    }
-
-    /**
      * Login method
      * 
      * @returns
      */
-    public async login(data: unknown) {
+    public static async login(data: unknown) {
 
         // Response
         type Response = { token: string }
@@ -39,10 +24,8 @@ export default class Authentication {
         // Ask response
         const response = await request<Response>({ method: "POST", url: "/auth/login", data })
 
-        // Set token
-        this.token = response.token
-
-        return this.token
+        // Set authorization
+        Authorization.value = response.token
     }
 
     /**
@@ -50,7 +33,7 @@ export default class Authentication {
      * 
      * @returns
      */
-    public async verify() {
+    public static async verify() {
 
         // Response
         type Response = { id: number }
@@ -66,7 +49,7 @@ export default class Authentication {
      * 
      * @returns
      */
-    public useVerify() {
+    public static useVerify() {
 
         return usePromise(this.verify, [])
     }
