@@ -65,7 +65,8 @@
         "windows": [
             {
                 "title": "Scorely",
-                "visible": false
+                "visible": false,
+                "center": true
             }
         ]
     }
