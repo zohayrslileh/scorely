@@ -1,4 +1,11 @@
-import styled from "@emotion/styled"
+import PendingException from "@/View/Exception/Exceptions/Pending"
+import Authentication from "@/Core/Authentication"
+import Authorization from "@/Models/Authorization"
+import { Navigate } from "react-router-dom"
+import { Throw } from "@/Tools/Exception"
+import { AxiosError } from "axios"
+import { useMemo } from "react"
+import Login from "./Login"
 
 /**
  * Auth
@@ -7,16 +14,32 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
+    /**
+     * Authentication
+     * 
+     */
+    const authentication = useMemo(() => new Authentication(Authorization.value), [])
 
-        <h1>Auth</h1>
+    /**
+     * User
+     * 
+     */
+    const user = authentication.useVerify()
 
-    </Container>
+    /**
+     * Unauthorized
+     * 
+     */
+    const unauthorized = user.exception && user.exception.current instanceof AxiosError && user.exception.current.response?.status === 401
+
+    // Pending status
+    if (user.pending) return <Throw exception={new PendingException} />
+
+    // Unauthorized status
+    if (unauthorized) return <Navigate to="auth" />
+
+    // Exception status
+    if (user.exception) return <Throw exception={user.exception.current} />
+
+    return <Login />
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`
