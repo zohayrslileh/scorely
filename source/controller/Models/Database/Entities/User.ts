@@ -1,7 +1,8 @@
-import { Entity, Column, ManyToOne } from "typeorm"
+import { Entity, Column, ManyToOne, OneToOne } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import { Signer } from "@/Models/Encryptor"
 import bcrypt from "bcrypt"
+import Judge from "./Judge"
 import Role from "./Role"
 
 /*
@@ -34,6 +35,13 @@ export default class User extends BaseEntity {
      */
     @ManyToOne(() => Role, role => role.users)
     declare public role: Role | null
+
+    /**
+     * Judge
+     * 
+     */
+    @OneToOne(() => Judge, judge => judge.user)
+    declare public judge: Judge | null
 
     /**
      * Set password method
