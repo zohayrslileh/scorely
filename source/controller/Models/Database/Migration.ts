@@ -20,7 +20,7 @@ export default async function () {
     await adminRole.save()
 
     // Admin user
-    const adminUser = await User.findOneBy({ role: adminRole }) || new User
+    const adminUser = await User.findOneBy({ role: { id: adminRole.id } }) || new User
 
     // Set username
     adminUser.username = "admin"
