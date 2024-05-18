@@ -1,5 +1,4 @@
 import { DataSource } from "typeorm"
-import migration from "./Migration"
 import { join } from "path"
 
 /*
@@ -12,7 +11,8 @@ import { join } from "path"
 const database = new DataSource({
     type: "sqlite",
     database: "storage/database.sqlite",
-    entities: [join(__dirname, "Entities/*")]
+    entities: [join(__dirname, "Entities/*")],
+    migrations: [join(__dirname, "Migrations/*")]
 })
 
-export default Object.assign(database, { migration })
+export default database
