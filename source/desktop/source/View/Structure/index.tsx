@@ -16,7 +16,7 @@ export default function () {
     const [isReady, setIsReady] = useState(false)
 
     /**
-     * On load
+     * After Effect
      * 
      */
     useEffect(function () {
@@ -25,7 +25,7 @@ export default function () {
         const timer = setTimeout(() => setIsReady(true), 1000)
 
         /**
-         * On end
+         * Before Effect
          * 
          */
         return function () {
