@@ -33,4 +33,13 @@ export default async function () {
 
     // Save admin user
     await adminUser.save()
+
+    // Judge role
+    const judgeRole = await Role.findOneBy({ name: "judge" }) || new Role
+
+    // Set name
+    judgeRole.name = "judge"
+
+    // Save judge role
+    await judgeRole.save()
 }
