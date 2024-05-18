@@ -13,7 +13,7 @@ export default function () {
      * Is ready
      * 
      */
-    const [isReady, setIsReady] = useState(true)
+    const [isReady, setIsReady] = useState(false)
 
     /**
      * On load
