@@ -5,8 +5,8 @@
     "author": "Zohayr SLILEH",
     "license": "ISC",
     "scripts": {
-        "web": "vite",
-        "dev": "tauri dev",
+        "dev": "vite",
+        "start": "tauri dev",
         "build": "tauri build"
     },
     "devDependencies": {
