@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm"
+import migration from "./Migration"
 import { join } from "path"
 
 /*
@@ -14,4 +15,4 @@ const database = new DataSource({
     entities: [join(__dirname, "Entities/*")]
 })
 
-export default database
+export default Object.assign(database, { migration })
