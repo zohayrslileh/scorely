@@ -7,9 +7,8 @@
 |
 */
 const config = {
-    
-    APP_NAME: "Scorely",
-    DEV_BASE_SERVER_URL: "http://localhost:3000/"
+
+    APP_NAME: "Scorely"
 }
 
 export default config
