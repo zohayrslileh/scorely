@@ -1,4 +1,4 @@
-import "./Config" // Setup environment variables 
+import "./Config" // Setup environment variables
 import Navigator from "@/Tools/Navigator"
 import database from "./Database"
 
