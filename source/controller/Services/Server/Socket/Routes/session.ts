@@ -21,7 +21,10 @@ export default new Router(function (session) {
         // User
         const user = await authentication.verify()
 
-        console.log(user.username)
+        // Role
+        const role = await user.getRole()
+
+        console.log(role)
 
     })
 })
