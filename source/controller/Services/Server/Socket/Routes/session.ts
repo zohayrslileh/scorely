@@ -1,3 +1,4 @@
+import Authentication from "@/Core/Authentication"
 import Router from "@/Tools/Socket/Router"
 
 /*
@@ -6,5 +7,21 @@ import Router from "@/Tools/Socket/Router"
 |-----------------------------
 |
 */
-export default new Router(function () {
+export default new Router(function (session) {
+
+    // On connection
+    session.onConnection(async function (client) {
+
+        // Authorization
+        const authorization = client.socket.handshake.auth.authorization
+
+        // Authentication
+        const authentication = new Authentication(authorization)
+
+        // User
+        const user = await authentication.verify()
+
+        console.log(user.username)
+
+    })
 })
