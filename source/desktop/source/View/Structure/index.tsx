@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Welcome from "./Welcome"
-import Routes from "./Routes"
+import Body from "./Body"
 
 /**
  * Structure
@@ -34,5 +34,5 @@ export default function () {
         }
     })
 
-    return isReady ? <Routes /> : <Welcome />
+    return isReady ? <Body /> : <Welcome />
 }
