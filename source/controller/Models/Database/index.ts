@@ -11,8 +11,7 @@ import { join } from "path"
 const database = new DataSource({
     type: "sqlite",
     database: "storage/database.sqlite",
-    entities: [join(__dirname, "Entities/*")],
-    migrations: [join(__dirname, "Migrations/*")]
+    entities: [join(__dirname, "Entities/*")]
 })
 
 export default database
