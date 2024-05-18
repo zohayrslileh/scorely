@@ -33,5 +33,5 @@ export default function () {
     // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
 
-    return <Navigate to="" />
+    return <Navigate to="/" />
 }
