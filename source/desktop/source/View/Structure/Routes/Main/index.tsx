@@ -32,5 +32,6 @@ export default function () {
     // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
 
+    // Authorized status
     return <h1>Main {user.solve.id}</h1>
 }

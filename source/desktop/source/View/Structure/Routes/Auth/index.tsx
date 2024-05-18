@@ -33,5 +33,6 @@ export default function () {
     // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
 
+    // Authorized status
     return <Navigate to="/" />
 }
