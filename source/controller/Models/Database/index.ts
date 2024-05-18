@@ -14,4 +14,13 @@ const database = new DataSource({
     entities: [join(__dirname, "Entities/*")]
 })
 
-export default database
+/*
+|-----------------------------
+|  Migration
+|-----------------------------
+|
+| 
+*/
+const migration = async () => await require("./Migration").default()
+
+export default Object.assign(database, { migration })
