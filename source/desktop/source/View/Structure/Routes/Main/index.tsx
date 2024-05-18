@@ -3,6 +3,7 @@ import Authentication from "@/Core/Authentication"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import { AxiosError } from "axios"
+import Routes from "./Routes"
 
 /**
  * Main
@@ -33,5 +34,5 @@ export default function () {
     if (user.exception) return <Throw exception={user.exception.current} />
 
     // Authorized status
-    return <h1>Main {user.solve.id}</h1>
+    return <Routes />
 }
