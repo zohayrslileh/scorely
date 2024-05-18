@@ -1,5 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import { lazy, useState } from "react"
+import PendingException from "@/View/Exception/Exceptions/Pending"
+import { lazy, useState, Suspense } from "react"
+import { Throw } from "@/Tools/Exception"
 import Server from "@/Models/Server"
 
 const Connect = lazy(() => import("./Connect"))
@@ -25,11 +27,15 @@ export default function () {
      */
     return <BrowserRouter>
 
-        <Routes>
-            <Route index element={server ? <Main /> : <Navigate to="/connect" />} />
-            <Route path="/auth" element={server ? <Auth /> : <Navigate to="/connect" />} />
-            <Route path="/connect" element={<Connect value={server} onChange={setServer} />} />
-        </Routes>
+        <Suspense fallback={<Throw exception={new PendingException} />}>
+
+            <Routes>
+                <Route index element={server ? <Main /> : <Navigate to="/connect" />} />
+                <Route path="/auth" element={server ? <Auth /> : <Navigate to="/connect" />} />
+                <Route path="/connect" element={<Connect value={server} onChange={setServer} />} />
+            </Routes>
+
+        </Suspense>
 
     </BrowserRouter>
 }
