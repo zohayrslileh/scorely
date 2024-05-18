@@ -9,6 +9,6 @@ import Color from "@/Tools/Color"
 */
 export default {
 
-    BACKGROUND: new Color("#FFFFFF"),
+    BACKGROUND: new Color("#DDE5F4"),
     COLOR: new Color("#001822")
 }
