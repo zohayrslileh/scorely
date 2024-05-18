@@ -32,4 +32,7 @@ export async function synchronize() {
 
     // Database synchronize
     await database.synchronize()
+
+    // Database migration
+    await database.migration()
 }
