@@ -8,5 +8,5 @@ import Router from "@/Tools/Socket/Router"
 */
 export default new Router(function (session) {
 
-    console.log(session)
+    session
 })
