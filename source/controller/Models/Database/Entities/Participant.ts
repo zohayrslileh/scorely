@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToMany } from "typeorm"
+import { Entity, Column, ManyToMany, JoinTable } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Session from "./Session"
 
@@ -24,5 +24,6 @@ export default class Participant extends BaseEntity {
      * 
      */
     @ManyToMany(() => Session, session => session.participants)
+    @JoinTable()
     declare public sessions: Session[]
 }
