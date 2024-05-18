@@ -9,7 +9,7 @@ const Auth = lazy(() => import("./Auth"))
 const Main = lazy(() => import("./Main"))
 
 /**
- * Body
+ * Content
  * 
  * @returns 
  */
