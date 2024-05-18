@@ -26,6 +26,18 @@ export default class Authentication {
 
         // Set authorization
         Authorization.value = response.token
+
+        return response
+    }
+
+    /**
+     * Use login method
+     * 
+     * @returns
+     */
+    public static useLogin(data: unknown) {
+
+        return usePromise(async () => await this.login(data), [])
     }
 
     /**
