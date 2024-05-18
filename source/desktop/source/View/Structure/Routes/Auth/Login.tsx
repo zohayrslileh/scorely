@@ -20,7 +20,7 @@ export default function () {
 
         await Authentication.login(value)
 
-        naviagte("")
+        naviagte("..")
 
     }, [value])
 
