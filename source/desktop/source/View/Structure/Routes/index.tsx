@@ -11,6 +11,10 @@ const Main = lazy(() => import("./Main"))
  */
 export default function () {
 
+    /**
+     * Browser Router
+     * 
+     */
     return <BrowserRouter>
 
         <Routes>
