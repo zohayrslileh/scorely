@@ -11,10 +11,19 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
+    /**
+     * Form
+     * 
+     */
     const { value, update } = useForm(() => new LoginForm)
 
+    /**
+     * Login
+     * 
+     */
     const login = Authentication.useLogin(value)
 
+    // Solve status
     if (login.solve) return <Navigate to="/" />
 
     return <Container>
@@ -35,7 +44,21 @@ export default function () {
 const Container = styled.div`
 `
 
+/**
+ * Login Form
+ * 
+ */
 class LoginForm {
+
+    /**
+     * Username
+     * 
+     */
     username: string | undefined
+
+    /**
+     * Password
+     * 
+     */
     password: string | undefined
 }
