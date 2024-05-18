@@ -1,5 +1,6 @@
+import { Entity, Column, ManyToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
-import { Entity, Column } from "typeorm"
+import Session from "./Session"
 
 /*
 |-----------------------------
@@ -18,4 +19,10 @@ export default class Judge extends BaseEntity {
     @Column({ type: "varchar", nullable: false, unique: true })
     declare public name: string
 
+    /**
+     * Sessions
+     * 
+     */
+    @ManyToMany(() => Session, session => session.judges)
+    declare public sessions: Session[]
 }

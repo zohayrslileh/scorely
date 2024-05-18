@@ -1,5 +1,7 @@
 import BaseEntity from "@/Tools/Database/Entity"
-import { Entity } from "typeorm"
+import { Entity, ManyToMany } from "typeorm"
+import Participant from "./Participant"
+import Judge from "./Judge"
 
 /*
 |-----------------------------
@@ -11,4 +13,17 @@ import { Entity } from "typeorm"
 @Entity()
 export default class Session extends BaseEntity {
 
+    /**
+     * Judges
+     * 
+     */
+    @ManyToMany(() => Judge, judge => judge.sessions)
+    declare public judges: Judge[]
+
+    /**
+     * Participants
+     * 
+     */
+    @ManyToMany(() => Participant, participant => participant.sessions)
+    declare public participants: Participant[]
 }
