@@ -10,17 +10,17 @@ import User from "./Entities/User"
 */
 export default async function () {
 
-    // Owner role
-    const ownerRole = await Role.findOneBy({ name: "owner" }) || new Role
+    // Admin role
+    const adminRole = await Role.findOneBy({ name: "admin" }) || new Role
 
     // Set name
-    ownerRole.name = "owner"
+    adminRole.name = "admin"
 
     // Save admin role
-    await ownerRole.save()
+    await adminRole.save()
 
     // Admin user
-    const adminUser = await User.findOneBy({ role: { id: ownerRole.id } }) || new User
+    const adminUser = await User.findOneBy({ role: { id: adminRole.id } }) || new User
 
     // Set username
     adminUser.username = "admin"
@@ -29,7 +29,7 @@ export default async function () {
     await adminUser.setPassword("admin123")
 
     // Set role
-    adminUser.role = ownerRole
+    adminUser.role = adminRole
 
     // Save admin user
     await adminUser.save()
