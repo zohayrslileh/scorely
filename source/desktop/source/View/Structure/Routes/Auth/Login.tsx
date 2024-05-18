@@ -1,7 +1,9 @@
+import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/Tools/MaterialUI/TextInput"
 import Authentication from "@/Core/Authentication"
 import useForm, { Form } from "@/Tools/Form"
 import { Navigate } from "react-router-dom"
+import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
 
 /**
@@ -22,6 +24,9 @@ export default function () {
      * 
      */
     const login = Authentication.useLogin(value)
+
+    // Pending status
+    if (login.pending) return <Throw exception={new PendingException} />
 
     // Solve status
     if (login.solve) return <Navigate to="/" />
