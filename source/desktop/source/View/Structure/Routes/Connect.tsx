@@ -1,8 +1,8 @@
-import Server from "@/Models/Server"
 import TextInput from "@/Tools/MaterialUI/TextInput"
-import styled from "@emotion/styled"
-import { useCallback, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useCallback, useState } from "react"
+import Server from "@/Models/Server"
+import styled from "@emotion/styled"
 
 /**
  * Connect
@@ -11,10 +11,23 @@ import { useNavigate } from "react-router-dom"
  */
 export default function ({ value, onChange }: Props) {
 
+    /**
+     * Navigate
+     * 
+     */
     const navigate = useNavigate()
 
+    /**
+     * Server
+     * 
+     */
     const [server, setServer] = useState(value)
 
+    /**
+     * Connect method
+     * 
+     * @returns
+     */
     const connect = useCallback(function () {
 
         onChange(server)
