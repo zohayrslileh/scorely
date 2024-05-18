@@ -2,8 +2,11 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import Authentication from "@/Core/Authentication"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
+import styled from "@emotion/styled"
 import { AxiosError } from "axios"
 import Content from "./Content"
+import Sidebar from "./Sidebar"
+import Navbar from "./Navbar"
 
 /**
  * Main
@@ -34,5 +37,23 @@ export default function () {
     if (user.exception) return <Throw exception={user.exception.current} />
 
     // Authorized status
-    return <Content />
+    return <Container>
+
+        {/** Navbar */}
+        <Navbar />
+
+        {/** Sidebar */}
+        <Sidebar />
+
+        {/** Content */}
+        <Content />
+
+    </Container>
 }
+
+/**
+ * Container
+ * 
+ */
+const Container = styled.div`
+`
