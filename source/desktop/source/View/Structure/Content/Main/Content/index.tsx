@@ -1,20 +1,29 @@
 import { Route, Routes } from "react-router-dom"
+import styled from "@emotion/styled"
 import { lazy } from "react"
 
 const Home = lazy(() => import("./Home"))
 
 /**
- * Routes
+ * Content
  * 
  * @returns 
  */
 export default function () {
 
-    /**
-     * Routes
-     * 
-     */
-    return <Routes>
-        <Route index element={<Home />} />
-    </Routes>
+    return <Container>
+
+        <Routes>
+            <Route index element={<Home />} />
+        </Routes>
+
+    </Container>
 }
+
+/**
+ * Container
+ * 
+ */
+const Container = styled.div`
+    grid-area: content;
+`
