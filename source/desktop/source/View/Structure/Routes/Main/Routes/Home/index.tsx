@@ -21,6 +21,15 @@ export default function () {
      */
     const connected = session.useConnected()
 
+    /**
+     * Error
+     * 
+     */
+    const error = session.useState<string>("error")
+
+    // Error status
+    if (!error) return <Throw exception={new Error(error)} />
+
     // Conniting status
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
