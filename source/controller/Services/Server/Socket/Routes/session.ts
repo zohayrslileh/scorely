@@ -2,10 +2,11 @@ import Router from "@/Tools/Socket/Router"
 
 /*
 |-----------------------------
-| Meet
+| Session
 |-----------------------------
 |
 */
-export default new Router(function () {
+export default new Router(function (session) {
 
+    console.log(session)
 })

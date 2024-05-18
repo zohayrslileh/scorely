@@ -1,5 +1,5 @@
 import Router from "@/Tools/Socket/Router"
-import meet from "./meet"
+import session from "./session"
 
 /*
 |-----------------------------
@@ -10,9 +10,9 @@ import meet from "./meet"
 export default new Router(function (routes) {
 
     /**
-     * Meet
+     * Session
      * 
      */
-    routes.route("/meet", meet)
+    routes.route("/session", session)
 
 })
