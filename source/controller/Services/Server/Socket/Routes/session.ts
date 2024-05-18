@@ -6,7 +6,5 @@ import Router from "@/Tools/Socket/Router"
 |-----------------------------
 |
 */
-export default new Router(function (session) {
-
-    session
+export default new Router(function () {
 })
