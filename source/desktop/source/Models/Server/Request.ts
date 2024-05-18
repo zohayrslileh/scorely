@@ -9,7 +9,7 @@ import config from "@/config"
 |
 |
 */
-export const instance = () => axios.create({
+export const createInstance = () => axios.create({
     baseURL: (import.meta.env.DEV ? config.DEV_BASE_SERVER_URL : "/") + "api",
     timeout: 30000,
     headers: {
@@ -24,8 +24,11 @@ export const instance = () => axios.create({
  */
 export default async function request<Body>(requestConfig: AxiosRequestConfig) {
 
+    // Instance
+    const instance = createInstance()
+
     // Ask response
-    const response = await instance()<Body>(requestConfig)
+    const response = await instance<Body>(requestConfig)
 
     return response.data
 }
