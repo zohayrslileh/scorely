@@ -27,7 +27,7 @@ export default function () {
     if (user.pending) return <Throw exception={new PendingException} />
 
     // Unauthorized status
-    if (unauthorized) return <Navigate to="auth" />
+    if (unauthorized) return <Navigate to="/auth" />
 
     // Exception status
     if (user.exception) return <Throw exception={user.exception.current} />
