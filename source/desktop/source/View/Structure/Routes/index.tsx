@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { lazy, useState } from "react"
 import Server from "@/Models/Server"
 import Connect from "./Connect"
-import { lazy } from "react"
 
 const Auth = lazy(() => import("./Auth"))
 const Main = lazy(() => import("./Main"))
@@ -14,15 +14,22 @@ const Main = lazy(() => import("./Main"))
 export default function () {
 
     /**
+     * Server
+     * 
+     */
+    const [server, setServer] = useState(() => Server.value)
+
+    /**
      * Browser Router
      * 
      */
-    return Server.value ? <BrowserRouter>
+    return <BrowserRouter>
 
         <Routes>
-            <Route index element={<Main />} />
-            <Route path="/auth" element={<Auth />} />
+            <Route index element={server ? <Main /> : <Navigate to="/connect" />} />
+            <Route path="/auth" element={server ? <Auth /> : <Navigate to="/connect" />} />
+            <Route path="/connect" element={server ? <Navigate to="/" /> : <Connect value={server} onChange={setServer} />} />
         </Routes>
 
-    </BrowserRouter> : <Connect />
+    </BrowserRouter>
 }
