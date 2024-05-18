@@ -37,7 +37,7 @@ export default class Authentication {
      */
     public static useLogin(data: unknown) {
 
-        return usePromise(async () => await this.login(data), [])
+        return usePromise(async () => await this.login(data))
     }
 
     /**
