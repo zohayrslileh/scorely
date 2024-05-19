@@ -9,7 +9,8 @@ import Color from "@/Tools/Color"
 */
 export default {
 
-    BACKGROUND_DARK: new Color("#100D0D"),
+    BACKGROUND_SECONDARY: new Color("#192130"),
     BACKGROUND: new Color("#001822"),
+    BOX_SHADOW: "0 0 20px #1d1c1c",
     COLOR: new Color("#DDE5F4")
 }
