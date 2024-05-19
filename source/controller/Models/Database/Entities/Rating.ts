@@ -18,7 +18,7 @@ export default class Rating extends BaseEntity {
      * Value
      * 
      */
-    @Column({ type: "number", nullable: false })
+    @Column({ type: "float", nullable: false })
     declare public value: number
 
     /**
