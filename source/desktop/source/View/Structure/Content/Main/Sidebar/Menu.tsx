@@ -1,8 +1,8 @@
-import { LuLayoutDashboard, LuBox, LuSettings, LuUsers2, LuBanknote, LuFile, LuAreaChart, LuWallet, LuShoppingCart } from "react-icons/lu"
+import { LuStar, LuUsers2, LuUsers } from "react-icons/lu"
 import { Link, useParams } from "react-router-dom"
+import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
-import Appearance from "@/View/Appearance"
 
 /**
  * Menu
@@ -40,6 +40,9 @@ export default function () {
 const Container = styled.div`
     overflow: hidden;
     padding: 10px;
+    display: grid;
+    gap: 10px;
+    height: fit-content;
 
     > a {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
@@ -52,7 +55,7 @@ const Container = styled.div`
         padding-inline-start: 15px;
         border-radius: 10px;
 
-        &.active {
+        &.active, &:hover {
             background: ${() => Appearance.schema.COLOR_BLUE.rgba()};
             color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
         }
@@ -69,53 +72,18 @@ const Container = styled.div`
  */
 const items = [
     {
-        route: "",
-        name: "Overview",
-        Icon: LuLayoutDashboard
+        route: "session",
+        name: "Sessions",
+        Icon: LuStar
     },
     {
-        route: "order",
-        name: "Orders",
-        Icon: LuShoppingCart
+        route: "judge",
+        name: "Judges",
+        Icon: LuUsers
     },
     {
-        route: "product",
-        name: "Products",
-        Icon: LuBox
-    },
-    {
-        route: "client",
-        name: "Clients",
+        route: "participant",
+        name: "Participants",
         Icon: LuUsers2
-    },
-    {
-        route: "cheque",
-        name: "Cheques",
-        Icon: LuBanknote
-    },
-    {
-        route: "invoice",
-        name: "Invoices",
-        Icon: LuFile
-    },
-    {
-        route: "estimate",
-        name: "Estimates",
-        Icon: LuFile
-    },
-    {
-        route: "expense",
-        name: "Expenses",
-        Icon: LuWallet
-    },
-    {
-        route: "statistics",
-        name: "Statistics",
-        Icon: LuAreaChart
-    },
-    {
-        route: "settings",
-        name: "Settings",
-        Icon: LuSettings
     }
 ]

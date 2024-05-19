@@ -40,7 +40,7 @@ const Container = styled.div`
     top: 0;
 
     * {
-        transition: 100ms ease-out;
+        transition: 90ms ease-out;
     }
 
     .animation {
