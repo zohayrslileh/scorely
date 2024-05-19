@@ -36,7 +36,7 @@ export default function () {
 
         } catch (error) {
 
-            if (error instanceof EventError) alert(error.message)
+            if (error instanceof EventError) alert(`${error.message} (${error.code})`)
 
         }
 
