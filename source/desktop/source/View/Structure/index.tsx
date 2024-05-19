@@ -26,5 +26,6 @@ export default function () {
  */
 const Container = styled.div`
     display: grid;
-    grid-template-rows: 1fr 100px;
+    grid-template-rows: 1fr auto;
+    height: 100%;
 `
