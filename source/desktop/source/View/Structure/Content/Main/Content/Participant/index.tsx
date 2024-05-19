@@ -1,3 +1,5 @@
+import Title from "@/View/Components/Title"
+import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 
 /**
@@ -8,7 +10,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
-        <h1>Participants</h1>
+        <Title><Lang>Participants</Lang></Title>
     </Container>
 }
 
