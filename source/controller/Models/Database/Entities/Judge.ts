@@ -1,7 +1,8 @@
-import { Entity, Column, ManyToMany, JoinTable, OneToOne, JoinColumn } from "typeorm"
+import { Entity, Column, ManyToMany, JoinTable, OneToOne, JoinColumn, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Session from "./Session"
 import User from "./User"
+import Rating from "./Rating"
 
 /*
 |-----------------------------
@@ -36,4 +37,11 @@ export default class Judge extends BaseEntity {
     @JoinColumn()
     declare public user: User | null
     
+    /**
+     * Ratings
+     * 
+     */
+    @OneToMany(() => Rating, rating => rating.judge)
+    declare public ratings: Rating[]
+
 }

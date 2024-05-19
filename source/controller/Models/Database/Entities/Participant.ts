@@ -1,6 +1,7 @@
-import { Entity, Column, ManyToMany, JoinTable } from "typeorm"
+import { Entity, Column, ManyToMany, JoinTable, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Session from "./Session"
+import Rating from "./Rating"
 
 /*
 |-----------------------------
@@ -26,5 +27,12 @@ export default class Participant extends BaseEntity {
     @ManyToMany(() => Session, session => session.participants)
     @JoinTable()
     declare public sessions: Session[]
-    
+
+    /**
+     * Ratings
+     * 
+     */
+    @OneToMany(() => Rating, rating => rating.participant)
+    declare public ratings: Rating[]
+
 }
