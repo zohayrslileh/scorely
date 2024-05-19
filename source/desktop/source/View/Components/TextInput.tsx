@@ -11,7 +11,12 @@ export default styled(TextInput)`
     background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     font-family: ${() => Appearance.schema.FONT_MEDIUM};
     border-radius: 7px;
-    padding: 10px 10px;
+    padding: 16px 10px;
+    font-size: 1em;
     border: none;
     outline: none;
+
+    &::placeholder {
+        opacity: 0.5;
+    }
 `

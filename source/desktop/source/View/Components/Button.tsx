@@ -2,15 +2,15 @@ import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 
 /**
- * Light button component
+ * Button component
  * 
  */
 export default styled.button`
-    color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
-    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba(0.8)};
+    background-color: ${() => Appearance.schema.COLOR_BLUE.rgba(0.8)};
+    color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
     font-family: ${() => Appearance.schema.FONT_MEDIUM};
     border-radius: 7px;
-    padding: 9px 15px;
+    padding: 15px 15px;
     border: none;
     outline: none;
     display: flex;
