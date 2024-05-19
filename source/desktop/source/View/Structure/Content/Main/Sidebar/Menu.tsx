@@ -2,6 +2,7 @@ import { LuLayoutDashboard, LuBox, LuSettings, LuUsers2, LuBanknote, LuFile, LuA
 import { Link, useParams } from "react-router-dom"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import Appearance from "@/View/Appearance"
 
 /**
  * Menu
@@ -37,31 +38,25 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    overflow: auto;
-
-    &::-webkit-scrollbar {
-        height: 7px;
-        width: 3px;
-    }
-    
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    
-
-    &::-webkit-scrollbar-thumb {
-        background: red;
-        border-radius: 10px;
-    }
+    overflow: hidden;
+    padding: 10px;
 
     > a {
         display: flex;
         align-items: center;
         gap: 10px;
+        color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
+        text-decoration: none;
+        padding-inline-end: 50px;
+        padding-inline-start: 15px;
+        border-radius: 10px;
 
         &.active {
-            border: 1px solid;
+            background: ${() => Appearance.schema.COLOR_BLUE.rgba()};
+        }
+
+        > p {
+            margin: 15px;
         }
     }
 `

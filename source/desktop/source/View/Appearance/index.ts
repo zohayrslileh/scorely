@@ -39,6 +39,10 @@ const Container = styled.div`
     left: 0;
     top: 0;
 
+    * {
+        transition: 100ms ease-in;
+    }
+
     .animation {
         
         animation: ${keyframes`

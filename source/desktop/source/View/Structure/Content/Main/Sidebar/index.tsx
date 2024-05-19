@@ -26,6 +26,7 @@ const Container = styled(Card)`
     grid-template-rows: auto 1fr;
 
     > #logo {
-        margin: 10px;
+        margin-inline: auto;
+        margin-block: 10px;
     }
 `
