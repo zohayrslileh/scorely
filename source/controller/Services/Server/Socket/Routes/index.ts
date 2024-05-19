@@ -1,5 +1,5 @@
 import Router from "@/Tools/Socket/Router"
-import session from "./session"
+import main from "./main"
 
 /*
 |-----------------------------
@@ -10,9 +10,9 @@ import session from "./session"
 export default new Router(function (routes) {
 
     /**
-     * Session
+     * Main
      * 
      */
-    routes.route("/session", session)
+    routes.route("/main", main)
 
 })

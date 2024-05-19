@@ -4,14 +4,14 @@ import Router from "@/Tools/Socket/Router"
 
 /*
 |-----------------------------
-| Session
+| Main
 |-----------------------------
 |
 */
-export default new Router(function (session) {
+export default new Router(function (main) {
 
     // On connection
-    session.onConnection(async function (client) {
+    main.onConnection(async function (client) {
 
         // Authorization
         const authorization = client.socket.handshake.auth.authorization
