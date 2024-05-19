@@ -1,5 +1,6 @@
 import themes from "@/View/Appearance/Themes"
 import Appearance from "@/View/Appearance"
+import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
 
 /**
@@ -11,6 +12,7 @@ export default function () {
 
     return <Container>
         {themes.map(theme => <button key={theme.key} onClick={() => Appearance.theme = theme} disabled={Appearance.theme === theme}>{theme.name}</button>)}
+        <Link to="/connect">Connect</Link>
     </Container>
 }
 
