@@ -93,10 +93,17 @@ export default class User extends BaseEntity {
      */
     public async getRole() {
 
-        // Get role
-        const role = await Role.findOneBy({ users: [{ id: this.id }] })
+        return await Role.findOneBy({ users: [{ id: this.id }] })
+    }
 
-        return role
+    /**
+     * Get judge method
+     * 
+     * @returns
+     */
+    public async getJudge() {
+
+        return await Judge.findOneBy({ user: { id: this.id } })
     }
 
     /**
