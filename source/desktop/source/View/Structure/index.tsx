@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import Content from "./Content"
+import Footer from "./Footer"
 
 /**
  * Structure
@@ -9,7 +10,13 @@ import Content from "./Content"
 export default function () {
 
     return <Container>
+
+        {/** Content */}
         <Content />
+
+        {/** Footer */}
+        <Footer />
+
     </Container>
 }
 
@@ -18,4 +25,6 @@ export default function () {
  * 
  */
 const Container = styled.div`
+    display: grid;
+    grid-template-rows: 1fr 100px;
 `
