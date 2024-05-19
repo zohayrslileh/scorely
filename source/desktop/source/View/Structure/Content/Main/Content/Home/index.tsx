@@ -16,22 +16,22 @@ export default function () {
     const session = manager.useNamespace("/session")
 
     /**
-     * Connected
-     * 
-     */
-    const connected = session.useConnected()
-
-    /**
      * Error
      * 
      */
     const error = session.useState<string>("error")
 
+    /**
+     * Time
+     * 
+     */
+    const time = session.useState<string>("time")
+
     // Error status
     if (error) return <Throw exception={new Error(error)} />
 
     // Conniting status
-    if (!connected) return <Throw exception={new PendingException("connecting")} />
+    if (!session.connected) return <Throw exception={new PendingException("connecting")} />
 
-    return <h1>Home</h1>
+    return <h1>Home: {time}</h1>
 }
