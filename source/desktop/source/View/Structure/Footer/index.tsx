@@ -25,4 +25,6 @@ export default function () {
  * 
  */
 const Container = styled(Card)`
+    display: flex;
+    gap: 10px;
 `
