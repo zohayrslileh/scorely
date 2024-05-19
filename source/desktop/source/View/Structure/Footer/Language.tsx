@@ -1,4 +1,5 @@
 import languages from "@/View/Language/Languages"
+import Select from "@/View/Components/Select"
 import Language from "@/View/Language"
 
 /**
@@ -8,7 +9,7 @@ import Language from "@/View/Language"
  */
 export default function () {
 
-    return <select value={Language.value.key} onChange={event => Language.value = languages.find(language => language.key === event.target.value) || languages[0]}>
+    return <Select value={Language.value.key} onChange={event => Language.value = languages.find(language => language.key === event.target.value) || languages[0]}>
         {languages.map(language => <option key={language.key} value={language.key}>{language.name}</option>)}
-    </select>
+    </Select>
 }

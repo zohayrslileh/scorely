@@ -1,5 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import TextInput from "@/Tools/MaterialUI/TextInput"
+import TextInput from "@/View/Components/TextInput"
 import Authentication from "@/Core/Authentication"
 import compiler from "@/View/Exception/compiler"
 import useForm, { Form } from "@/Tools/Form"

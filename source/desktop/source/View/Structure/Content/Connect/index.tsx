@@ -1,4 +1,4 @@
-import TextInput from "@/Tools/MaterialUI/TextInput"
+import TextInput from "@/View/Components/TextInput"
 import { useNavigate } from "react-router-dom"
 import { useCallback, useState } from "react"
 import Card from "@/View/Components/Card"
