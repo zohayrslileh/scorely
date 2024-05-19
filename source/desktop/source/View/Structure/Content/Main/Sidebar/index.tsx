@@ -1,3 +1,4 @@
+import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
 
 /**
@@ -8,7 +9,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
-        Sidebar
+        <Logo width={150} id="logo" />
     </Container>
 }
 
@@ -19,4 +20,8 @@ export default function () {
 const Container = styled.div`
     grid-area: sidebar;
     border: 2px solid;
+
+    > #logo {
+        margin: 10px;
+    }
 `

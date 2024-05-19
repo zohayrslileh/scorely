@@ -57,9 +57,8 @@ export default function () {
  */
 const Container = styled.div`
     display: grid; 
-    grid-auto-columns: 1fr; 
-    grid-template-columns: 0.3fr 1.7fr; 
-    grid-template-rows: 0.2fr 1.8fr; 
+    grid-template-columns: auto 1fr; 
+    grid-template-rows: auto 1fr; 
     gap: 10px; 
     grid-template-areas: 
         "sidebar navbar"
