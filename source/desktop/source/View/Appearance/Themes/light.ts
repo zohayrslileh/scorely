@@ -10,7 +10,6 @@ import Color from "@/Tools/Color"
 export default {
 
     BACKGROUND_SECONDARY: new Color("#FFFFFF"),
-    BACKGROUND: new Color("#DDE5F4"),
-    BOX_SHADOW: "0 0 20px #000000",
-    COLOR: new Color("#001822")
+    BACKGROUND_PRIMARY: new Color("#DDE5F4"),
+    CONTENT_COLOR: new Color("#001822")
 }

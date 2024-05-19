@@ -27,8 +27,8 @@ const Container = styled.div`
     ${fonts}
 
     // Style sheet
-    background-color: ${() => Appearance.theme.schema.BACKGROUND.rgba()};
-    color: ${() => Appearance.theme.schema.COLOR.rgba()};
+    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
+    color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
     direction: ${() => Language.value.direction};
     font-family: ${() => schema.FONT_REGULAR};
     zoom: ${() => Appearance.zoom}%;
