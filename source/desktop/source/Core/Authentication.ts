@@ -31,6 +31,16 @@ export default class Authentication {
     }
 
     /**
+     * Logout method
+     * 
+     * @returns
+     */
+    public static logout() {
+
+        Authorization.value = ""
+    }
+
+    /**
      * Use login method
      * 
      * @returns
