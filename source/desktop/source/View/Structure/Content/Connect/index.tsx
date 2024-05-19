@@ -1,6 +1,7 @@
 import TextInput from "@/Tools/MaterialUI/TextInput"
 import { useNavigate } from "react-router-dom"
 import { useCallback, useState } from "react"
+import Card from "@/View/Components/Card"
 import Server from "@/Models/Server"
 import styled from "@emotion/styled"
 import { Form } from "@/Tools/Form"
@@ -39,7 +40,7 @@ export default function ({ value, onChange }: Props) {
 
     }, [server])
 
-    return <Container>
+    return <Container className="animation">
         <Form onSubmit={connect}>
             <TextInput type="text" value={server} onChange={setServer} />
             <button>Connect</button>
@@ -51,7 +52,7 @@ export default function ({ value, onChange }: Props) {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
 `
 
 /**

@@ -30,7 +30,7 @@ export default function () {
 
     }, [])
 
-    return <Container>
+    return <Container className="animation">
         <button onClick={logout}>Logout</button>
     </Container>
 }

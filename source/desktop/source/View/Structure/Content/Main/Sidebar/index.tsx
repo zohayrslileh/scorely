@@ -9,7 +9,7 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
+    return <Container className="animation">
         <Logo width={150} id="logo" />
     </Container>
 }

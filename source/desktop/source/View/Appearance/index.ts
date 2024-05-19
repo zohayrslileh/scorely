@@ -1,4 +1,5 @@
 import AppearanceState, { initialAppearance } from "./context"
+import { keyframes } from "@emotion/react"
 import Language from "@/View/Language"
 import styled from "@emotion/styled"
 import schema from "./schema"
@@ -37,6 +38,40 @@ const Container = styled.div`
     width: 100%;
     left: 0;
     top: 0;
+
+    .animation {
+        
+        animation: ${keyframes`
+
+            0% {
+                transform: translateY(10px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: none;
+                opacity: 1;
+            }
+
+        `} ease 300ms;
+
+        &:nth-child(even) {
+
+            animation: ${keyframes`
+
+                0% {
+                    transform: translateY(-10px);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: none;
+                    opacity: 1;
+                }
+
+            `} ease 300ms;
+        }
+    }
 `
 
 export default Object.assign(Appearance, { Container, schema })

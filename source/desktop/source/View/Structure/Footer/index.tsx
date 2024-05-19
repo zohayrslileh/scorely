@@ -11,7 +11,7 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
+    return <Container className="animation">
         {themes.map(theme => <button key={theme.key} onClick={() => Appearance.theme = theme} disabled={Appearance.theme === theme}>{theme.name}</button>)}
         <Link to="/connect">Connect</Link>
     </Container>

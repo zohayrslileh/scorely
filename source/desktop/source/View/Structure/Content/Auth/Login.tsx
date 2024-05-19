@@ -5,6 +5,7 @@ import compiler from "@/View/Exception/compiler"
 import useForm, { Form } from "@/Tools/Form"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
+import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 
 /**
@@ -38,7 +39,7 @@ export default function () {
     // Solve status
     if (login.solve) return <Navigate to="/" />
 
-    return <Container>
+    return <Container className="animation">
 
         {error ? <b>{error.message}</b> : undefined}
 
@@ -55,7 +56,7 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
 `
 
 /**

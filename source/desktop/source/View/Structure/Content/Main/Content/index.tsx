@@ -13,7 +13,7 @@ const Home = lazy(() => import("./Home"))
  */
 export default function () {
 
-    return <Container>
+    return <Container className="animation">
 
         <Exception>
 
