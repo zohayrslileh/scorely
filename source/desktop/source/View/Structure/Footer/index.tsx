@@ -15,7 +15,9 @@ export default function () {
 
     return <Container className="animation">
         {themes.map(theme => <button key={theme.key} onClick={() => Appearance.theme = theme} disabled={Appearance.theme === theme}>{theme.name}</button>)}
-        {languages.map(language => <button key={language.key} onClick={() => Language.value = language} disabled={Language.value === language}>{language.name}</button>)}
+        <select value={Language.value.key} onChange={event => Language.value = languages.find(language => language.key === event.target.value) || languages[0]}>
+            {languages.map(language => <option key={language.key} value={language.key}>{language.name}</option>)}
+        </select>
         <Link to="/connect">Connect</Link>
     </Container>
 }
