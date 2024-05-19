@@ -13,10 +13,11 @@ const LightButton = styled.button`
     padding: 9px 15px;
     border: none;
     outline: none;
-    display: grid;
-    justify-items: center;
+    display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
+    gap: 10px;
 
     &:active {
         background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};

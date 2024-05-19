@@ -1,9 +1,7 @@
-import Authentication from "@/Core/Authentication"
-import { useNavigate } from "react-router-dom"
 import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
-import { useCallback } from "react"
 import Navigator from "./Navigator"
+import User from "./User"
 
 /**
  * Navbar
@@ -12,28 +10,10 @@ import Navigator from "./Navigator"
  */
 export default function () {
 
-    /**
-     * Navigate
-     * 
-     */
-    const navigate = useNavigate()
-
-    /**
-     * Logout method
-     * 
-     * @returns
-     */
-    const logout = useCallback(function () {
-
-        Authentication.logout()
-
-        navigate("/auth")
-
-    }, [])
 
     return <Container className="animation">
         <Navigator />
-        <button onClick={logout}>Logout</button>
+        <User />
     </Container>
 }
 
