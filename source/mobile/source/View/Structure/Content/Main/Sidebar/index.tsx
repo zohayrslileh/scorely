@@ -1,15 +1,14 @@
-import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
 
 /**
- * Welcome
+ * Sidebar
  * 
  * @returns 
  */
 export default function () {
 
     return <Container>
-        <Logo width={250} />
+        Sidebar
     </Container>
 }
 
@@ -18,8 +17,6 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    height: 100%;
+    grid-area: sidebar;
+    border: 2px solid;
 `

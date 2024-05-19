@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import Welcome from "./Welcome"
-import Routes from "./Routes"
+import { BrowserRouter } from "react-router-dom"
+import styled from "@emotion/styled"
+import Content from "./Content"
+import Footer from "./Footer"
 
 /**
  * Structure
@@ -10,29 +11,33 @@ import Routes from "./Routes"
 export default function () {
 
     /**
-     * Is ready
+     * Browser Router
      * 
      */
-    const [isReady, setIsReady] = useState(false)
+    return <BrowserRouter>
 
-    /**
-     * After Effect
-     * 
-     */
-    useEffect(function () {
+        <Container>
 
-        // Timer
-        const timer = setTimeout(() => setIsReady(true), 1000)
+            {/** Content */}
+            <Content />
 
-        /**
-         * Before Effect
-         * 
-         */
-        return function () {
+            {/** Footer */}
+            <Footer />
 
-            clearTimeout(timer)
-        }
-    })
+        </Container>
 
-    return isReady ? <Routes /> : <Welcome />
+    </BrowserRouter>
 }
+
+/**
+ * Container
+ * 
+ */
+const Container = styled.div`
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: 100%;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 10px;
+`

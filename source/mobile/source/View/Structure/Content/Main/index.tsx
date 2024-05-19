@@ -2,8 +2,11 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import Authentication from "@/Core/Authentication"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
+import styled from "@emotion/styled"
 import { AxiosError } from "axios"
-import Routes from "./Routes"
+import Content from "./Content"
+import Sidebar from "./Sidebar"
+import Navbar from "./Navbar"
 
 /**
  * Main
@@ -34,5 +37,32 @@ export default function () {
     if (user.exception) return <Throw exception={user.exception.current} />
 
     // Authorized status
-    return <Routes />
+    return <Container>
+
+        {/** Navbar */}
+        <Navbar />
+
+        {/** Sidebar */}
+        <Sidebar />
+
+        {/** Content */}
+        <Content />
+
+    </Container>
 }
+
+/**
+ * Container
+ * 
+ */
+const Container = styled.div`
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: 0.3fr 1.7fr; 
+    grid-template-rows: 0.2fr 1.8fr; 
+    gap: 10px; 
+    grid-template-areas: 
+        "sidebar navbar"
+        "sidebar content";
+    height: 100%;
+`
