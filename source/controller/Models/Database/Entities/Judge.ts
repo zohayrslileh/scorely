@@ -1,8 +1,8 @@
 import { Entity, Column, ManyToMany, JoinTable, OneToOne, JoinColumn, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Session from "./Session"
-import User from "./User"
 import Rating from "./Rating"
+import User from "./User"
 
 /*
 |-----------------------------
