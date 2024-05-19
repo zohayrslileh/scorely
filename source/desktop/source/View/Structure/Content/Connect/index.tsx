@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useCallback, useState } from "react"
 import Server from "@/Models/Server"
 import styled from "@emotion/styled"
+import { Form } from "@/Tools/Form"
 
 /**
  * Connect
@@ -39,8 +40,10 @@ export default function ({ value, onChange }: Props) {
     }, [server])
 
     return <Container>
-        <TextInput type="text" value={server} onChange={setServer} />
-        <button onClick={connect}>Connect</button>
+        <Form onSubmit={connect}>
+            <TextInput type="text" value={server} onChange={setServer} />
+            <button>Connect</button>
+        </Form>
     </Container>
 }
 
