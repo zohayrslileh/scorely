@@ -31,7 +31,7 @@ export default function () {
     if (error) return <Throw exception={new Error(error)} />
 
     // Conniting status
-    if (connected) return <Throw exception={new PendingException("connecting")} />
+    if (!connected) return <Throw exception={new PendingException("connecting")} />
 
     return <h1>Home</h1>
 }
