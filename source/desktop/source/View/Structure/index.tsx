@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom"
 import styled from "@emotion/styled"
 import Content from "./Content"
 import Footer from "./Footer"
@@ -9,15 +10,23 @@ import Footer from "./Footer"
  */
 export default function () {
 
-    return <Container>
+    /**
+     * Browser Router
+     * 
+     */
+    return <BrowserRouter>
 
-        {/** Content */}
-        <Content />
+        <Container>
 
-        {/** Footer */}
-        <Footer />
+            {/** Content */}
+            <Content />
 
-    </Container>
+            {/** Footer */}
+            <Footer />
+
+        </Container>
+
+    </BrowserRouter>
 }
 
 /**

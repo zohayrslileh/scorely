@@ -1,5 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import { Navigate, Route, Routes } from "react-router-dom"
 import { lazy, useState, Suspense } from "react"
 import { Throw } from "@/Tools/Exception"
 import Exception from "@/View/Exception"
@@ -23,31 +23,23 @@ export default function () {
      */
     const [server, setServer] = useState(() => Server.value)
 
-    /**
-     * Browser Router
-     * 
-     */
-    return <BrowserRouter>
+    return <Container>
 
-        <Container>
+        <Exception>
 
-            <Exception>
+            <Suspense fallback={<Throw exception={new PendingException} />}>
 
-                <Suspense fallback={<Throw exception={new PendingException} />}>
+                <Routes>
+                    <Route index element={server ? <Main /> : <Navigate to="/connect" />} />
+                    <Route path="/auth" element={server ? <Auth /> : <Navigate to="/connect" />} />
+                    <Route path="/connect" element={<Connect value={server} onChange={setServer} />} />
+                </Routes>
 
-                    <Routes>
-                        <Route index element={server ? <Main /> : <Navigate to="/connect" />} />
-                        <Route path="/auth" element={server ? <Auth /> : <Navigate to="/connect" />} />
-                        <Route path="/connect" element={<Connect value={server} onChange={setServer} />} />
-                    </Routes>
+            </Suspense>
 
-                </Suspense>
+        </Exception>
 
-            </Exception>
-
-        </Container>
-
-    </BrowserRouter>
+    </Container>
 }
 
 /**
