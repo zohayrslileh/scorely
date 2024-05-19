@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom"
+import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
 import { lazy } from "react"
 
@@ -13,9 +14,13 @@ export default function () {
 
     return <Container>
 
-        <Routes>
-            <Route index element={<Home />} />
-        </Routes>
+        <Exception>
+
+            <Routes>
+                <Route index element={<Home />} />
+            </Routes>
+
+        </Exception>
 
     </Container>
 }
@@ -27,4 +32,5 @@ export default function () {
 const Container = styled.div`
     grid-area: content;
     border: 2px solid;
+    position: relative;
 `
