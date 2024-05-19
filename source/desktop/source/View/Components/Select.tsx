@@ -13,4 +13,5 @@ export default styled.select`
     padding: 10px 10px;
     border: none;
     outline: none;
+    border-inline-end: 10px solid transparent
 `
