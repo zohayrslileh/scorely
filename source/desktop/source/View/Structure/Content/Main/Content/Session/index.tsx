@@ -1,9 +1,10 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import ErrorCard from "@/View/Components/ErrorCard"
+import compiler from "@/View/Exception/compiler"
+import Button from "@/View/Components/Button"
 import manager from "@/Models/Server/Socket"
 import { Throw } from "@/Tools/Exception"
-import { useCallback } from "react"
-import EventError from "@/Tools/Socket/EventError"
-import Button from "@/View/Components/Button"
+import usePromise from "@/Tools/Promise"
 
 /**
  * Session
@@ -28,19 +29,11 @@ export default function () {
      * Join
      * 
      */
-    const join = useCallback(async function () {
+    const join = usePromise(async function () {
 
-        try {
+        await main.ask("judge-join")
 
-            await main.ask("judge-join")
-
-        } catch (error) {
-
-            if (error instanceof EventError) alert(`${error.message} (${error.code})`)
-
-        }
-
-    }, [])
+    })
 
     // Error status
     if (error) return <Throw exception={new Error(error)} />
@@ -51,6 +44,7 @@ export default function () {
     return <div>
         <h1>Home</h1>
         <br />
-        <Button onClick={join}>Join</Button>
+        {join.exception && <ErrorCard message={compiler(join.exception.current).message} />}
+        {!join.pending && <Button onClick={join.execute}>Join</Button>}
     </div>
 }
