@@ -26,4 +26,5 @@ export default function () {
  */
 const Container = styled.div`
     grid-area: content;
+    border: 2px solid;
 `

@@ -18,4 +18,5 @@ export default function () {
  */
 const Container = styled.div`
     grid-area: navbar;
+    border: 2px solid;
 `

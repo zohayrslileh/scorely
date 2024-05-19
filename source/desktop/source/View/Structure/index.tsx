@@ -37,4 +37,7 @@ const Container = styled.div`
     display: grid;
     grid-template-rows: 1fr auto;
     height: 100%;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 10px;
 `

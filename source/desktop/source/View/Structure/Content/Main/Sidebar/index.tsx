@@ -18,4 +18,5 @@ export default function () {
  */
 const Container = styled.div`
     grid-area: sidebar;
+    border: 2px solid;
 `
