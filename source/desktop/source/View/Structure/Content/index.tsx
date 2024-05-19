@@ -30,8 +30,9 @@ export default function () {
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
                 <Routes>
-                    <Route index element={server ? <Main /> : <Navigate to="/connect" />} />
-                    <Route path="/auth" element={server ? <Auth /> : <Navigate to="/connect" />} />
+                    <Route index element={<Navigate to="/main" />} />
+                    <Route path="/main/*" element={server ? <Main /> : <Navigate to="/connect" />} />
+                    <Route path="/auth/*" element={server ? <Auth /> : <Navigate to="/connect" />} />
                     <Route path="/connect" element={<Connect value={server} onChange={setServer} />} />
                 </Routes>
 
@@ -48,4 +49,5 @@ export default function () {
  */
 const Container = styled.div`
     position: relative;
+    overflow: hidden;
 `

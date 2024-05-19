@@ -22,7 +22,6 @@ export default function () {
  */
 const Container = styled(Card)`
     grid-area: sidebar;
-    background-color: pink;
     display: grid;
     grid-template-rows: auto 1fr;
 
