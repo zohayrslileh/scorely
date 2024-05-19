@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
+import Navigator from "./Navigator"
 
 /**
  * Navbar
@@ -31,6 +32,7 @@ export default function () {
     }, [])
 
     return <Container className="animation">
+        <Navigator />
         <button onClick={logout}>Logout</button>
     </Container>
 }
@@ -41,4 +43,7 @@ export default function () {
  */
 const Container = styled(Card)`
     grid-area: navbar;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 `

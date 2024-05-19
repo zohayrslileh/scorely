@@ -33,6 +33,7 @@ const Container = styled.div`
     font-family: ${() => schema.FONT_REGULAR};
     zoom: ${() => Appearance.zoom}%;
     position: absolute;
+    line-height: 1;
     overflow: auto;
     height: 100%;
     width: 100%;
