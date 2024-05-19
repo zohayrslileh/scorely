@@ -10,22 +10,22 @@ import { Throw } from "@/Tools/Exception"
 export default function () {
 
     /**
-     * Session
+     * Main
      * 
      */
-    const session = manager.useNamespace("/session")
+    const main = manager.useNamespace("/main")
 
     /**
      * Error
      * 
      */
-    const error = session.useState<string>("error")
+    const error = main.useState<string>("error")
 
     // Error status
     if (error) return <Throw exception={new Error(error)} />
 
     // Conniting status
-    if (!session.connected) return <Throw exception={new PendingException("connecting")} />
+    if (!main.connected) return <Throw exception={new PendingException("connecting")} />
 
     return <h1>Home</h1>
 }
