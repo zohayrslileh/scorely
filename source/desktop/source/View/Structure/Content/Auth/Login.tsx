@@ -1,6 +1,7 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/Tools/MaterialUI/TextInput"
 import Authentication from "@/Core/Authentication"
+import compiler from "@/View/Exception/compiler"
 import useForm, { Form } from "@/Tools/Form"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
@@ -25,6 +26,12 @@ export default function () {
      */
     const login = Authentication.useLogin(value)
 
+    /**
+     * Error
+     * 
+     */
+    const error = login.exception ? compiler(login.exception.current) : undefined
+
     // Pending status
     if (login.pending) return <Throw exception={new PendingException} />
 
@@ -32,6 +39,8 @@ export default function () {
     if (login.solve) return <Navigate to="/" />
 
     return <Container>
+
+        {error ? <b>{error.message}</b> : undefined}
 
         <Form onSubmit={login.execute}>
             <TextInput placeholder="Username" type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
