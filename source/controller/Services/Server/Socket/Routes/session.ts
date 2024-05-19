@@ -31,8 +31,5 @@ export default new Router(function (session) {
             // Check judge
             if (!judge) throw new WsException("You are not judge")
         })
-
-        setInterval(() => client.socket.emit("time", new Date), 1000)
-
     })
 })
