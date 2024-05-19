@@ -1,5 +1,6 @@
 import themes from "@/View/Appearance/Themes"
 import Appearance from "@/View/Appearance"
+import Card from "@/View/Components/Card"
 import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
 
@@ -20,6 +21,5 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
-    border: 2px solid;
+const Container = styled(Card)`
 `

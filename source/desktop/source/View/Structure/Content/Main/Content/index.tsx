@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom"
+import Card from "@/View/Components/Card"
 import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
 import { lazy } from "react"
@@ -29,8 +30,7 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
     grid-area: content;
-    border: 2px solid;
     position: relative;
 `

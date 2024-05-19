@@ -1,5 +1,6 @@
 import Authentication from "@/Core/Authentication"
 import { useNavigate } from "react-router-dom"
+import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
 
@@ -38,7 +39,6 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
     grid-area: navbar;
-    border: 2px solid;
 `

@@ -1,3 +1,4 @@
+import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
 
@@ -17,9 +18,8 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
     grid-area: sidebar;
-    border: 2px solid;
 
     > #logo {
         margin: 10px;
