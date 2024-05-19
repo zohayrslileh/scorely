@@ -27,6 +27,7 @@ const Container = styled.div`
     gap: 10px;
     padding: 10px 10px;
     border-radius: 7px;
+    height: fit-content;
 `
 
 /**

@@ -1,3 +1,4 @@
+import ErrorCard from "@/View/Components/ErrorCard"
 
 /*
 |-----------------------------
@@ -15,6 +16,6 @@ export default class ViewException extends Error {
      */
     public view() {
 
-        return <b>{this.constructor.name}: {this.message}</b>
+        return <ErrorCard message={`${this.constructor.name}: ${this.message}`} />
     }
 }
