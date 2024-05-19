@@ -3,7 +3,7 @@ import manager from "@/Models/Server/Socket"
 import { Throw } from "@/Tools/Exception"
 
 /**
- * Home
+ * Session
  * 
  * @returns 
  */

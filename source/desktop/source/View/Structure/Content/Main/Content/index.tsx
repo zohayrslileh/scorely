@@ -1,12 +1,12 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Navigate, Route, Routes } from "react-router-dom"
-import Card from "@/View/Components/Card"
 import { Throw } from "@/Tools/Exception"
+import Card from "@/View/Components/Card"
 import Exception from "@/View/Exception"
+import { Suspense, lazy } from "react"
 import styled from "@emotion/styled"
-import { Suspense } from "react"
 
-// const Home = lazy(() => import("./Home"))
+const Session = lazy(() => import("./Session"))
 
 /**
  * Content
@@ -23,6 +23,7 @@ export default function () {
 
                 <Routes>
                     <Route index element={<Navigate to="session" />} />
+                    <Route path="session" element={<Session />} />
                 </Routes>
 
             </Suspense>

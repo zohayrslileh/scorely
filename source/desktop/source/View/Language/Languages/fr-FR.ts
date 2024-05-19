@@ -2,7 +2,7 @@ export default {
     "Login": "Connexion",
     "Username": "Nom d'utilisateur",
     "Password": "Mot de passe",
-    "Sessions": "séances",
+    "Sessions": "Séances",
     "Judges": "Juges",
     "Participants": "Participants"
 }
