@@ -26,6 +26,22 @@ export default function () {
  */
 const Container = styled.div`
     overflow: auto;
+
+    &::-webkit-scrollbar {
+        height: 7px;
+        width: 3px;
+    }
+    
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+
+    &::-webkit-scrollbar-thumb {
+        background: red;
+        border-radius: 10px;
+    }
 `
 
 /**
