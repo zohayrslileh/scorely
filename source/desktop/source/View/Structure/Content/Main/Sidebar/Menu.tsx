@@ -1,6 +1,6 @@
 import { LuLayoutDashboard, LuBox, LuSettings, LuUsers2, LuBanknote, LuFile, LuAreaChart, LuWallet, LuShoppingCart } from "react-icons/lu"
+import { Link, useParams } from "react-router-dom"
 import { Lang } from "@/Tools/Language"
-import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
 
 /**
@@ -10,9 +10,21 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
+    /**
+     * Params
+     * 
+     */
+    const params = useParams()
+
+    /**
+     * This route
+     * 
+     */
+    const thisRoute = params['*']?.split('/')[0]
+
     return <Container>
         {items.map(item => (
-            <Link key={item.route} to={item.route}>
+            <Link key={item.route} to={item.route} className={thisRoute === item.route ? "active" : undefined}>
                 <item.Icon size={20} strokeWidth={1} />
                 <p><Lang>{item.name}</Lang></p>
             </Link>
@@ -41,6 +53,16 @@ const Container = styled.div`
     &::-webkit-scrollbar-thumb {
         background: red;
         border-radius: 10px;
+    }
+
+    > a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &.active {
+            border: 1px solid;
+        }
     }
 `
 
