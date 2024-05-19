@@ -25,5 +25,5 @@ export default class Permission extends BaseEntity {
      */
     @ManyToMany(() => Role, role => role.permissions)
     declare public roles: Role[]
-
+    
 }

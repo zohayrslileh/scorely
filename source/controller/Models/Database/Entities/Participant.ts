@@ -26,4 +26,5 @@ export default class Participant extends BaseEntity {
     @ManyToMany(() => Session, session => session.participants)
     @JoinTable()
     declare public sessions: Session[]
+    
 }
