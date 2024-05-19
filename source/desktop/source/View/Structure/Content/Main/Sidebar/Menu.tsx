@@ -26,7 +26,7 @@ export default function () {
     return <Container>
         {items.map(item => (
             <Link key={item.route} to={item.route} className={thisRoute === item.route ? "active" : undefined}>
-                <item.Icon size={20} strokeWidth={1} />
+                <item.Icon size={20} strokeWidth={1.5} />
                 <p><Lang>{item.name}</Lang></p>
             </Link>
         ))}
@@ -42,6 +42,7 @@ const Container = styled.div`
     padding: 10px;
 
     > a {
+        font-family: ${() => Appearance.schema.FONT_MEDIUM};
         display: flex;
         align-items: center;
         gap: 10px;
@@ -53,6 +54,7 @@ const Container = styled.div`
 
         &.active {
             background: ${() => Appearance.schema.COLOR_BLUE.rgba()};
+            color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
         }
 
         > p {

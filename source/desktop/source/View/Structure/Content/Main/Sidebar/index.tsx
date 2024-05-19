@@ -27,6 +27,6 @@ const Container = styled(Card)`
 
     > #logo {
         margin-inline: auto;
-        margin-block: 10px;
+        margin-block: 30px;
     }
 `
