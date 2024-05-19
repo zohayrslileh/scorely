@@ -6,7 +6,9 @@ import Exception from "@/View/Exception"
 import { Suspense, lazy } from "react"
 import styled from "@emotion/styled"
 
+const Participant = lazy(() => import("./Participant"))
 const Session = lazy(() => import("./Session"))
+const Judge = lazy(() => import("./Judge"))
 
 /**
  * Content
@@ -22,8 +24,10 @@ export default function () {
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
                 <Routes>
+                    <Route path="participant" element={<Participant />} />
                     <Route index element={<Navigate to="session" />} />
                     <Route path="session" element={<Session />} />
+                    <Route path="judge" element={<Judge />} />
                 </Routes>
 
             </Suspense>

@@ -1,14 +1,14 @@
 import styled from "@emotion/styled"
 
 /**
- * Session
+ * Judge
  * 
  * @returns 
  */
 export default function () {
 
     return <Container>
-        <h1>Sessions</h1>
+        <h1>Judges</h1>
     </Container>
 }
 
