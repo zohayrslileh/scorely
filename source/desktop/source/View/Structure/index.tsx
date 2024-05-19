@@ -39,4 +39,5 @@ const Container = styled.div`
     box-sizing: border-box;
     gap: 10px;
     padding: 10px;
+    height: 100%;
 `

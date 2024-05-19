@@ -63,4 +63,5 @@ const Container = styled.div`
     grid-template-areas: 
         "sidebar navbar"
         "sidebar content";
+    height: 100%;
 `
