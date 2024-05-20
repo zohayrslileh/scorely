@@ -17,7 +17,7 @@ export default function () {
 
     const create = usePromise(async function () {
 
-        return await Participant.create({ name: "Ahmed Rachdi" })
+        return await Participant.create({ name: "Manal Golan" })
     })
 
     return <Container>
