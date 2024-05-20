@@ -14,7 +14,7 @@ export default class Participant {
      * Id
      * 
      */
-    private readonly id: number
+    public readonly id: number
 
     /**
      * Constructor method
