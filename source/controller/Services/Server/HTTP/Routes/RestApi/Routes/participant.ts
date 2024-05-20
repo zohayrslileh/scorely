@@ -49,7 +49,7 @@ export default Router.create<Environment>(function (participant) {
         if (!role || role.name !== "admin") throw new HttpException("You do not have permission to perform this operation", 401)
 
         // Get participant
-        const participant = new Participant(context.req.param("id"))
+        const participant = new Participant(+context.req.param("id"))
 
         return context.json(await participant.read())
     })
