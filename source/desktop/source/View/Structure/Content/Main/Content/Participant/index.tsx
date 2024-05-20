@@ -5,6 +5,8 @@ import Button from "@/View/Components/Button"
 import usePromise from "@/Tools/Promise"
 import request from "@/Models/Server/Request"
 import JsonView from "@/View/Components/JsonView"
+import ErrorCard from "@/View/Components/ErrorCard"
+import compiler from "@/View/Exception/compiler"
 
 /**
  * Participant
@@ -20,6 +22,7 @@ export default function () {
 
     return <Container>
         <Title><Lang>Participants</Lang></Title>
+        {create.exception && <ErrorCard message={compiler(create.exception.current).message} />}
         {create.solve && <JsonView json={create.solve.current} />}
         <Button onClick={create.execute}>Create</Button>
     </Container>
