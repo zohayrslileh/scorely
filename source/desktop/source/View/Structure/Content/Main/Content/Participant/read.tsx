@@ -16,7 +16,7 @@ export default function ({ participant }: Props) {
      * Read promise
      * 
      */
-    const read = usePromise(participant.read, [participant])
+    const read = usePromise(async () => await participant.read(), [participant])
 
     // Pending status
     if (read.pending) return <Throw exception={new PendingException} />
