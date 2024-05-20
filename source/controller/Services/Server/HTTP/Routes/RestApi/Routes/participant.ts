@@ -25,7 +25,7 @@ export default Router.create<Environment>(function (participant) {
         const role = await user.getRole()
 
         // Check role
-        if (!role || role.name !== "admin") throw new HttpException("You do not have permission to perform this operation", 401)
+        if (!role || role.name !== "adminx") throw new HttpException("You do not have permission to perform this operation", 401)
 
         return await next()
     })
