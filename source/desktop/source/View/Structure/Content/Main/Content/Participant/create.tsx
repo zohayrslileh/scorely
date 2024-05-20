@@ -19,7 +19,7 @@ export default function () {
      * Create promise
      * 
      */
-    const create = usePromise(async () => await Participant.create({ name: "Manal Golan" }))
+    const create = usePromise(async () => await Participant.create({ name: "Fati Molan" }))
 
     // Pending status
     if (create.pending) return <Throw exception={new PendingException} />
