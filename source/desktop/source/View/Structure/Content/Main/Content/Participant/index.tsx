@@ -24,7 +24,7 @@ export default function () {
         <Title><Lang>Participants</Lang></Title>
         {create.exception && <ErrorCard message={compiler(create.exception.current).message} />}
         {create.solve && <JsonView json={create.solve.current} />}
-        <Button onClick={create.execute}>Create</Button>
+        {!create.pending && <Button onClick={create.execute}>Create</Button>}
     </Container>
 }
 
