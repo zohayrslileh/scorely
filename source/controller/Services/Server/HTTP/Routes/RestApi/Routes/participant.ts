@@ -1,4 +1,6 @@
+import HttpException from "@/Services/Server/HTTP/Exception/Exceptions"
 import Authentication from "@/Core/Authentication"
+import Participant from "@/Core/Participant"
 import Router from "@/Tools/HTTP/Router"
 
 /*
@@ -19,7 +21,16 @@ export default Router.create<Environment>(function (participant) {
         // Authentication verify
         const user = await context.var.authentication.verify()
 
-        return context.json(user)
+        // Role
+        const role = await user.getRole()
+
+        // Check role
+        if (!role || role.name !== "admin") throw new HttpException("You do not have permission to perform this operation", 401)
+
+        // Create participant
+        const participant = await Participant.create(await context.req.json())
+
+        return context.json(await participant.read())
     })
 
 })

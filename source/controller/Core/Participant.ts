@@ -30,6 +30,16 @@ export default class Participant {
     }
 
     /**
+     * Read method
+     * 
+     * @returns
+     */
+    public async read() {
+
+        return await ParticipantModel.findOneBy({ id: this.id })
+    }
+
+    /**
      * Create method
      * 
      * @returns
