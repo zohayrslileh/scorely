@@ -13,10 +13,10 @@ import Router from "@/Tools/HTTP/Router"
 export default Router.create<Environment>(function (participant) {
 
     /**
-     * Create
+     * Permission middleware
      * 
      */
-    participant.post(async function (context) {
+    participant.all(async function (context, next) {
 
         // Authentication verify
         const user = await context.var.authentication.verify()
@@ -26,6 +26,15 @@ export default Router.create<Environment>(function (participant) {
 
         // Check role
         if (!role || role.name !== "admin") throw new HttpException("You do not have permission to perform this operation", 401)
+
+        return await next()
+    })
+
+    /**
+     * Create
+     * 
+     */
+    participant.post(async function (context) {
 
         // Create participant
         const participant = await Participant.create(await context.req.json())
@@ -38,15 +47,6 @@ export default Router.create<Environment>(function (participant) {
      * 
      */
     participant.get("/:id", async function (context) {
-
-        // Authentication verify
-        const user = await context.var.authentication.verify()
-
-        // Role
-        const role = await user.getRole()
-
-        // Check role
-        if (!role || role.name !== "admin") throw new HttpException("You do not have permission to perform this operation", 401)
 
         // Get participant
         const participant = new Participant(+context.req.param("id"))
