@@ -17,7 +17,7 @@ export default function () {
 
     const create = usePromise(async function () {
 
-        return await request<object>({ method: "POST", url: "/participant" })
+        return await request<object>({ method: "POST", url: "/participant", data: {name: "Ahmed Rachdi"} })
     })
 
     return <Container>
