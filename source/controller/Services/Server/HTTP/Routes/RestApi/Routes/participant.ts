@@ -16,7 +16,7 @@ export default Router.create<Environment>(function (participant) {
      * Permission middleware
      * 
      */
-    participant.use(async function (context, next) {
+    participant.use("/*", async function (context, next) {
 
         // Authentication verify
         const user = await context.var.authentication.verify()
