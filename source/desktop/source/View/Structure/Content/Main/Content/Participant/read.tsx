@@ -1,5 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import JsonView from "@/View/Components/JsonView"
+import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -10,7 +11,7 @@ import styled from "@emotion/styled"
  * 
  * @returns 
  */
-export default function ({ participant }: Props) {
+export default function ({ participant, reset }: Props) {
 
     /**
      * Read promise
@@ -26,6 +27,7 @@ export default function ({ participant }: Props) {
 
     return <Container>
         <JsonView json={read.solve} />
+        <Button onClick={reset}>New</Button>
     </Container>
 }
 
@@ -42,4 +44,5 @@ const Container = styled.div`
  */
 interface Props {
     participant: Participant
+    reset: () => void
 }

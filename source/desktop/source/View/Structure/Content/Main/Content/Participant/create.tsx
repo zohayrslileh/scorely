@@ -35,7 +35,7 @@ export default function () {
     // Exception status
     if (create.exception) return <Throw exception={create.exception.current} />
 
-    return create.solve ? <Read participant={create.solve.current} /> : <Container>
+    return create.solve ? <Read participant={create.solve.current} reset={create.reset} /> : <Container>
         <Title><Lang>Create new participant</Lang></Title>
         <TextInput placeholder="Name" value={name} onChange={setName} />
         <Button onClick={create.execute}>Create</Button>
