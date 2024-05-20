@@ -107,6 +107,19 @@ export default class User extends BaseEntity {
     }
 
     /**
+     * Has role method
+     * 
+     * @returns
+     */
+    public async hasRole(name: string) {
+
+        // Get role
+        const role = await this.getRole()
+
+        return role && role.name === name
+    }
+
+    /**
      * Has permission method
      * 
      * @returns
