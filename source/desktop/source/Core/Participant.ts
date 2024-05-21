@@ -20,7 +20,7 @@ export default class Participant {
      * Name
      * 
      */
-    public readonly name: string
+    public name: string
 
     /**
      * Constructor method
@@ -48,7 +48,11 @@ export default class Participant {
         })
 
         // Create participant
-        const participant = await request<PrimitiveParticipant>({ method: "POST", url: "/participant", data: schema.parse(data) })
+        const participant = await request<PrimitiveParticipant>({
+            method: "POST",
+            url: "/participant",
+            data: schema.parse(data)
+        })
 
         return new this(participant)
     }
@@ -94,8 +98,18 @@ export default class Participant {
             name: zod.string().max(50)
         })
 
+        // Validate data
+        const { name } = schema.parse(data)
+
+        // Set name
+        this.name = name
+
         // Update participant
-        await request<PrimitiveParticipant>({ method: "POST", url: `/participant/${this.id}`, data: schema.parse(data) })
+        await request<PrimitiveParticipant>({
+            method: "POST",
+            url: `/participant/${this.id}`,
+            data: { name }
+        })
 
         return this
     }
