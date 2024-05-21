@@ -24,10 +24,10 @@ export default function () {
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
                 <Routes>
-                    <Route path="participant" element={<Participant />} />
                     <Route index element={<Navigate to="session" />} />
-                    <Route path="session" element={<Session />} />
-                    <Route path="judge" element={<Judge />} />
+                    <Route path="participant/*" element={<Participant />} />
+                    <Route path="session/*" element={<Session />} />
+                    <Route path="judge/*" element={<Judge />} />
                 </Routes>
 
             </Suspense>
