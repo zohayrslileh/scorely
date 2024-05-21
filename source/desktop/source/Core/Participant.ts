@@ -1,3 +1,4 @@
+import useRecord from "@/Models/Server/Record"
 import request from "@/Models/Server/Request"
 import zod from "zod"
 
@@ -54,16 +55,13 @@ export default class Participant {
     }
 
     /**
-     * Record method
+     * Use record hook
      * 
      * @returns
      */
-    public static async record() {
+    public static useRecord() {
 
-        // Get participant
-        const participants = await request<PrimitiveParticipant[]>({ url: "/participant" })
-
-        return participants.map(participant => new this(participant))
+        return useRecord("/participant", 10)
     }
 
     /**

@@ -1,5 +1,8 @@
 import Language from "@/View/Language"
 import styled from "@emotion/styled"
+import Column from "./Column"
+import Head from "./Head"
+import Cell from "./Cell"
 
 /**
  * Table Component
@@ -15,6 +18,8 @@ export default function ({ children, ...props }: React.ComponentProps<typeof Con
         </Container>
     )
 }
+
+export { Column, Head, Cell }
 
 /**
  * Container
