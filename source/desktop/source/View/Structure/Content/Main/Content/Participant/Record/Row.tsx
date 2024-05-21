@@ -1,4 +1,5 @@
 import PromiseButton from "@/View/Components/PromiseButton"
+import { useCallback, useState } from "react"
 import Participant from "@/Core/Participant"
 import styled from "@emotion/styled"
 
@@ -9,9 +10,19 @@ import styled from "@emotion/styled"
  */
 export default function ({ participant }: Props) {
 
-    return <Container>
+    const [isDelete, setIsDelete] = useState(false)
+
+    const destroy = useCallback(async function () {
+
+        await participant.delete()
+
+        setIsDelete(true)
+
+    }, [participant])
+
+    return isDelete ? null : <Container>
         {participant.name}
-        <PromiseButton onClick={async () => await participant.delete()} pending="...">Delete</PromiseButton>
+        <PromiseButton onClick={destroy} pending="...">Delete</PromiseButton>
     </Container>
 }
 
