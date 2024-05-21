@@ -10,6 +10,7 @@ export default function ({ participant }: Props) {
 
     return <Container>
         {participant.name}
+        <button onClick={async () => await participant.delete()}>Delete</button>
     </Container>
 }
 
