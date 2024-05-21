@@ -96,6 +96,36 @@ export default class Participant {
     }
 
     /**
+     * Update method
+     * 
+     * @returns
+     */
+    public async update(data: unknown) {
+
+        // Schema
+        const schema = zod.object({
+            name: zod.string().max(50)
+        })
+
+        // Validate data
+        const { name } = schema.parse(data)
+
+        // Get entity
+        const entity = await ParticipantEntity.findOneBy({ id: this.id })
+
+        // Check entity
+        if (!entity) throw new CoreException("Participant entity was not found")
+
+        // Set name
+        entity.name = name
+
+        // Save
+        await entity.save()
+
+        return this
+    }
+
+    /**
      * Delete method
      * 
      * @returns

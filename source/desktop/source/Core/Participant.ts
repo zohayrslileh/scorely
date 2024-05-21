@@ -76,10 +76,28 @@ export default class Participant {
         // Schema
         const schema = zod.number()
 
-        // Get entity
-        const entity = await request<PrimitiveParticipant>({ url: `/participant/${schema.parse(id)}` })
+        // Get participant
+        const participant = await request<PrimitiveParticipant>({ url: `/participant/${schema.parse(id)}` })
 
-        return new this(entity)
+        return new this(participant)
+    }
+
+    /**
+     * Update method
+     * 
+     * @returns
+     */
+    public async update(data: unknown) {
+
+        // Schema
+        const schema = zod.object({
+            name: zod.string().max(50)
+        })
+
+        // Update participant
+        await request<PrimitiveParticipant>({ method: "POST", url: `/participant/${this.id}`, data: schema.parse(data) })
+
+        return this
     }
 
     /**
