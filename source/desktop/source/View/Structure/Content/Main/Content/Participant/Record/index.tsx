@@ -1,5 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import JsonView from "@/View/Components/JsonView"
+import LightButton from "@/View/Components/LightButton"
 import Participant from "@/Core/Participant"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -25,7 +25,9 @@ export default function () {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return <Container>
-        <JsonView json={record.solve} />
+        {record.solve.map(participant => <div key={participant.id}>
+            <b>{participant.name}</b> <LightButton onClick={async () => await participant.delete()}>Delete</LightButton>
+        </div>)}
     </Container>
 }
 
