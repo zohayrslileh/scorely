@@ -31,22 +31,6 @@ export default class Participant {
     }
 
     /**
-     * Entity method
-     * 
-     * @returns
-     */
-    public async entity() {
-
-        // Get Participant
-        const participant = await ParticipantEntity.findOneBy({ id: this.id })
-
-        // Check Participant
-        if (!participant) throw new CoreException("Participant was not found")
-
-        return participant
-    }
-
-    /**
      * Create method
      * 
      * @returns
@@ -61,16 +45,45 @@ export default class Participant {
         // Validate data
         const { name } = schema.parse(data)
 
-        // Create participant
-        const participant = new ParticipantEntity
+        // Create entity
+        const entity = new ParticipantEntity
 
         // Set name
-        participant.name = name
+        entity.name = name
 
         // Save
-        await participant.save()
+        await entity.save()
 
-        return new this(participant.id)
+        return new this(entity.id)
+    }
+
+    /**
+     * Entity method
+     * 
+     * @returns
+     */
+    public async entity() {
+
+        // Get entity
+        const entity = await ParticipantEntity.findOneBy({ id: this.id })
+
+        // Check entity
+        if (!entity) throw new CoreException("Participant was not found")
+
+        return entity
+    }
+
+    /**
+     * Delete method
+     * 
+     * @returns
+     */
+    public async delete() {
+
+        // Get entity
+        const entity = await this.entity()
+
+        await entity.remove()
     }
 
 }
