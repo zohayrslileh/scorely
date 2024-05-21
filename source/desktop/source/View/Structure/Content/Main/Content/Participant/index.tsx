@@ -1,5 +1,8 @@
+import { Route, Routes } from "react-router-dom"
 import styled from "@emotion/styled"
-import Record from "./record"
+import { lazy } from "react"
+
+const Record = lazy(() => import("./Record"))
 
 /**
  * Participant
@@ -9,7 +12,9 @@ import Record from "./record"
 export default function () {
 
     return <Container>
-        <Record />
+        <Routes>
+            <Route index element={<Record />} />
+        </Routes>
     </Container>
 }
 
