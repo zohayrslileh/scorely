@@ -1,4 +1,5 @@
-import ParticipantModel from "@/Models/Database/Entities/Participant"
+import ParticipantEntity from "@/Models/Database/Entities/Participant"
+import CoreException from "./Exception"
 import zod from "zod"
 
 /*
@@ -30,13 +31,19 @@ export default class Participant {
     }
 
     /**
-     * Read method
+     * Entity method
      * 
      * @returns
      */
-    public async read() {
+    public async entity() {
 
-        return await ParticipantModel.findOneBy({ id: this.id })
+        // Get Participant
+        const participant = await ParticipantEntity.findOneBy({ id: this.id })
+
+        // Check Participant
+        if (!participant) throw new CoreException("Participant was not found")
+
+        return participant
     }
 
     /**
@@ -55,7 +62,7 @@ export default class Participant {
         const { name } = schema.parse(data)
 
         // Create participant
-        const participant = new ParticipantModel
+        const participant = new ParticipantEntity
 
         // Set name
         participant.name = name

@@ -45,7 +45,7 @@ export default Router.create<Environment>(function (participant) {
         // Get participant
         const participant = new Participant(+context.req.param("id"))
 
-        return context.json(await participant.read())
+        return context.json(await participant.entity())
     })
 
 })
