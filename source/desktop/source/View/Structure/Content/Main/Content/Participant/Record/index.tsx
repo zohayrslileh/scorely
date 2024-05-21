@@ -2,8 +2,10 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
+import Title from "@/View/Components/Title"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
+import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Row from "./Row"
 
@@ -33,6 +35,7 @@ export default function () {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return <Container>
+        <Title><Lang>Participants</Lang></Title>
         <Button onClick={() => navigate("create")}>Create</Button>
         {record.solve.map(participant => <Row participant={participant} />)}
     </Container>
