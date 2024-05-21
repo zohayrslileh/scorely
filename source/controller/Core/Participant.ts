@@ -58,6 +58,16 @@ export default class Participant {
     }
 
     /**
+     * Record
+     * 
+     * @returns
+     */
+    public static async record() {
+
+        return await ParticipantEntity.find()
+    }
+
+    /**
      * Read method
      * 
      * @returns
@@ -83,7 +93,7 @@ export default class Participant {
         // Get entity
         const entity = await this.read()
 
-        await entity.remove()
+        return await entity.remove()
     }
 
 }
