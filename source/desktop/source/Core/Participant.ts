@@ -101,15 +101,15 @@ export default class Participant {
         // Validate data
         const { name } = schema.parse(data)
 
-        // Set name
-        this.name = name
-
         // Update participant
         await request<PrimitiveParticipant>({
             method: "POST",
             url: `/participant/${this.id}`,
             data: { name }
         })
+
+        // Set name
+        this.name = name
 
         return this
     }

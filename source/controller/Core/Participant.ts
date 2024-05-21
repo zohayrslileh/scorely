@@ -110,9 +110,6 @@ export default class Participant {
         // Validate data
         const { name } = schema.parse(data)
 
-        // Set name
-        this.name = name
-
         // Get entity
         const entity = await ParticipantEntity.findOneBy({ id: this.id })
 
@@ -120,10 +117,13 @@ export default class Participant {
         if (!entity) throw new CoreException("Participant entity was not found")
 
         // Set name
-        entity.name = this.name
+        entity.name = name
 
         // Save
         await entity.save()
+
+        // Set name
+        this.name = name
 
         return this
     }
