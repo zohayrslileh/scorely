@@ -2,6 +2,7 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import JsonView from "@/View/Components/JsonView"
 import Participant from "@/Core/Participant"
 import { Throw } from "@/Tools/Exception"
+import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 
 /**
@@ -12,16 +13,16 @@ import styled from "@emotion/styled"
 export default function () {
 
     /**
-     * Record
+     * Record promise
      * 
      */
-    const record = Participant.useRecord()
+    const record = usePromise(async () => await Participant.record(), [])
 
     // Pending status
-    if (record.loading) return <Throw exception={new PendingException} />
+    if (record.pending) return <Throw exception={new PendingException} />
 
     // Exception status
-    if (record.error) return <Throw exception={record.error} />
+    if (record.exception) return <Throw exception={record.exception.current} />
 
     return <Container>
         <JsonView json={record} />
