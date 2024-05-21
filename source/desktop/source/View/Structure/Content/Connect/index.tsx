@@ -41,11 +41,11 @@ export default function ({ value, onChange }: Props) {
      */
     const connect = useCallback(function () {
 
+        localStorage.clear()
+
         onChange(server)
 
         Server.value = server
-
-        localStorage.clear()
 
         navigate(-1)
 
