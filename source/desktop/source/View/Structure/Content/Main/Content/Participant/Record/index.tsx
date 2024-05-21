@@ -1,4 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import { useNavigate } from "react-router-dom"
+import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -13,6 +15,12 @@ import Row from "./Row"
 export default function () {
 
     /**
+     * Navigate
+     * 
+     */
+    const navigate = useNavigate()
+
+    /**
      * Record promise
      * 
      */
@@ -25,6 +33,7 @@ export default function () {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return <Container>
+        <Button onClick={() => navigate("create")}>Create</Button>
         {record.solve.map(participant => <Row participant={participant} />)}
     </Container>
 }
