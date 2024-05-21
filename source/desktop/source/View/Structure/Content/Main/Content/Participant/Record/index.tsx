@@ -1,9 +1,9 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import JsonView from "@/View/Components/JsonView"
 import Participant from "@/Core/Participant"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
+import Row from "./Row"
 
 /**
  * Record
@@ -25,7 +25,7 @@ export default function () {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return <Container>
-        <JsonView json={record} />
+        {record.solve.map(participant => <Row participant={participant} />)}
     </Container>
 }
 
