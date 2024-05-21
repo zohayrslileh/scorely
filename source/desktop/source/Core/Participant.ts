@@ -57,6 +57,16 @@ export default class Participant {
         return new this(participant.id)
     }
 
+    /**
+     * Record
+     * 
+     * @returns
+     */
+    public static async record() {
+
+        return await request<PrimitiveParticipant[]>({ url: "/participant" })
+    }
+
 }
 
 /**

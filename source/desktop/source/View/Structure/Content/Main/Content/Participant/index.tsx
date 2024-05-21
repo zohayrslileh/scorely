@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import Create from "./create"
+import Record from "./record"
 
 /**
  * Participant
@@ -9,7 +9,7 @@ import Create from "./create"
 export default function () {
 
     return <Container>
-        <Create />
+        <Record />
     </Container>
 }
 
