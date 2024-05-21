@@ -2,6 +2,7 @@ import PromiseButton from "@/View/Components/PromiseButton"
 import { useCallback, useState } from "react"
 import Participant from "@/Core/Participant"
 import styled from "@emotion/styled"
+import { useNavigate } from "react-router-dom"
 
 /**
  * Row
@@ -9,6 +10,8 @@ import styled from "@emotion/styled"
  * @returns 
  */
 export default function ({ participant }: Props) {
+
+    const navigate = useNavigate()
 
     const [isDelete, setIsDelete] = useState(false)
 
@@ -23,6 +26,7 @@ export default function ({ participant }: Props) {
     return isDelete ? null : <Container>
         {participant.name}
         <PromiseButton onClick={destroy} pending="...">Delete</PromiseButton>
+        <PromiseButton onClick={() => navigate(`${participant.id}/edit`)}>Edit</PromiseButton>
     </Container>
 }
 
