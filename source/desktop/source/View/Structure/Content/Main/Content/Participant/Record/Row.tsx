@@ -1,3 +1,4 @@
+import PromiseButton from "@/View/Components/PromiseButton"
 import Participant from "@/Core/Participant"
 import styled from "@emotion/styled"
 
@@ -10,7 +11,7 @@ export default function ({ participant }: Props) {
 
     return <Container>
         {participant.name}
-        <button onClick={async () => await participant.delete()}>Delete</button>
+        <PromiseButton onClick={async () => await participant.delete()} pending="...">Delete</PromiseButton>
     </Container>
 }
 

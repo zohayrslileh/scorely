@@ -1,3 +1,4 @@
+import PromiseButton from "./PromiseButton"
 import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 
@@ -5,7 +6,7 @@ import styled from "@emotion/styled"
  * Button component
  * 
  */
-export default styled.button`
+export default styled(PromiseButton)`
     background-color: ${() => Appearance.schema.COLOR_BLUE.rgba(0.8)};
     color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
     font-family: ${() => Appearance.schema.FONT_MEDIUM};
