@@ -18,16 +18,22 @@ export default class Participant {
     public readonly id: number
 
     /**
+     * Name
+     * 
+     */
+    public readonly name: string
+
+    /**
      * Constructor method
      * 
      */
-    public constructor(id: unknown) {
+    private constructor(primitiveParticipant: PrimitiveParticipant) {
 
-        // Schema
-        const schema = zod.number()
+        // Set id
+        this.id = primitiveParticipant.id
 
-        // Validate and set id
-        this.id = schema.parse(id)
+        // Set name
+        this.name = primitiveParticipant.name
     }
 
     /**
@@ -54,33 +60,39 @@ export default class Participant {
         // Save
         await entity.save()
 
-        return new this(entity.id)
+        return new this(entity)
     }
 
     /**
-     * Record
+     * Record method
      * 
      * @returns
      */
     public static async record() {
 
-        return await ParticipantEntity.find()
+        // Get entities
+        const entities = await ParticipantEntity.find()
+
+        return entities.map(entity => new this(entity))
     }
 
     /**
-     * Read method
+     * Find method
      * 
      * @returns
      */
-    public async read() {
+    public static async find(id: unknown) {
+
+        // Schema
+        const schema = zod.number()
 
         // Get entity
-        const entity = await ParticipantEntity.findOneBy({ id: this.id })
+        const entity = await ParticipantEntity.findOneBy({ id: schema.parse(id) })
 
         // Check entity
-        if (!entity) throw new CoreException("Participant was not found")
+        if (!entity) throw new CoreException("Participant entity was not found")
 
-        return entity
+        return new this(entity)
     }
 
     /**
@@ -91,9 +103,21 @@ export default class Participant {
     public async delete() {
 
         // Get entity
-        const entity = await this.read()
+        const entity = await ParticipantEntity.findOneBy({ id: this.id })
 
-        return await entity.remove()
+        // Check entity
+        if (!entity) throw new CoreException("Participant entity was not found")
+
+        await entity.remove()
     }
 
+}
+
+/**
+ * Primitive
+ * 
+ */
+export interface PrimitiveParticipant {
+    id: number
+    name: string
 }

@@ -42,14 +42,14 @@ export default Router.create<Environment>(function (participant) {
         // Check role
         if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
 
-        // Create participant
+        // Get participants
         const participants = await Participant.record()
 
         return context.json(participants)
     })
 
     /**
-     * Read
+     * Find
      * 
      */
     participant.get("/:id", async function (context) {
@@ -61,9 +61,9 @@ export default Router.create<Environment>(function (participant) {
         if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
 
         // Get participant
-        const participant = new Participant(+context.req.param("id"))
+        const participant = await Participant.find(+context.req.param("id"))
 
-        return context.json(await participant.read())
+        return context.json(participant)
     })
 
     /**
@@ -79,9 +79,12 @@ export default Router.create<Environment>(function (participant) {
         if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
 
         // Get participant
-        const participant = new Participant(+context.req.param("id"))
+        const participant = await Participant.find(+context.req.param("id"))
 
-        return context.json(await participant.delete())
+        // Delete
+        await participant.delete()
+
+        return context.json(undefined)
     })
 
 })
