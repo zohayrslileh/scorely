@@ -2,6 +2,7 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
 import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
+import Title from "@/View/Components/Title"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -38,6 +39,7 @@ export default function () {
     if (create.solve) return <Navigate to=".." />
 
     return <Container>
+        <Title><Lang>Create new participant</Lang></Title>
         <TextInput placeholder="Name" type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
         <Button onClick={create.execute}><Lang>Create</Lang></Button>
     </Container>
