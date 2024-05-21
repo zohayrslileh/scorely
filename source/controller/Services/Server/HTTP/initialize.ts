@@ -9,10 +9,8 @@ import { MiddlewareHandler } from "hono"
 */
 const initialize: MiddlewareHandler = async function (context, next) {
 
-    // Set Headers
+    // Set X Powered By
     context.header("X-Powered-By", "Xaelion")
-    context.header("Access-Control-Allow-Origin", "*")
-    context.header("Access-Control-Allow-Headers", "*")
 
     return await next()
 }
