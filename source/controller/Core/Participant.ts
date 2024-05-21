@@ -58,11 +58,11 @@ export default class Participant {
     }
 
     /**
-     * Entity method
+     * Read method
      * 
      * @returns
      */
-    public async entity() {
+    public async read() {
 
         // Get entity
         const entity = await ParticipantEntity.findOneBy({ id: this.id })
@@ -81,7 +81,7 @@ export default class Participant {
     public async delete() {
 
         // Get entity
-        const entity = await this.entity()
+        const entity = await this.read()
 
         await entity.remove()
     }
