@@ -25,7 +25,7 @@ export default function () {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return <Container>
-        <JsonView json={{ record: true }} />
+        <JsonView json={record.solve} />
     </Container>
 }
 
