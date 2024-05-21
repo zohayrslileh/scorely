@@ -45,6 +45,8 @@ export default function ({ value, onChange }: Props) {
 
         Server.value = server
 
+        localStorage.clear()
+
         navigate(-1)
 
     }, [server])
