@@ -110,6 +110,9 @@ export default class Participant {
         // Validate data
         const { name } = schema.parse(data)
 
+        // Set name
+        this.name = name
+
         // Get entity
         const entity = await ParticipantEntity.findOneBy({ id: this.id })
 
@@ -121,9 +124,6 @@ export default class Participant {
 
         // Save
         await entity.save()
-
-        // Set name
-        this.name = name
 
         return this
     }
