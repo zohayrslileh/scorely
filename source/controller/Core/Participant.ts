@@ -1,7 +1,7 @@
 import ParticipantEntity from "@/Models/Database/Entities/Participant"
 import CoreException from "./Exception"
-import zod from "zod"
 import { Like } from "typeorm"
+import zod from "zod"
 
 /*
 |-----------------------------
