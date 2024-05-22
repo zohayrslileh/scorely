@@ -34,4 +34,6 @@ export default function () {
  * 
  */
 const Container = styled.div`
+    position: relative;
+    background-color: red;
 `

@@ -65,7 +65,7 @@ export default class Participant {
     public static async record() {
 
         // Get participants
-        const participants = await request<PrimitiveParticipant[]>({ url: "/participant" })
+        const participants = await request<PrimitiveParticipant[]>({ url: "/participantx" })
 
         return participants.map(participant => new this(participant))
     }
