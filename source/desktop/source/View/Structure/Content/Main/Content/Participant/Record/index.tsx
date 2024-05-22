@@ -4,6 +4,7 @@ import Button from "@/View/Components/Button"
 import Title from "@/View/Components/Title"
 import Flex from "@/View/Components/Flex"
 import Grid from "@/View/Components/Grid"
+import Exception from "@/View/Exception"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import useForm from "@/Tools/Form"
@@ -36,7 +37,11 @@ export default function () {
         <Grid>
             <TextInput placeholder="Search" type="text" value={value.name} onChange={update.name} />
         </Grid>
-        <Rows filter={value} />
+        <div id="rows">
+            <Exception>
+                <Rows filter={value} />
+            </Exception>
+        </div>
     </Container>
 }
 
@@ -45,7 +50,21 @@ export default function () {
  * 
  */
 const Container = styled(Grid)`
-    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > #rows {
+        position: relative;
+        overflow: auto;
+        height: 0px;
+        flex: auto;
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    }
 `
 
 /**

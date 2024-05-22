@@ -3,7 +3,6 @@ import Participant from "@/Core/Participant"
 import Grid from "@/View/Components/Grid"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
-import styled from "@emotion/styled"
 import Row from "./Row"
 
 /**
@@ -25,19 +24,10 @@ export default function ({ filter }: Props) {
     // Exception status
     if (record.exception) return <Throw exception={record.exception.current} />
 
-    return <Container columns="1fr 1fr" gap="10px">
+    return <Grid columns="1fr 1fr" gap="10px">
         {record.solve.map(participant => <Row key={participant.id} participant={participant} />)}
-    </Container>
+    </Grid>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled(Grid)`
-    display: grid;
-    overflow: auto;
-`
 
 /**
  * Props
