@@ -10,13 +10,13 @@ import Row from "./Row"
  * 
  * @returns 
  */
-export default function ({ params }: Props) {
+export default function ({ filter }: Props) {
 
     /**
      * Record promise
      * 
      */
-    const record = usePromise(async () => await Participant.record(params), [params.name])
+    const record = usePromise(async () => await Participant.record(filter), [filter])
 
     // Pending status
     if (record.pending) return <Throw exception={new PendingException} />
@@ -41,5 +41,5 @@ const Container = styled.div`
  * 
  */
 interface Props {
-    params: Record<string, string>
+    filter: unknown
 }

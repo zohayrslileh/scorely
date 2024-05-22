@@ -1,12 +1,11 @@
-import { useNavigate, useSearchParams } from "react-router-dom"
 import TextInput from "@/View/Components/TextInput"
+import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Title from "@/View/Components/Title"
 import Flex from "@/View/Components/Flex"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import useForm from "@/Tools/Form"
-import { useEffect } from "react"
 import Rows from "./Rows"
 
 /**
@@ -23,31 +22,10 @@ export default function () {
     const navigate = useNavigate()
 
     /**
-     * Search params
+     * Filter
      * 
      */
-    const [searchParams, setSearchParams] = useSearchParams()
-
-    /**
-     * Form
-     * 
-     */
-    const { value, update } = useForm(() => ({
-        name: searchParams.get("name") || ""
-    }))
-
-    /**
-     * On Typing
-     * 
-     */
-    useEffect(() => {
-
-        // Typing Timeout
-        const timeout = setTimeout(() => setSearchParams(value), 200)
-
-        return () => clearTimeout(timeout)
-
-    }, [value])
+    const { value, update } = useForm(() => new Filter)
 
     return <Container>
         <Flex>
@@ -57,7 +35,7 @@ export default function () {
         <Flex>
             <TextInput placeholder="Search" type="text" value={value.name} onChange={update.name} />
         </Flex>
-        <Rows params={{ name: searchParams.get("name") || "" }} />
+        <Rows filter={value} />
     </Container>
 }
 
@@ -67,3 +45,11 @@ export default function () {
  */
 const Container = styled.div`
 `
+
+/**
+ * Filter
+ * 
+ */
+class Filter {
+    name: string = ""
+}
