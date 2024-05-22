@@ -5,7 +5,8 @@ import Title from "@/View/Components/Title"
 import Flex from "@/View/Components/Flex"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
-import { useState } from "react"
+import useForm from "@/Tools/Form"
+import { useEffect } from "react"
 import Rows from "./Rows"
 
 /**
@@ -16,24 +17,37 @@ import Rows from "./Rows"
 export default function () {
 
     /**
-     * Search params
-     * 
-     */
-    const [searchParams, setSearchParams] = useSearchParams()
-
-    console.log(searchParams.getAll("name"))
-    setSearchParams()
-    /**
      * Navigate
      * 
      */
     const navigate = useNavigate()
 
     /**
-     * Name
+     * Search params
      * 
      */
-    const [name, setName] = useState("")
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    /**
+     * Form
+     * 
+     */
+    const { value, update } = useForm(() => ({
+        name: searchParams.get("name") || ""
+    }))
+
+    /**
+     * On Typing
+     * 
+     */
+    useEffect(() => {
+
+        // Typing Timeout
+        const timeout = setTimeout(() => setSearchParams(value), 200)
+
+        return () => clearTimeout(timeout)
+
+    }, [value])
 
     return <Container>
         <Flex>
@@ -41,8 +55,9 @@ export default function () {
             <Button onClick={() => navigate("create")}>Create</Button>
         </Flex>
         <Flex>
-            <TextInput placeholder="Search" type="text" value={name} onChange={setName} />
+            <TextInput placeholder="Search" type="text" value={value.name} onChange={update.name} />
         </Flex>
+        <Rows params={{ name: searchParams.get("name") || "" }} />
     </Container>
 }
 
