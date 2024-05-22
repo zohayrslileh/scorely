@@ -49,7 +49,7 @@ export default function () {
  */
 const Container = styled.div`
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     flex: 1;
     display: grid;
 `

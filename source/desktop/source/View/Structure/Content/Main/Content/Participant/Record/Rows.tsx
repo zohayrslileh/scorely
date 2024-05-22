@@ -24,9 +24,9 @@ export default function ({ filter }: Props) {
     // Exception status
     if (record.exception) return <Throw exception={record.exception.current} />
 
-    return <Grid columns="1fr 1fr" gap="10px">
+    return record.solve.length ? <Grid columns="1fr 1fr" gap="10px">
         {record.solve.map(participant => <Row key={participant.id} participant={participant} />)}
-    </Grid>
+    </Grid> : <b>Not found !!</b>
 }
 
 /**

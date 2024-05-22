@@ -32,7 +32,7 @@ export default function () {
     return <Container gap="10px" rows="auto auto 1fr">
         <Flex>
             <Title><Lang>Participants</Lang></Title>
-            <Button onClick={() => navigate("create")}>Create</Button>
+            <Button onClick={() => navigate("create")}>Create new</Button>
         </Flex>
         <Grid>
             <TextInput placeholder="Search" type="text" value={value.name} onChange={update.name} />

@@ -49,7 +49,7 @@ const Container = styled.div`
         animation: ${keyframes`
 
             0% {
-                transform: translateY(10px);
+                transform: translateX(10px);
                 opacity: 0;
             }
 
@@ -65,7 +65,7 @@ const Container = styled.div`
             animation: ${keyframes`
 
                 0% {
-                    transform: translateY(-10px);
+                    transform: translateX(-10px);
                     opacity: 0;
                 }
 
