@@ -1,5 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import Participant from "@/Core/Participant"
+import Grid from "@/View/Components/Grid"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
@@ -24,7 +25,7 @@ export default function ({ filter }: Props) {
     // Exception status
     if (record.exception) return <Throw exception={record.exception.current} />
 
-    return <Container>
+    return <Container columns="1fr 1fr" gap="10px">
         {record.solve.map(participant => <Row key={participant.id} participant={participant} />)}
     </Container>
 }
@@ -33,8 +34,9 @@ export default function ({ filter }: Props) {
  * Container
  * 
  */
-const Container = styled.div`
-    background-color: red;
+const Container = styled(Grid)`
+    display: grid;
+    overflow: auto;
 `
 
 /**

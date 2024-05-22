@@ -3,6 +3,7 @@ import { useCallback, useState } from "react"
 import Participant from "@/Core/Participant"
 import styled from "@emotion/styled"
 import { useNavigate } from "react-router-dom"
+import Appearance from "@/View/Appearance"
 
 /**
  * Row
@@ -35,6 +36,9 @@ export default function ({ participant }: Props) {
  * 
  */
 const Container = styled.div`
+    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
+    border-radius: 7px;
+    padding: 10px;
 `
 
 /**
