@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom"
-import styled from "@emotion/styled"
 import { lazy } from "react"
 
 const Record = lazy(() => import("./Record"))
@@ -13,18 +12,9 @@ const Update = lazy(() => import("./Update"))
  */
 export default function () {
 
-    return <Container>
-        <Routes>
-            <Route index element={<Record />} />
-            <Route path="create" element={<Create />} />
-            <Route path=":id/edit" element={<Update />} />
-        </Routes>
-    </Container>
+    return <Routes>
+        <Route index element={<Record />} />
+        <Route path="create" element={<Create />} />
+        <Route path=":id/edit" element={<Update />} />
+    </Routes>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`

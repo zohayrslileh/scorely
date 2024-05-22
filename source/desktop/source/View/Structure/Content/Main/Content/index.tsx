@@ -44,4 +44,5 @@ export default function () {
 const Container = styled(Card)`
     grid-area: content;
     position: relative;
+    padding: 20px;
 `

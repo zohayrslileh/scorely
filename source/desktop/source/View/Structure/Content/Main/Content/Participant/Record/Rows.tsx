@@ -34,6 +34,7 @@ export default function ({ filter }: Props) {
  * 
  */
 const Container = styled.div`
+    background-color: red;
 `
 
 /**

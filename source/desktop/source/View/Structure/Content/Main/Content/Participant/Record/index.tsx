@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Title from "@/View/Components/Title"
 import Flex from "@/View/Components/Flex"
+import Grid from "@/View/Components/Grid"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import useForm from "@/Tools/Form"
@@ -27,14 +28,14 @@ export default function () {
      */
     const { value, update } = useForm(() => new Filter)
 
-    return <Container>
+    return <Container gap="10px" rows="auto auto 1fr">
         <Flex>
             <Title><Lang>Participants</Lang></Title>
             <Button onClick={() => navigate("create")}>Create</Button>
         </Flex>
-        <Flex>
+        <Grid>
             <TextInput placeholder="Search" type="text" value={value.name} onChange={update.name} />
-        </Flex>
+        </Grid>
         <Rows filter={value} />
     </Container>
 }
@@ -43,7 +44,8 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Grid)`
+    height: 100%;
 `
 
 /**
