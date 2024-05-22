@@ -62,10 +62,15 @@ export default class Participant {
      * 
      * @returns
      */
-    public static async record() {
+    public static async record(data: unknown) {
+
+        // Schema
+        const schema = zod.object({
+            name: zod.string().max(50).optional()
+        })
 
         // Get participants
-        const participants = await request<PrimitiveParticipant[]>({ url: "/participantx" })
+        const participants = await request<PrimitiveParticipant[]>({ url: "/participant", params: schema.parse(data) })
 
         return participants.map(participant => new this(participant))
     }

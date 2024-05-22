@@ -1,6 +1,7 @@
 import ParticipantEntity from "@/Models/Database/Entities/Participant"
 import CoreException from "./Exception"
 import zod from "zod"
+import { Like } from "typeorm"
 
 /*
 |-----------------------------
@@ -68,10 +69,18 @@ export default class Participant {
      * 
      * @returns
      */
-    public static async record() {
+    public static async record(data: unknown) {
+
+        // Schema
+        const schema = zod.object({
+            name: zod.string().max(50).optional()
+        })
+
+        // Validate data
+        const { name } = schema.parse(data)
 
         // Get entities
-        const entities = await ParticipantEntity.find()
+        const entities = await ParticipantEntity.findBy({ name: Like(`%${name}%`) })
 
         return entities.map(entity => new this(entity))
     }
