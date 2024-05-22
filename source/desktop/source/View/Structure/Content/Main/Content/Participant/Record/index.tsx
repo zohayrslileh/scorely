@@ -1,5 +1,5 @@
+import { useNavigate, useSearchParams } from "react-router-dom"
 import TextInput from "@/View/Components/TextInput"
-import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Title from "@/View/Components/Title"
 import Flex from "@/View/Components/Flex"
@@ -15,6 +15,14 @@ import Rows from "./Rows"
  */
 export default function () {
 
+    /**
+     * Search params
+     * 
+     */
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    console.log(searchParams.getAll("name"))
+    setSearchParams()
     /**
      * Navigate
      * 
@@ -35,7 +43,6 @@ export default function () {
         <Flex>
             <TextInput placeholder="Search" type="text" value={name} onChange={setName} />
         </Flex>
-        <Rows params={{ name }} />
     </Container>
 }
 

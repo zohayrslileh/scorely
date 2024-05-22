@@ -15,12 +15,6 @@ import Row from "./Row"
 export default function ({ params }: Props) {
 
     /**
-     * Search params
-     * 
-     */
-    const [searchParams, setSearchParams] = useSearchParams()
-
-    /**
      * Record promise
      * 
      */
