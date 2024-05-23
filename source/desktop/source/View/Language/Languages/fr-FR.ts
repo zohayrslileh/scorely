@@ -12,5 +12,6 @@ export default {
     "Add new participant": "Ajouter un nouveau participant",
     "Name": "Nom",
     "Save": "Sauvegarder",
-    "Edit participant": "Modifier participant"
+    "Edit participant": "Modifier participant",
+    "No results found": "Aucun résultat trouvé"
 }

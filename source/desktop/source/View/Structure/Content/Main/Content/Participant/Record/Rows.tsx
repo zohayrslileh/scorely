@@ -1,5 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import Participant from "@/Core/Participant"
+import Empty from "@/View/Components/Empty"
 import Grid from "@/View/Components/Grid"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -26,7 +27,7 @@ export default function ({ filter }: Props) {
 
     return record.solve.length ? <Grid columns="1fr 1fr" gap="10px" style={{ overflow: "hidden" }}>
         {record.solve.map(participant => <Row key={participant.id} participant={participant} />)}
-    </Grid> : <b>Not found !!</b>
+    </Grid> : <Empty />
 }
 
 /**

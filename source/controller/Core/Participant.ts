@@ -80,7 +80,10 @@ export default class Participant {
         const { name } = schema.parse(data)
 
         // Get entities
-        const entities = await ParticipantEntity.findBy({ name: Like(`%${name}%`) })
+        const entities = await ParticipantEntity.find({
+            where: { name: Like(`%${name}%`) },
+            take: 20
+        })
 
         return entities.map(entity => new this(entity))
     }
