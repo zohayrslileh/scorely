@@ -15,5 +15,7 @@ export default {
     "Edit participant": "Modifier participant",
     "No results found": "Aucun résultat trouvé",
     "Add new judge": "Ajouter un nouveau juge",
-    "Edit judge": "Modifier le juge"
+    "Edit judge": "Modifier le juge",
+    "Server URL": "URL du serveur",
+    "Connect": "Connecter"
 }
