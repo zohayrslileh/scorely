@@ -122,26 +122,17 @@ export default class Session {
      */
     public async addParticipant(participant: Participant) {
 
-        // Get session entity
-        const sessionEntity = await SessionEntity.findOne({
-            relations: { participants: true },
-            where: { id: this.id }
-        })
-
-        // Check session entity
-        if (!sessionEntity) throw new CoreException("Session entity was not found")
-
         // Get participant entity
         const participantEntity = await ParticipantEntity.findOneBy({ id: participant.id })
 
         // Check participant entity
         if (!participantEntity) throw new CoreException("Participant entity was not found")
 
-        // Add participant entity to session entity
-        sessionEntity.participants.push(participantEntity)
+        // Create session query builder
+        const sessionQueryBuilder = SessionEntity.createQueryBuilder()
 
-        // Save
-        await sessionEntity.save()
+        // Add participant entity to session entity
+        await sessionQueryBuilder.relation("participants").add(participantEntity)
     }
 
 }
