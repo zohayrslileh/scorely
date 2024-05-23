@@ -122,7 +122,7 @@ export default class Judge {
         const schema = zod.object({
             name: zod.string().max(50),
             username: zod.string().max(50),
-            password: zod.string().max(50)
+            password: zod.string().max(50).optional()
         })
 
         // Validate data
