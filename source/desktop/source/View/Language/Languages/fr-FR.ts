@@ -16,6 +16,8 @@ export default {
     "No results found": "Aucun résultat trouvé",
     "Add new judge": "Ajouter un nouveau juge",
     "Edit judge": "Modifier le juge",
+    "Add new session": "Ajouter une nouvelle session",
+    "Edit session": "Modifier la session",
     "Server URL": "URL du serveur",
     "Connect": "Connecter"
 }
