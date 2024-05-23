@@ -20,5 +20,6 @@ export default {
     "Edit session": "Modifier la session",
     "Server URL": "URL du serveur",
     "Connect": "Connecter",
-    "Open new session": "Ouvrir une nouvelle session"
+    "Open new session": "Ouvrir une nouvelle session",
+    "Logout": "Se déconnecter"
 }
