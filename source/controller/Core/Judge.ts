@@ -1,4 +1,5 @@
 import JudgeEntity from "@/Models/Database/Entities/Judge"
+import User from "@/Models/Database/Entities/User"
 import CoreException from "./Exception"
 import { Like } from "typeorm"
 import zod from "zod"
@@ -25,6 +26,18 @@ export default class Judge {
     public name: string
 
     /**
+     * Username
+     * 
+     */
+    public username: string
+
+    /**
+     * Password
+     * 
+     */
+    public password: string | undefined
+
+    /**
      * Constructor method
      * 
      */
@@ -35,6 +48,12 @@ export default class Judge {
 
         // Set name
         this.name = primitiveJudge.name
+
+        // Set username
+        this.username = primitiveJudge.username
+
+        // Set password
+        this.password = primitiveJudge.password
     }
 
     /**
@@ -46,11 +65,13 @@ export default class Judge {
 
         // Schema
         const schema = zod.object({
-            name: zod.string().max(50)
+            name: zod.string().max(50),
+            username: zod.string().max(50),
+            password: zod.string().max(50)
         })
 
         // Validate data
-        const { name } = schema.parse(data)
+        const { name, username, password } = schema.parse(data)
 
         // Create entity
         const entity = new JudgeEntity
@@ -58,10 +79,27 @@ export default class Judge {
         // Set name
         entity.name = name
 
+        // Set user
+        entity.user = new User
+
+        // Set username
+        entity.user.username = username
+
+        // Set password
+        await entity.user.setPassword(password)
+
+        // Save user
+        await entity.user.save()
+
         // Save
         await entity.save()
 
-        return new this(entity)
+        return new this({
+            id: entity.id,
+            name: entity.name,
+            username: entity.user.username,
+            password: undefined
+        })
     }
 
     /**
@@ -82,11 +120,17 @@ export default class Judge {
         // Get entities
         const entities = await JudgeEntity.find({
             where: { name: Like(`%${name}%`) },
+            relations: { user: true },
             order: { id: "DESC" },
-            take: 20
+            take: 20,
         })
 
-        return entities.map(entity => new this(entity))
+        return entities.map(entity => new this({
+            id: entity.id,
+            name: entity.name,
+            username: entity.user.username,
+            password: undefined
+        }))
     }
 
     /**
@@ -100,12 +144,20 @@ export default class Judge {
         const schema = zod.number()
 
         // Get entity
-        const entity = await JudgeEntity.findOneBy({ id: schema.parse(id) })
+        const entity = await JudgeEntity.findOne({
+            where: { id: schema.parse(id) },
+            relations: { user: true }
+        })
 
         // Check entity
         if (!entity) throw new CoreException("Judge entity was not found")
 
-        return new this(entity)
+        return new this({
+            id: entity.id,
+            name: entity.name,
+            username: entity.user.username,
+            password: undefined
+        })
     }
 
     /**
@@ -166,4 +218,6 @@ export default class Judge {
 export interface PrimitiveJudge {
     id: number
     name: string
+    username: string
+    password: string | undefined
 }
