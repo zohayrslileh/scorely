@@ -5,7 +5,7 @@ import { useCallback, useState } from "react"
  * 
  * @returns
  */
-export default function ({ onClick, pending, children, ...props }: Props) {
+export default function ({ onClick, children, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
 
     /**
      * Loading state
@@ -22,12 +22,6 @@ export default function ({ onClick, pending, children, ...props }: Props) {
         // Check on click event
         if (!onClick) return
 
-        // Without pending
-        if (pending === undefined) return onClick(event)
-
-        // Check is loading
-        if (loading) return
-
         // Start loading
         setLoading(true)
 
@@ -42,17 +36,9 @@ export default function ({ onClick, pending, children, ...props }: Props) {
             setLoading(false)
         }
 
-    }, [onClick, loading, pending])
+    }, [onClick, loading])
 
     return <button {...props} onClick={clickHandler} className={`${props.className} ${loading ? "disable" : undefined}`}>
-        {loading && pending ? pending : children}
+        {children}
     </button>
-}
-
-/**
- * Props
- * 
- */
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-    pending?: React.ReactNode
 }
