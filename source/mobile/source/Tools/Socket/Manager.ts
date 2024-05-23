@@ -49,13 +49,7 @@ export default class Manager extends BaseManager {
          */
         const namespace = useMemo(() => new Namespace(this.socket(name, { ...options, auth: { authorization } })), [])
 
-        /**
-         * Connected
-         * 
-         */
-        const connected = namespace.useConnected()
-
-        return Object.assign(namespace, { connected })
+        return namespace
     }
 }
 

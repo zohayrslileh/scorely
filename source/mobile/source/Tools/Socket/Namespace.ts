@@ -146,6 +146,27 @@ export default class Namespace {
          */
         this.useOn("disconnect", () => setConnected(false))
 
+        /**
+         * Before Effect
+         * 
+         */
+        useEffect(() => {
+
+            // Connect
+            if (this.socket.disconnected) this.socket.connect()
+
+            /**
+             * After Effect
+             * 
+             */
+            return () => {
+
+                // Disconnect
+                if (this.socket.connected) this.socket.disconnect()
+            }
+
+        }, [])
+
         return connected
     }
 
