@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Title from "@/View/Components/Title"
+import Appearance from "@/View/Appearance"
 import Flex from "@/View/Components/Flex"
 import Grid from "@/View/Components/Grid"
 import Exception from "@/View/Exception"
@@ -64,6 +65,9 @@ const Container = styled(Grid)`
         overflow-y: auto;
         height: 0px;
         flex: auto;
+        border: 2px solid ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
+        border-radius: 7px;
+        padding: 7px;
 
         ::-webkit-scrollbar {
             display: none;
