@@ -1,5 +1,6 @@
 import HttpException from "@/Services/Server/HTTP/Exception/Exceptions"
 import Authentication from "@/Core/Authentication"
+import Participant from "@/Core/Participant"
 import Router from "@/Tools/HTTP/Router"
 import Session from "@/Core/Session"
 
@@ -41,7 +42,7 @@ export default Router.create<Environment>(function (session) {
 
         // Check role
         if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
-    
+
         // Get sessions
         const sessions = await Session.record()
 
@@ -104,6 +105,30 @@ export default Router.create<Environment>(function (session) {
 
         // Delete
         await session.delete()
+
+        return context.json(undefined)
+    })
+
+    /**
+     * Add participant
+     * 
+     */
+    session.post("/:id/:participant", async function (context) {
+
+        // Authentication verify
+        const user = await context.var.authentication.verify()
+
+        // Check role
+        if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
+
+        // Get session
+        const session = await Session.find(+context.req.param("id"))
+
+        // Get participant
+        const participant = await Participant.find(+context.req.param("participant"))
+
+        // Add participant
+        await session.addParticipant(participant)
 
         return context.json(undefined)
     })

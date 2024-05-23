@@ -1,5 +1,7 @@
+import ParticipantEntity from "@/Models/Database/Entities/Participant"
 import SessionEntity from "@/Models/Database/Entities/Session"
 import CoreException from "./Exception"
+import Participant from "./Participant"
 import zod from "zod"
 
 /*
@@ -111,6 +113,35 @@ export default class Session {
         if (!entity) throw new CoreException("Session entity was not found")
 
         await entity.remove()
+    }
+
+    /**
+     * Add participant method
+     * 
+     * @returns
+     */
+    public async addParticipant(participant: Participant) {
+
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOne({
+            relations: { participants: true },
+            where: { id: this.id }
+        })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
+        // Get participant entity
+        const participantEntity = await ParticipantEntity.findOneBy({ id: participant.id })
+
+        // Check participant entity
+        if (!participantEntity) throw new CoreException("Participant entity was not found")
+
+        // Add participant entity to session entity
+        sessionEntity.participants.push(participantEntity)
+
+        // Save
+        await sessionEntity.save()
     }
 
 }

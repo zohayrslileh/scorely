@@ -1,4 +1,5 @@
 import request from "@/Models/Server/Request"
+import Participant from "./Participant"
 import zod from "zod"
 
 /*
@@ -95,6 +96,20 @@ export default class Session {
     public async delete() {
 
         await request({ method: "DELETE", url: `/session/${this.id}` })
+    }
+
+    /**
+     * Add participant method
+     * 
+     * @returns
+     */
+    public async addParticipant(participant: Participant) {
+
+        // Add participant
+        await request({
+            method: "POST",
+            url: `/session/${this.id}/${participant.id}`
+        })
     }
 
 }
