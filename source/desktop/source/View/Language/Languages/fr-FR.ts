@@ -13,5 +13,7 @@ export default {
     "Name": "Nom",
     "Save": "Sauvegarder",
     "Edit participant": "Modifier participant",
-    "No results found": "Aucun résultat trouvé"
+    "No results found": "Aucun résultat trouvé",
+    "Add new judge": "Ajouter un nouveau juge",
+    "Edit judge": "Modifier le juge"
 }
