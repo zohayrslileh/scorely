@@ -42,6 +42,7 @@ const Container = styled.div`
 
     * {
         transition: 90ms ease-out;
+        cursor: default !important;
     }
 
     .animation {

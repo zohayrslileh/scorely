@@ -5,7 +5,6 @@ import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
 import { AxiosError } from "axios"
 import Content from "./Content"
-import Sidebar from "./Sidebar"
 import Navbar from "./Navbar"
 
 /**
@@ -44,9 +43,6 @@ export default function () {
             {/** Navbar */}
             <Navbar />
 
-            {/** Sidebar */}
-            <Sidebar />
-
             {/** Content */}
             <Content />
 
@@ -65,6 +61,6 @@ const Container = styled.div`
     grid-template-rows: auto 1fr; 
     gap: 10px; 
     grid-template-areas: 
-        "sidebar navbar"
-        "sidebar content";
+        "navbar navbar"
+        "content content";
 `

@@ -1,14 +1,10 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import { Navigate, Route, Routes } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
-import Card from "@/View/Components/Card"
+import Logo from "@/View/Components/Logo"
 import Exception from "@/View/Exception"
-import { Suspense, lazy } from "react"
 import styled from "@emotion/styled"
-
-const Participant = lazy(() => import("./Participant"))
-const Session = lazy(() => import("./Session"))
-const Judge = lazy(() => import("./Judge"))
+import { Suspense } from "react"
+import Order from "./Order"
 
 /**
  * Content
@@ -17,18 +13,15 @@ const Judge = lazy(() => import("./Judge"))
  */
 export default function () {
 
-    return <Container className="animation">
+    return <Container>
 
         <Exception>
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
-                <Routes>
-                    <Route index element={<Navigate to="session" />} />
-                    <Route path="participant/*" element={<Participant />} />
-                    <Route path="session/*" element={<Session />} />
-                    <Route path="judge/*" element={<Judge />} />
-                </Routes>
+                <Logo width={200} id="logo" />
+
+                <Order />
 
             </Suspense>
 
@@ -41,10 +34,20 @@ export default function () {
  * Container
  * 
  */
-const Container = styled(Card)`
+const Container = styled.div`
     grid-area: content;
     position: relative;
     padding: 20px;
     overflow: auto;
     display: grid;
+
+    > #logo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        opacity: 0.1;
+    }
 `
