@@ -49,6 +49,8 @@ export default function ({ judge }: Props) {
         <Title><Lang>Edit judge</Lang> "{judge.name}"</Title>
         <Grid gap="10px">
             <TextInput placeholder={lang("Name")} type="text" value={value.name} onChange={value => update.name(value)} />
+            <TextInput placeholder={lang("Username")} type="text" value={value.username} onChange={value => update.username(value)} />
+            <TextInput placeholder={lang("Password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>

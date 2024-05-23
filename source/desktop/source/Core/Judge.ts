@@ -32,7 +32,7 @@ export default class Judge {
      * Password
      * 
      */
-    public password: string
+    public password: string | undefined
 
     /**
      * Constructor method
@@ -167,5 +167,5 @@ export interface PrimitiveJudge {
     id: number
     name: string
     username: string
-    password: string
+    password: string | undefined
 }

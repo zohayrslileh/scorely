@@ -169,23 +169,37 @@ export default class Judge {
 
         // Schema
         const schema = zod.object({
-            name: zod.string().max(50)
+            name: zod.string().max(50),
+            username: zod.string().max(50),
+            password: zod.string().max(50).optional()
         })
 
         // Validate data
-        const { name } = schema.parse(data)
+        const { name, username, password } = schema.parse(data)
 
         // Set name
         this.name = name
 
         // Get entity
-        const entity = await JudgeEntity.findOneBy({ id: this.id })
+        const entity = await JudgeEntity.findOne({
+            where: { id: this.id },
+            relations: { user: true }
+        })
 
         // Check entity
         if (!entity) throw new CoreException("Judge entity was not found")
 
         // Set name
         entity.name = name
+
+        // Set username
+        entity.user.username = username
+
+        // Set password
+        if (password) await entity.user.setPassword(password)
+
+        // Save user
+        await entity.user.save()
 
         // Save
         await entity.save()
@@ -201,12 +215,19 @@ export default class Judge {
     public async delete() {
 
         // Get entity
-        const entity = await JudgeEntity.findOneBy({ id: this.id })
+        const entity = await JudgeEntity.findOne({
+            where: { id: this.id },
+            relations: { user: true }
+        })
 
         // Check entity
         if (!entity) throw new CoreException("Judge entity was not found")
 
+        // Remove entity
         await entity.remove()
+
+        // Remove user
+        await entity.user.remove()
     }
 
 }
