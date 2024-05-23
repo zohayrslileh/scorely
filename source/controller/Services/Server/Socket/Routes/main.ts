@@ -1,4 +1,4 @@
-import WsException from "@/Services/Server/Socket/Exception/Exceptions"
+// import WsException from "@/Services/Server/Socket/Exception/Exceptions"
 import Authentication from "@/Core/Authentication"
 import Router from "@/Tools/Socket/Router"
 
@@ -22,14 +22,6 @@ export default new Router(function (main) {
         // User
         const user = await authentication.verify()
 
-        // On judge join
-        client.on("judge-join", async function () {
-
-            // Get judge
-            const judge = await user.getJudge()
-
-            // Check judge
-            if (!judge) throw new WsException("You are not judge")
-        })
+        console.log(user)
     })
 })
