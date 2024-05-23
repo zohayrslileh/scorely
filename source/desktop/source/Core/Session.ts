@@ -1,5 +1,5 @@
-import Participant, { PrimitiveParticipant } from "./Participant"
 import request from "@/Models/Server/Request"
+import Participant from "./Participant"
 import zod from "zod"
 
 /*
@@ -18,12 +18,6 @@ export default class Session {
     public readonly id: number
 
     /**
-     * Participants
-     * 
-     */
-    public readonly participants: Participant[]
-
-    /**
      * Constructor method
      * 
      */
@@ -31,9 +25,6 @@ export default class Session {
 
         // Set id
         this.id = primitiveSession.id
-
-        // Set participants
-        this.participants = primitiveSession.participants.map(participant => new Participant(participant))
     }
 
     /**
@@ -129,5 +120,4 @@ export default class Session {
  */
 export interface PrimitiveSession {
     id: number
-    participants: PrimitiveParticipant[]
 }

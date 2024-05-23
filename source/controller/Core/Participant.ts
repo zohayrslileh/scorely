@@ -34,7 +34,7 @@ export default class Participant {
      * Constructor method
      * 
      */
-    private constructor(primitiveParticipant: PrimitiveParticipant) {
+    public constructor(primitiveParticipant: PrimitiveParticipant) {
 
         // Set id
         this.id = primitiveParticipant.id
