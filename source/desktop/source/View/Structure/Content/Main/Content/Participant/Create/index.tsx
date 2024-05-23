@@ -5,6 +5,7 @@ import Participant from "@/Core/Participant"
 import Title from "@/View/Components/Title"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
+import Grid from "@/View/Components/Grid"
 import usePromise from "@/Tools/Promise"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
@@ -38,10 +39,12 @@ export default function () {
     // Solve status
     if (create.solve) return <Navigate to=".." />
 
-    return <Container>
+    return <Container gap="20px">
         <Title><Lang>Create new participant</Lang></Title>
-        <TextInput placeholder="Name" type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
-        <Button onClick={create.execute}><Lang>Create</Lang></Button>
+        <Grid gap="10px">
+            <TextInput placeholder="Name" type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
+            <Button onClick={create.execute}><Lang>Save</Lang></Button>
+        </Grid>
     </Container>
 }
 
@@ -49,7 +52,8 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Grid)`
+    height: fit-content;
 `
 
 /**
