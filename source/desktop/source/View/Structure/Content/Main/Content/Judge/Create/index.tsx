@@ -49,6 +49,8 @@ export default function () {
         <Title><Lang>Add new judge</Lang></Title>
         <Grid gap="10px">
             <TextInput placeholder={lang("Name")} type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
+            <TextInput placeholder={lang("Username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
+            <TextInput placeholder={lang("Password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>
@@ -73,4 +75,16 @@ class JudgeForm {
      * 
      */
     public name: string | undefined
+
+    /**
+     * Username
+     * 
+     */
+    public username: string | undefined
+
+    /**
+     * Password
+     * 
+     */
+    public password: string | undefined
 }

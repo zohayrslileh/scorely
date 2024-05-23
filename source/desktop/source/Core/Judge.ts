@@ -23,6 +23,18 @@ export default class Judge {
     public name: string
 
     /**
+     * Username
+     * 
+     */
+    public username: string
+
+    /**
+     * Password
+     * 
+     */
+    public password: string
+
+    /**
      * Constructor method
      * 
      */
@@ -33,6 +45,12 @@ export default class Judge {
 
         // Set name
         this.name = primitiveJudge.name
+
+        // Set username
+        this.username = primitiveJudge.username
+
+        // Set password
+        this.password = primitiveJudge.password
     }
 
     /**
@@ -44,7 +62,9 @@ export default class Judge {
 
         // Schema
         const schema = zod.object({
-            name: zod.string().max(50)
+            name: zod.string().max(50),
+            username: zod.string().max(50),
+            password: zod.string().max(50)
         })
 
         // Create judge
@@ -100,20 +120,28 @@ export default class Judge {
 
         // Schema
         const schema = zod.object({
-            name: zod.string().max(50)
+            name: zod.string().max(50),
+            username: zod.string().max(50),
+            password: zod.string().max(50)
         })
 
         // Validate data
-        const { name } = schema.parse(data)
+        const { name, username, password } = schema.parse(data)
 
         // Set name
         this.name = name
+
+        // Set username
+        this.username = username
+
+        // Set password
+        this.password = password
 
         // Update judge
         await request<PrimitiveJudge>({
             method: "POST",
             url: `/judge/${this.id}`,
-            data: { name }
+            data: { name, username, password }
         })
 
         return this
@@ -138,4 +166,6 @@ export default class Judge {
 export interface PrimitiveJudge {
     id: number
     name: string
+    username: string
+    password: string
 }
