@@ -1,12 +1,12 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import JsonView from "@/View/Components/JsonView"
 import { useParams } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import Session from "@/Core/Session"
-import Form from "./Form"
 
 /**
- * Update
+ * View
  * 
  * @returns 
  */
@@ -30,5 +30,5 @@ export default function () {
     // Exception status
     if (session.exception) return <Throw exception={session.exception.current} />
 
-    return <Form session={session.solve} />
+    return <JsonView json={session.solve} />
 }

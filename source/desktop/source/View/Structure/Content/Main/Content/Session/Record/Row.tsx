@@ -1,5 +1,5 @@
 import LightButton from "@/View/Components/LightButton"
-import { FiEdit2, FiTrash2 } from "react-icons/fi"
+import { FiEye, FiTrash2 } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
 import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
@@ -43,7 +43,7 @@ export default function ({ session }: Props) {
     return isDelete ? null : <Container className="animation">
         <p>{session.id}</p>
         <Flex id="control">
-            <LightButton onClick={() => navigate(`${session.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
+            <LightButton onClick={() => navigate(`${session.id}`)}><FiEye /><Lang>View</Lang></LightButton>
             <LightButton onClick={destroy} pending="..." id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
         </Flex>
     </Container>

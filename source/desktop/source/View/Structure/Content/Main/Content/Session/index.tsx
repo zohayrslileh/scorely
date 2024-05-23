@@ -3,7 +3,7 @@ import { lazy } from "react"
 
 const Record = lazy(() => import("./Record"))
 const Create = lazy(() => import("./Create"))
-const Update = lazy(() => import("./Update"))
+const View = lazy(() => import("./View"))
 
 /**
  * Session
@@ -15,6 +15,6 @@ export default function () {
     return <Routes>
         <Route index element={<Record />} />
         <Route path="create" element={<Create />} />
-        <Route path=":id/edit" element={<Update />} />
+        <Route path=":id" element={<View />} />
     </Routes>
 }
