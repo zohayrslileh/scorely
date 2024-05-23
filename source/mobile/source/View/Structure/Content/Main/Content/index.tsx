@@ -1,8 +1,5 @@
-import PendingException from "@/View/Exception/Exceptions/Pending"
-import { Throw } from "@/Tools/Exception"
 import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
-import { Suspense } from "react"
 import Socket from "./Socket"
 
 /**
@@ -16,11 +13,7 @@ export default function () {
 
         <Exception>
 
-            <Suspense fallback={<Throw exception={new PendingException} />}>
-
-                <Socket />
-
-            </Suspense>
+            <Socket />
 
         </Exception>
 
