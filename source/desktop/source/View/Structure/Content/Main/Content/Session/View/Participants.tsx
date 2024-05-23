@@ -16,7 +16,7 @@ export default function ({ session }: Props) {
      * Record promise
      * 
      */
-    const record = usePromise(async () => await Participant.record({}), [])
+    const record = usePromise(async () => await Participant.record({ name: "" }), [])
 
     // Pending status
     if (record.pending) return <Throw exception={new PendingException} />
