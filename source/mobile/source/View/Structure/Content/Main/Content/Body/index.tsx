@@ -5,7 +5,7 @@ import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
 
 /**
- * Order
+ * Body
  * 
  * @returns 
  */

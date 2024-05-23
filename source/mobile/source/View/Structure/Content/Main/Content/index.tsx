@@ -3,7 +3,7 @@ import { Throw } from "@/Tools/Exception"
 import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
 import { Suspense } from "react"
-import Order from "./Order"
+import Body from "./Body"
 
 /**
  * Content
@@ -18,7 +18,7 @@ export default function () {
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
-                <Order />
+                <Body />
 
             </Suspense>
 
@@ -34,7 +34,6 @@ export default function () {
 const Container = styled.div`
     grid-area: content;
     position: relative;
-    padding: 20px;
     overflow: auto;
     display: grid;
 `
