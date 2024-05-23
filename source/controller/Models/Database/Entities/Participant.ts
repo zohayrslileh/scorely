@@ -21,6 +21,13 @@ export default class Participant extends BaseEntity {
     declare public name: string
 
     /**
+     * Club
+     * 
+     */
+    @Column({ type: "varchar", nullable: true })
+    declare public club: string | null
+
+    /**
      * Sessions
      * 
      */

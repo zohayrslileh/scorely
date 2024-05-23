@@ -23,6 +23,12 @@ export default class Participant {
     public name: string
 
     /**
+     * Club
+     * 
+     */
+    public club: string | null
+
+    /**
      * Constructor method
      * 
      */
@@ -33,6 +39,9 @@ export default class Participant {
 
         // Set name
         this.name = primitiveParticipant.name
+
+        // Set club
+        this.club = primitiveParticipant.club
     }
 
     /**
@@ -44,7 +53,8 @@ export default class Participant {
 
         // Schema
         const schema = zod.object({
-            name: zod.string().max(50)
+            name: zod.string().max(50),
+            club: zod.string().max(50).nullable()
         })
 
         // Create participant
@@ -100,20 +110,24 @@ export default class Participant {
 
         // Schema
         const schema = zod.object({
-            name: zod.string().max(50)
+            name: zod.string().max(50),
+            club: zod.string().max(50).nullable()
         })
 
         // Validate data
-        const { name } = schema.parse(data)
+        const { name, club } = schema.parse(data)
 
         // Set name
         this.name = name
+
+        // Set club
+        this.club = club
 
         // Update participant
         await request<PrimitiveParticipant>({
             method: "POST",
             url: `/participant/${this.id}`,
-            data: { name }
+            data: { name, club }
         })
 
         return this
@@ -138,4 +152,5 @@ export default class Participant {
 export interface PrimitiveParticipant {
     id: number
     name: string
+    club: string | null
 }

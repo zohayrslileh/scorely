@@ -1,5 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
+import { Lang, useLang } from "@/Tools/Language"
 import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import { Navigate } from "react-router-dom"
@@ -7,7 +8,6 @@ import Title from "@/View/Components/Title"
 import { Throw } from "@/Tools/Exception"
 import Grid from "@/View/Components/Grid"
 import usePromise from "@/Tools/Promise"
-import { Lang, useLang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import useForm from "@/Tools/Form"
 
@@ -49,6 +49,7 @@ export default function ({ participant }: Props) {
         <Title><Lang>Edit participant</Lang> "{participant.name}"</Title>
         <Grid gap="10px">
             <TextInput placeholder={lang("Name")} type="text" value={value.name} onChange={value => update.name(value)} />
+            <TextInput placeholder={lang("Club")} type="text" value={value.club || ""} onChange={value => update.club(value || null)} />
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>
