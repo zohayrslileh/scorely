@@ -95,6 +95,7 @@ export default class Participant {
         // Get entities
         const entities = await ParticipantEntity.find({
             where: { name: Like(`%${name}%`) },
+            order: { id: "DESC" },
             take: 20
         })
 
