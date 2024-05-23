@@ -5,6 +5,7 @@ import { useCallback, useState } from "react"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
 import Flex from "@/View/Components/Flex"
+import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 
 /**
@@ -14,10 +15,23 @@ import styled from "@emotion/styled"
  */
 export default function ({ participant }: Props) {
 
+    /**
+     * Navigate
+     * 
+     */
     const navigate = useNavigate()
 
+    /**
+     * Is delete
+     * 
+     */
     const [isDelete, setIsDelete] = useState(false)
 
+    /**
+     * Destroy method
+     * 
+     * @returns
+     */
     const destroy = useCallback(async function () {
 
         await participant.delete()
@@ -29,8 +43,8 @@ export default function ({ participant }: Props) {
     return isDelete ? null : <Container className="animation">
         <p>{participant.name}</p>
         <Flex id="control">
-            <LightButton onClick={() => navigate(`${participant.id}/edit`)}><FiEdit2 />Edit</LightButton>
-            <LightButton onClick={destroy} pending="..." id="delete"><FiTrash2 />Delete</LightButton>
+            <LightButton onClick={() => navigate(`${participant.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
+            <LightButton onClick={destroy} pending="..." id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
         </Flex>
     </Container>
 }
@@ -41,6 +55,7 @@ export default function ({ participant }: Props) {
  */
 const Container = styled(Flex)`
     background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
+    border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
     border-radius: 7px;
     padding: 15px;
 

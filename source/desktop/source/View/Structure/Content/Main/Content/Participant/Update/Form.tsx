@@ -7,7 +7,7 @@ import Title from "@/View/Components/Title"
 import { Throw } from "@/Tools/Exception"
 import Grid from "@/View/Components/Grid"
 import usePromise from "@/Tools/Promise"
-import { Lang } from "@/Tools/Language"
+import { Lang, useLang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import useForm from "@/Tools/Form"
 
@@ -17,6 +17,12 @@ import useForm from "@/Tools/Form"
  * @returns 
  */
 export default function ({ participant }: Props) {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Form
@@ -42,7 +48,7 @@ export default function ({ participant }: Props) {
     return <Container gap="20px">
         <Title><Lang>Edit participant</Lang> "{participant.name}"</Title>
         <Grid gap="10px">
-            <TextInput placeholder="Name" type="text" value={value.name} onChange={value => update.name(value)} />
+            <TextInput placeholder={lang("Name")} type="text" value={value.name} onChange={value => update.name(value)} />
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>

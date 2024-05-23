@@ -1,5 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
+import { Lang, useLang } from "@/Tools/Language"
 import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import Title from "@/View/Components/Title"
@@ -7,7 +8,6 @@ import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import Grid from "@/View/Components/Grid"
 import usePromise from "@/Tools/Promise"
-import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import useForm from "@/Tools/Form"
 
@@ -17,6 +17,12 @@ import useForm from "@/Tools/Form"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Form
@@ -40,9 +46,9 @@ export default function () {
     if (create.solve) return <Navigate to=".." />
 
     return <Container gap="20px">
-        <Title><Lang>Create new participant</Lang></Title>
+        <Title><Lang>Add new participant</Lang></Title>
         <Grid gap="10px">
-            <TextInput placeholder="Name" type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
+            <TextInput placeholder={lang("Name")} type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>
