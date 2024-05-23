@@ -40,7 +40,7 @@ export default function () {
     return <Container gap="10px" rows="auto auto 1fr">
         <Flex>
             <Title><Lang>Sessions</Lang></Title>
-            <Button onClick={open} pending="..."><Lang>Open new session</Lang></Button>
+            <Button onClick={open} pending={null}><Lang>Open new session</Lang></Button>
         </Flex>
         <div id="rows">
             <Exception>
