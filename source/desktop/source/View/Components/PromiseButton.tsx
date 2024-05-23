@@ -44,7 +44,7 @@ export default function ({ onClick, pending, children, ...props }: Props) {
 
     }, [onClick, loading, pending])
 
-    return <button {...props} onClick={clickHandler}>
+    return <button {...props} onClick={clickHandler} className={`${props.className} ${loading ? "disable" : undefined}`}>
         {loading && pending ? pending : children}
     </button>
 }

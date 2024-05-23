@@ -44,7 +44,7 @@ export default function ({ session }: Props) {
         <p>{session.id}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${session.id}`)}><FiEye /><Lang>View</Lang></LightButton>
-            <LightButton onClick={destroy} pending="..." id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
+            <LightButton onClick={destroy} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
         </Flex>
     </Container>
 }

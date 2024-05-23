@@ -44,7 +44,7 @@ export default function ({ judge }: Props) {
         <p>{judge.name}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${judge.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
-            <LightButton onClick={destroy} pending="..." id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
+            <LightButton onClick={destroy} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
         </Flex>
     </Container>
 }
