@@ -133,6 +133,30 @@ export default Router.create<Environment>(function (session) {
         return context.json(undefined)
     })
 
+    /**
+     * Remove participant
+     * 
+     */
+    session.delete("/:id/:participant", async function (context) {
+
+        // Authentication verify
+        const user = await context.var.authentication.verify()
+
+        // Check role
+        if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
+
+        // Get session
+        const session = await Session.find(+context.req.param("id"))
+
+        // Get participant
+        const participant = await Participant.find(+context.req.param("participant"))
+
+        // Remove participant
+        await session.removeParticipant(participant)
+
+        return context.json(undefined)
+    })
+
 })
 
 /**

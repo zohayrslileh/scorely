@@ -112,6 +112,20 @@ export default class Session {
         })
     }
 
+    /**
+     * Remove participant method
+     * 
+     * @returns
+     */
+    public async removeParticipant(participant: Participant) {
+
+        // Add participant
+        await request({
+            method: "DELETE",
+            url: `/session/${this.id}/${participant.id}`
+        })
+    }
+
 }
 
 /**

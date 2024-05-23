@@ -141,6 +141,32 @@ export default class Session {
         await sessionQueryBuilder.relation("participants").of(sessionEntity).add(participantEntity)
     }
 
+    /**
+     * Remove participant method
+     * 
+     * @returns
+     */
+    public async removeParticipant(participant: Participant) {
+
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
+        // Get participant entity
+        const participantEntity = await ParticipantEntity.findOneBy({ id: participant.id })
+
+        // Check participant entity
+        if (!participantEntity) throw new CoreException("Participant entity was not found")
+
+        // Create session query builder
+        const sessionQueryBuilder = SessionEntity.createQueryBuilder()
+
+        // Remove participant entity from session entity
+        await sessionQueryBuilder.relation("participants").of(sessionEntity).remove(participantEntity)
+    }
+
 }
 
 /**

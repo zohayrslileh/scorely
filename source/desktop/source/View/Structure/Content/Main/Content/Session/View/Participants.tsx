@@ -25,7 +25,13 @@ export default function ({ session }: Props) {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return <div>
-        {record.solve.map(participant => <p key={participant.id}>{participant.name} <PromiseButton onClick={async () => await session.addParticipant(participant)} pending="...">Add</PromiseButton></p>)}
+        {record.solve.map(participant => (
+            <p key={participant.id}>
+                {participant.name}
+                <PromiseButton onClick={async () => await session.addParticipant(participant)} pending="...">Add</PromiseButton>
+                <PromiseButton onClick={async () => await session.removeParticipant(participant)} pending="...">Remove</PromiseButton>
+            </p>
+        ))}
     </div>
 }
 
