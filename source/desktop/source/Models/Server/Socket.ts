@@ -9,6 +9,6 @@ import Server from "."
 |
 |
 */
-const manager = new Manager(Server.value, { authorization: () => Authorization.value })
+const manager = new Manager(Server.value, { authorization: () => Authorization.value, autoConnect: false })
 
 export default manager
