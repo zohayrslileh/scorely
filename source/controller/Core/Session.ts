@@ -122,6 +122,12 @@ export default class Session {
      */
     public async addParticipant(participant: Participant) {
 
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
         // Get participant entity
         const participantEntity = await ParticipantEntity.findOneBy({ id: participant.id })
 
@@ -132,7 +138,7 @@ export default class Session {
         const sessionQueryBuilder = SessionEntity.createQueryBuilder()
 
         // Add participant entity to session entity
-        await sessionQueryBuilder.relation("participants").add(participantEntity)
+        await sessionQueryBuilder.relation("participants").of(sessionEntity).add(participantEntity)
     }
 
 }
