@@ -1,4 +1,7 @@
+import Card from "@/View/Components/Card"
+import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
+import Menu from "./Menu"
 
 /**
  * Sidebar
@@ -7,8 +10,9 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
-        Sidebar
+    return <Container className="animation">
+        <Logo width={150} id="logo" />
+        <Menu />
     </Container>
 }
 
@@ -16,7 +20,13 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
     grid-area: sidebar;
-    border: 2px solid;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    > #logo {
+        margin-inline: auto;
+        margin-block: 30px;
+    }
 `

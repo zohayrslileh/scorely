@@ -1,3 +1,5 @@
+import Appearance from "@/View/Appearance"
+import { BiError } from "react-icons/bi"
 import styled from "@emotion/styled"
 
 /**
@@ -7,7 +9,10 @@ import styled from "@emotion/styled"
  */
 export default function ({ message }: Props) {
 
-    return <Container>{message}</Container>
+    return <Container>
+        <BiError />
+        {message}
+    </Container>
 }
 
 /**
@@ -15,19 +20,14 @@ export default function ({ message }: Props) {
  * 
  */
 const Container = styled.div`
-    background-color: red;
-    position: absolute;
-    width: fit-content;
+    background-color: #f54747;
+    color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 10px;
+    border-radius: 7px;
     height: fit-content;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    padding-inline: 10px;
-    padding-block: 10px;
-    border-radius: 10px;
 `
 
 /**

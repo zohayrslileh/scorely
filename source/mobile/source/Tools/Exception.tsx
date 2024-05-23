@@ -25,9 +25,6 @@ export default function Exception({ children, onCatch }: ExceptionProps) {
      */
     return <Fragment>
 
-        {/** Exceptions */}
-        {exceptions.length ? onCatch(exceptions.map(exception => exception.current)) : undefined}
-
         {/** Set Exceptions Provider */}
         <SetExceptions.Provider value={setExceptions}>
 
@@ -35,6 +32,9 @@ export default function Exception({ children, onCatch }: ExceptionProps) {
             {children}
 
         </SetExceptions.Provider>
+
+        {/** Exceptions */}
+        {exceptions.length ? onCatch(exceptions.map(exception => exception.current)) : undefined}
 
     </Fragment>
 }

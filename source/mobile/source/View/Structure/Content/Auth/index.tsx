@@ -34,5 +34,5 @@ export default function () {
     if (user.exception) return <Throw exception={user.exception.current} />
 
     // Authorized status
-    return <Navigate to="/" />
+    return <Navigate to="/main" />
 }

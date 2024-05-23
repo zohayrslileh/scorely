@@ -1,4 +1,7 @@
+import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
+import Navigator from "./Navigator"
+import User from "./User"
 
 /**
  * Navbar
@@ -7,8 +10,10 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
-        Navbar
+
+    return <Container className="animation">
+        <Navigator />
+        <User />
     </Container>
 }
 
@@ -16,7 +21,9 @@ export default function () {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
     grid-area: navbar;
-    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 `

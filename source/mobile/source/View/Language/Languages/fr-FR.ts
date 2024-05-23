@@ -1,5 +1,24 @@
 export default {
     "Login": "Connexion",
     "Username": "Nom d'utilisateur",
-    "Password": "Mot de passe"
+    "Password": "Mot de passe",
+    "Sessions": "Séances",
+    "Judges": "Juges",
+    "Participants": "Participants",
+    "Add new": "Ajouter un nouveau",
+    "Edit": "Modifier",
+    "Delete": "Supprimer",
+    "Search": "Recherche",
+    "Add new participant": "Ajouter un nouveau participant",
+    "Name": "Nom",
+    "Save": "Sauvegarder",
+    "Edit participant": "Modifier participant",
+    "No results found": "Aucun résultat trouvé",
+    "Add new judge": "Ajouter un nouveau juge",
+    "Edit judge": "Modifier le juge",
+    "Add new session": "Ajouter une nouvelle session",
+    "Edit session": "Modifier la session",
+    "Server URL": "URL du serveur",
+    "Connect": "Connecter",
+    "Open new session": "Ouvrir une nouvelle session"
 }

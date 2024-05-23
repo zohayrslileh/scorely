@@ -34,10 +34,10 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    display: grid;
-    grid-template-rows: 1fr auto;
-    height: 100%;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    box-sizing: border-box;
     padding: 10px;
+    height: 100%;
 `

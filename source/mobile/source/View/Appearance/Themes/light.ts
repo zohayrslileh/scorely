@@ -1,3 +1,4 @@
+import schema from "@/View/Appearance/schema"
 import Color from "@/Tools/Color"
 
 /*
@@ -9,6 +10,7 @@ import Color from "@/Tools/Color"
 */
 export default {
 
-    BACKGROUND: new Color("#DDE5F4"),
-    COLOR: new Color("#001822")
+    BACKGROUND_SECONDARY: new Color("#FFFFFF"),
+    BACKGROUND_PRIMARY: schema.COLOR_LIGHT,
+    CONTENT_COLOR: schema.COLOR_DARK
 }
