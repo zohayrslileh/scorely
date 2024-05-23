@@ -1,6 +1,9 @@
-import Title from "@/View/Components/Title"
-import { Lang } from "@/Tools/Language"
-import styled from "@emotion/styled"
+import { Route, Routes } from "react-router-dom"
+import { lazy } from "react"
+
+const Record = lazy(() => import("./Record"))
+const Create = lazy(() => import("./Create"))
+const Update = lazy(() => import("./Update"))
 
 /**
  * Judge
@@ -9,14 +12,9 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
-        <Title><Lang>Judges</Lang></Title>
-    </Container>
+    return <Routes>
+        <Route index element={<Record />} />
+        <Route path="create" element={<Create />} />
+        <Route path=":id/edit" element={<Update />} />
+    </Routes>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`
