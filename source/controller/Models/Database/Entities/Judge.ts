@@ -33,10 +33,10 @@ export default class Judge extends BaseEntity {
      * User
      * 
      */
-    @OneToOne(() => User, user => user.judge)
+    @OneToOne(() => User, user => user.judge, { nullable: false })
     @JoinColumn()
-    declare public user: User | null
-    
+    declare public user: User
+
     /**
      * Ratings
      * 
