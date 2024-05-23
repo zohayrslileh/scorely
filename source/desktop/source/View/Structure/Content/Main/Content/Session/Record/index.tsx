@@ -5,7 +5,9 @@ import Flex from "@/View/Components/Flex"
 import Grid from "@/View/Components/Grid"
 import Exception from "@/View/Exception"
 import { Lang } from "@/Tools/Language"
+import Session from "@/Core/Session"
 import styled from "@emotion/styled"
+import { useCallback } from "react"
 import Rows from "./Rows"
 
 /**
@@ -21,10 +23,23 @@ export default function () {
      */
     const navigate = useNavigate()
 
+    /**
+     * Open method
+     * 
+     * @returns
+     */
+    const open = useCallback(async function () {
+
+        const session = await Session.create()
+
+        navigate(session.id.toString())
+
+    }, [])
+
     return <Container gap="10px" rows="auto auto 1fr">
         <Flex>
             <Title><Lang>Sessions</Lang></Title>
-            <Button onClick={() => navigate("create")}><Lang>Add new</Lang></Button>
+            <Button onClick={open} pending="..."><Lang>Open new session</Lang></Button>
         </Flex>
         <div id="rows">
             <Exception>
