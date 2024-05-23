@@ -3,7 +3,7 @@ import { Throw } from "@/Tools/Exception"
 import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
 import { Suspense } from "react"
-import Body from "./Body"
+import Socket from "./Socket"
 
 /**
  * Content
@@ -18,7 +18,7 @@ export default function () {
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
-                <Body />
+                <Socket />
 
             </Suspense>
 
