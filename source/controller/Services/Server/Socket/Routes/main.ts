@@ -10,9 +10,6 @@ import Router from "@/Tools/Socket/Router"
 */
 export default new Router(function (main) {
 
-    // Judges
-    const judges = main.namespace.in("judges")
-
     // On connection
     main.onConnection(async function (client) {
 
@@ -25,10 +22,6 @@ export default new Router(function (main) {
         // User
         const user = await authentication.verify()
 
-        // Judge
-        const judge = await user.getJudge()
-
-        // Join to judges
-        if (judge) client.socket.join("judges")
+        console.log(user)
     })
 })
