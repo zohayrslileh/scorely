@@ -38,7 +38,7 @@ export default function () {
     }, [])
 
     // Pending status
-    if (main.connected) return <Throw exception={new PendingException("connecting")} />
+    if (!main.connected) return <Throw exception={new PendingException("connecting")} />
 
     return <p>Done</p>
 }
