@@ -49,7 +49,7 @@ export default function () {
         <Title><Lang>Add new participant</Lang></Title>
         <Grid gap="10px">
             <TextInput placeholder={lang("Name")} type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
-            <TextInput placeholder={lang("Club")} type="text" value={value.club || ""} onChange={value => update.club(value || undefined)} />
+            <TextInput placeholder={lang("Club")} type="text" value={value.club || ""} onChange={value => update.club(value || null)} />
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>
@@ -79,5 +79,5 @@ class ParticipantForm {
      * Club
      * 
      */
-    public club: string | undefined
+    public club: string | null = null
 }

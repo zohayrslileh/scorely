@@ -41,7 +41,7 @@ export default function ({ participant }: Props) {
     }, [participant])
 
     return isDelete ? null : <Container className="animation">
-        <p>{participant.name}</p>
+        <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${participant.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
             <LightButton onClick={destroy} pending="..." id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
