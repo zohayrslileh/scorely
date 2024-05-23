@@ -25,7 +25,7 @@ export default function ({ filter }: Props) {
     // Exception status
     if (record.exception) return <Throw exception={record.exception.current} />
 
-    return record.solve.length ? <Grid columns="1fr 1fr" gap="10px" style={{ overflow: "hidden" }}>
+    return record.solve.length ? <Grid columns="repeat(auto-fit, minmax(450px, auto))" gap="10px" style={{ overflow: "hidden" }}>
         {record.solve.map(judge => <Row key={judge.id} judge={judge} />)}
     </Grid> : <Empty />
 }
