@@ -1,6 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Throw } from "@/Tools/Exception"
-import Logo from "@/View/Components/Logo"
 import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
 import { Suspense } from "react"
@@ -18,8 +17,6 @@ export default function () {
         <Exception>
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
-
-                <Logo width={200} id="logo" />
 
                 <Order />
 
@@ -40,14 +37,4 @@ const Container = styled.div`
     padding: 20px;
     overflow: auto;
     display: grid;
-
-    > #logo {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        opacity: 0.1;
-    }
 `
