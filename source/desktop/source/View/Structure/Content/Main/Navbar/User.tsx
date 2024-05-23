@@ -1,8 +1,8 @@
+import { useCallback, useContext, useState } from "react"
 import LightButton from "@/View/Components/LightButton"
 import Authentication from "@/Core/Authentication"
 import { IoLogOutOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
-import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { LuUser } from "react-icons/lu"
@@ -21,6 +21,12 @@ export default function () {
      * 
      */
     const navigate = useNavigate()
+
+    /**
+     * User
+     * 
+     */
+    const user = useContext(Authentication.context)
 
     /**
      * Active state
@@ -45,7 +51,7 @@ export default function () {
         <Container onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}>
             <div id="username">
                 <LuUser />
-                <p>Admin</p>
+                <p>{user?.username}</p>
             </div>
             {active && <div id="list" className="animation">
                 <Card id="body">

@@ -1,6 +1,7 @@
 import Authorization from "@/Models/Authorization"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
+import { createContext } from "react"
 
 /*
 |-----------------------------
@@ -10,6 +11,12 @@ import usePromise from "@/Tools/Promise"
 |
 */
 export default class Authentication {
+
+    /**
+     * Context
+     * 
+     */
+    public static readonly context = createContext<PrimitiveUser | undefined>(undefined)
 
     /**
      * Login method
@@ -57,11 +64,8 @@ export default class Authentication {
      */
     public static async verify() {
 
-        // Response
-        type Response = { id: number }
-
         // Ask response
-        const response = await request<Response>({ method: "POST", url: "/auth" })
+        const response = await request<PrimitiveUser>({ method: "POST", url: "/auth" })
 
         return response
     }
@@ -75,4 +79,13 @@ export default class Authentication {
 
         return usePromise(this.verify, [])
     }
+}
+
+/**
+ * Primitive User
+ * 
+ */
+interface PrimitiveUser {
+    id: number
+    username: string
 }

@@ -39,14 +39,18 @@ export default function () {
     // Authorized status
     return <Container>
 
-        {/** Navbar */}
-        <Navbar />
+        <Authentication.context.Provider value={user.solve}>
 
-        {/** Sidebar */}
-        <Sidebar />
+            {/** Navbar */}
+            <Navbar />
 
-        {/** Content */}
-        <Content />
+            {/** Sidebar */}
+            <Sidebar />
+
+            {/** Content */}
+            <Content />
+
+        </Authentication.context.Provider>
 
     </Container>
 }
