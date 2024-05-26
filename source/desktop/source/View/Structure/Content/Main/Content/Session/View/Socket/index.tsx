@@ -1,4 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import Button from "@/View/Components/Button"
 import manager from "@/Models/Server/Socket"
 import Participants from "./Participants"
 import { Throw } from "@/Tools/Exception"
@@ -28,6 +29,8 @@ export default function () {
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
     return <Container>
+
+        <Button onClick={async () => await main.ask("admin-join")}>Admin Join</Button>
 
         {/** Participants */}
         <Participants />

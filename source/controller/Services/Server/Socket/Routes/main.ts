@@ -1,4 +1,4 @@
-// import WsException from "@/Services/Server/Socket/Exception/Exceptions"
+import WsException from "@/Services/Server/Socket/Exception/Exceptions"
 import Authentication from "@/Core/Authentication"
 import Router from "@/Tools/Socket/Router"
 
@@ -22,6 +22,36 @@ export default new Router(function (main) {
         // User
         const user = await authentication.verify()
 
-        console.log(user)
+        // On judge join
+        client.on("judge-join", async function () {
+
+            // Check has joined
+            if (client.socket.rooms.has("judges")) throw new WsException("You not judge")
+
+            // Judge
+            const judge = await user.getJudge()
+
+            // Check judge
+            if (!judge) throw new WsException("You not judge")
+
+            // join
+            client.socket.join("judges")
+        })
+
+        // On admin join
+        client.on("admin-join", async function () {
+
+            // Check has joined
+            if (client.socket.rooms.has("admins")) throw new WsException("You not admin")
+
+            // Role
+            const role = await user.getRole()
+
+            // Check admin
+            if (!role || role.name !== "admin") throw new WsException("You not admin")
+
+            // join
+            client.socket.join("admins")
+        })
     })
 })
