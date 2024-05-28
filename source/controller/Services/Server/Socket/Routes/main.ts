@@ -22,36 +22,19 @@ export default new Router(function (main) {
         // User
         const user = await authentication.verify()
 
-        // On judge join
-        client.on("judge-join", async function () {
+        // Judge
+        const judge = await user.getJudge()
 
-            // Check has joined
-            if (client.socket.rooms.has("judges")) throw new WsException("You are adeady joined to judges")
+        // Role
+        const role = await user.getRole()
 
-            // Judge
-            const judge = await user.getJudge()
+        // Is judge
+        if (judge) client.socket.join("judges")
 
-            // Check judge
-            if (!judge) throw new WsException("You not judge")
+        // Is admin
+        else if (role && role.name === "admin") client.socket.join("admins")
 
-            // join
-            client.socket.join("judges")
-        })
-
-        // On admin join
-        client.on("admin-join", async function () {
-
-            // Check has joined
-            if (client.socket.rooms.has("admins")) throw new WsException("You are adeady joined to admins")
-
-            // Role
-            const role = await user.getRole()
-
-            // Check admin
-            if (!role || role.name !== "admin") throw new WsException("You not admin")
-
-            // join
-            client.socket.join("admins")
-        })
+        // Other
+        else throw new WsException("You do not have standing to join")
     })
 })

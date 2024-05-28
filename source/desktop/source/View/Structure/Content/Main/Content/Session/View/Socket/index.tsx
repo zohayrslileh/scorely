@@ -1,4 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import ViewException from "@/View/Exception/Exceptions"
 import manager from "@/Models/Server/Socket"
 import Participants from "./Participants"
 import { Throw } from "@/Tools/Exception"
@@ -23,6 +24,15 @@ export default function () {
      * 
      */
     const connected = main.useConnected()
+
+    /**
+     * Error
+     * 
+     */
+    const error = main.useState<string>("error")
+
+    // Error status
+    if (error) return <Throw exception={new ViewException(error)} />
 
     // Pending status
     if (!connected) return <Throw exception={new PendingException("connecting")} />
