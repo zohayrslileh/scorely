@@ -1,6 +1,8 @@
+import Dialog from "@/View/Components/Dialog"
 import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import { useState } from "react"
 
 /**
  * Participants
@@ -9,8 +11,17 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
+    /**
+     * Is open
+     * 
+     */
+    const [isOpen, setIsOpen] = useState(false)
+
     return <Container>
-        <button><Lang>Add participant</Lang></button>
+        <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
+        <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+            <h1>Hello World</h1>
+        </Dialog>
     </Container>
 }
 
@@ -40,5 +51,11 @@ const Container = styled.div`
         &:hover {
             color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
         }
+    }
+
+    > #dialog {
+        position: fixed;
+        z-index: 99999;
+        background-color: red;
     }
 `
