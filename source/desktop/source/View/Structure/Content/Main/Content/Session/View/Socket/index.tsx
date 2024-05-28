@@ -5,6 +5,7 @@ import Participants from "./Participants"
 import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
 import Judges from "./Judges"
+import usePromise from "@/Tools/Promise"
 
 /**
  * Socket
@@ -25,8 +26,20 @@ export default function () {
      */
     const connected = main.useConnected()
 
+    /**
+     * Join promise
+     * 
+     */
+    const join = usePromise(async () => await main.ask("admin-join"))
+
     // Pending status
     if (!connected) return <Throw exception={new PendingException("connecting")} />
+
+    // Pending status
+    if (join.pending) return <Throw exception={new PendingException} />
+
+    // Pending exception
+    if (join.exception) return <Throw exception={join.exception.current} />
 
     return <Container>
 
