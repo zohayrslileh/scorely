@@ -13,7 +13,7 @@ export default async function () {
 
     const browser = await puppeteer.launch()
 
-    const context = await browser.createBrowserContext()
+    const context = browser.defaultBrowserContext()
 
     await context.overridePermissions("https://www.google.com", ["geolocation"])
 
