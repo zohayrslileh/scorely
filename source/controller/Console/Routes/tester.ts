@@ -22,7 +22,7 @@ export default async function () {
 
     await page.setViewport({ width: 375, height: 812 })
 
-    await page.setGeolocation({ latitude: 36.0605993, longitude: 103.8359516 })
+    await page.setGeolocation({ latitude: 55.7890275, longitude: 49.1279631 })
 
     await page.goto("https://www.google.com/search?q=apple")
 
