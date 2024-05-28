@@ -13,11 +13,11 @@ export default async function () {
 
     const browser = await puppeteer.launch({ headless: false })
 
-    const context = await browser.createBrowserContext()
+    const context = browser.defaultBrowserContext()
 
     await context.overridePermissions("https://www.google.com", ["geolocation"])
 
-    const page = await context.newPage()
+    const page = await browser.newPage()
 
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
