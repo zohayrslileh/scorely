@@ -12,11 +12,11 @@ export default async function () {
 
     const browser = await puppeteer.launch()
 
-    const context = browser.defaultBrowserContext()
+    const context = await browser.createBrowserContext()
 
     await context.overridePermissions("https://www.google.com", ["geolocation"])
 
-    const page = await browser.newPage()
+    const page = await context.newPage()
 
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
@@ -45,8 +45,6 @@ export default async function () {
     await sleep(3000)
 
     await recorder.stop()
-
-    await browser.close()
 
     console.log("The test completed successfully 🧪 ")
 }
