@@ -1,5 +1,6 @@
-import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
+import sleep from "@/Tools/Sleep"
+import axios from "axios"
 
 /*
 |-----------------------------
@@ -16,7 +17,26 @@ export default async function () {
 
     await context.overridePermissions("https://www.google.com", ["geolocation"])
 
-    const page = await context.newPage()
+    const page = await browser.newPage()
+
+    await page.setRequestInterception(true)
+
+    page.on("request", async function (request) {
+
+        const response = await axios({
+            method: request.method(),
+            url: request.url(),
+            headers: request.headers(),
+            data: request.postData()
+        })
+
+        await request.respond({
+            body: response.data
+        })
+
+    })
+
+    await page.authenticate({ username: "zhfklqek", password: "i7cz80j2bn8h" })
 
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
@@ -34,13 +54,19 @@ export default async function () {
 
     const textarea = await page.$("textarea")
 
-    if (!textarea) throw new Error
+    if (textarea) {
 
-    await textarea.focus()
+        await textarea.focus()
 
-    await textarea.type("Free vps")
+        await textarea.type("Free vps")
 
-    await textarea.press("Enter")
+        await textarea.press("Enter")
+
+    }
+
+    await sleep(3000)
+
+    await page.goto("https://whatismyipaddress.com/")
 
     await sleep(3000)
 
