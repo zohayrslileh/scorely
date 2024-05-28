@@ -1,11 +1,12 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import compiler from "@/View/Exception/compiler"
 import Button from "@/View/Components/Button"
 import manager from "@/Models/Server/Socket"
 import Participants from "./Participants"
 import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
+import { useCallback } from "react"
 import Judges from "./Judges"
-import usePromise from "@/Tools/Promise"
 
 /**
  * Socket
@@ -27,23 +28,31 @@ export default function () {
     const connected = main.useConnected()
 
     /**
-     * Join promise
+     * Join method
      * 
+     * @returns
      */
-    const join = usePromise(async () => await main.ask("admin-join"))
+    const join = useCallback(async function () {
+
+        try {
+
+            await new Promise(resolve => setTimeout(resolve, 2000))
+
+            await main.ask("admin-join")
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+        }
+
+    }, [])
 
     // Pending status
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
-    // Pending status
-    if (join.pending) return <Throw exception={new PendingException} />
-
-    // Pending exception
-    if (join.exception) return <Throw exception={join.exception.current} />
-
     return <Container>
 
-        <Button onClick={async () => await main.ask("admin-join")}>Admin Join</Button>
+        <Button onClick={join}>Admin Join</Button>
 
         {/** Participants */}
         <Participants />
