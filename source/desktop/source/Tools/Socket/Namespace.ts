@@ -171,6 +171,16 @@ export default class Namespace {
     }
 
     /**
+     * Error hook
+     * 
+     * @returns
+     */
+    public useError() {
+
+        return this.useState<string>("error")
+    }
+
+    /**
      * Ask method
      * 
      * @returns

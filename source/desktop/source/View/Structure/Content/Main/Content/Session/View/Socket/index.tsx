@@ -1,8 +1,8 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import ViewException from "@/View/Exception/Exceptions"
 import manager from "@/Models/Server/Socket"
-import Participants from "./Participants"
 import { Throw } from "@/Tools/Exception"
+import Participants from "./Participants"
 import styled from "@emotion/styled"
 import Judges from "./Judges"
 
@@ -29,12 +29,12 @@ export default function ({ sessionId }: Props) {
      * Error
      * 
      */
-    const error = main.useState<string>("error")
+    const error = main.useError()
 
     // Error status
     if (error) return <Throw exception={new ViewException(error)} />
 
-    // Pending status
+    // Connecting status
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
     return <Container>
