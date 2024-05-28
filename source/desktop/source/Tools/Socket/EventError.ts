@@ -18,7 +18,7 @@ export default class EventError extends Error {
      * Response
      * 
      */
-    public readonly response: any
+    public readonly response: unknown
 
     /**
      * Constructor method

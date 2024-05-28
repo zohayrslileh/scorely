@@ -22,8 +22,16 @@ export default class WsEventException extends ViewException {
      */
     constructor(eventError: EventError) {
 
+        // Message
+        const message = (
+            eventError.response
+            && typeof eventError.response === "object"
+            && "message" in eventError.response
+            && typeof eventError.response.message === "string"
+        ) ? eventError.response.message : eventError.message
+
         // Call parent constructor
-        super(eventError.response.message)
+        super(message)
 
         // Set event error
         this.eventError = eventError
