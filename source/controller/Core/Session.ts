@@ -1,8 +1,10 @@
 import ParticipantEntity from "@/Models/Database/Entities/Participant"
+import JudgeEntity from "@/Models/Database/Entities/Judge"
 import SessionEntity from "@/Models/Database/Entities/Session"
 import CoreException from "./Exception"
 import Participant from "./Participant"
 import zod from "zod"
+import Judge from "./Judge"
 
 /*
 |-----------------------------
@@ -167,6 +169,57 @@ export default class Session {
         await sessionQueryBuilder.relation("participants").of(sessionEntity).remove(participantEntity)
     }
 
+    /**
+     * Add judge method
+     * 
+     * @returns
+     */
+    public async addJudge(judge: Judge) {
+
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
+        // Get judge entity
+        const judgeEntity = await JudgeEntity.findOneBy({ id: judge.id })
+
+        // Check judge entity
+        if (!judgeEntity) throw new CoreException("Judge entity was not found")
+
+        // Create session query builder
+        const sessionQueryBuilder = SessionEntity.createQueryBuilder()
+
+        // Add judge entity to session entity
+        await sessionQueryBuilder.relation("judges").of(sessionEntity).add(judgeEntity)
+    }
+
+    /**
+     * Remove judge method
+     * 
+     * @returns
+     */
+    public async removeJudge(judge: Judge) {
+
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
+        // Get judge entity
+        const judgeEntity = await ParticipantEntity.findOneBy({ id: judge.id })
+
+        // Check judge entity
+        if (!judgeEntity) throw new CoreException("Judge entity was not found")
+
+        // Create session query builder
+        const sessionQueryBuilder = SessionEntity.createQueryBuilder()
+
+        // Remove judge entity from session entity
+        await sessionQueryBuilder.relation("judges").of(sessionEntity).remove(judgeEntity)
+    }
 }
 
 /**
