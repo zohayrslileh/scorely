@@ -1,4 +1,3 @@
-import { writeFile } from "fs/promises"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
 
@@ -25,13 +24,15 @@ export default async function () {
 
     await page.setGeolocation({ latitude: 25.2000789, longitude: 55.2720523 })
 
+    const recorder = await page.screencast({ path: "storage/record.webm" })
+
     await page.goto("https://www.google.com/search?q=apple")
 
     await sleep(1000)
 
     await page.goto("https://www.google.com/")
 
-    await writeFile("storage/screenshot.png", await page.screenshot())
+    await recorder.stop()
 
     await browser.close()
 
