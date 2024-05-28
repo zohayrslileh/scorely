@@ -54,6 +54,11 @@ export default new Router(function (main) {
 
                 // Add participant to session
                 await session.addParticipant(participant)
+
+                // Emit to broadcast admins
+                client.socket.broadcast.in("admins").emit("add-participant", participant)
+
+                return participant
             })
         }
 
