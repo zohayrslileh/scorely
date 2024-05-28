@@ -1,6 +1,8 @@
 import WsException from "@/Services/Server/Socket/Exception/Exceptions"
 import Authentication from "@/Core/Authentication"
+import Participant from "@/Core/Participant"
 import Router from "@/Tools/Socket/Router"
+import Session from "@/Core/Session"
 
 /*
 |-----------------------------
@@ -40,6 +42,19 @@ export default new Router(function (main) {
 
             // Join to admins
             client.socket.join("admins")
+
+            // Session
+            const session = await Session.find(client.socket.handshake.auth.sessionId)
+
+            // On add participant
+            client.on("add-participant", async function (_, participantId: unknown) {
+
+                // Participant
+                const participant = await Participant.find(participantId)
+
+                // Add participant to session
+                await session.addParticipant(participant)
+            })
         }
 
         // Other

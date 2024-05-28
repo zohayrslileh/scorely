@@ -47,7 +47,7 @@ export default class Manager extends BaseManager {
          * Namespace
          * 
          */
-        const namespace = useMemo(() => new Namespace(this.socket(name, { ...options, auth: { authorization } })), [])
+        const namespace = useMemo(() => new Namespace(this.socket(name, { ...options, auth: { ...options?.auth, authorization } })), [])
 
         return namespace
     }

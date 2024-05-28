@@ -11,13 +11,13 @@ import Judges from "./Judges"
  * 
  * @returns 
  */
-export default function () {
+export default function ({ sessionId }: Props) {
 
     /**
      * Main
      * 
      */
-    const main = manager.useNamespace("/main")
+    const main = manager.useNamespace("/main", { auth: { sessionId } })
 
     /**
      * Connected
@@ -46,6 +46,14 @@ export default function () {
         <Judges />
 
     </Container>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    sessionId: number
 }
 
 /**
