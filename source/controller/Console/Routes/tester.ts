@@ -33,7 +33,7 @@ export default async function () {
 
     await writeFile("storage/screenshot.png", await page.screenshot())
 
-    // await browser.close()
+    await browser.close()
 
     console.log("The test completed successfully 🧪 ")
 }
