@@ -26,7 +26,7 @@ export default new Router(function (main) {
         client.on("judge-join", async function () {
 
             // Check has joined
-            if (client.socket.rooms.has("judges")) throw new WsException("You not judge")
+            if (client.socket.rooms.has("judges")) throw new WsException("You are adeady joined to judges")
 
             // Judge
             const judge = await user.getJudge()
@@ -42,7 +42,7 @@ export default new Router(function (main) {
         client.on("admin-join", async function () {
 
             // Check has joined
-            if (client.socket.rooms.has("admins")) throw new WsException("You not admin")
+            if (client.socket.rooms.has("admins")) throw new WsException("You are adeady joined to admins")
 
             // Role
             const role = await user.getRole()
