@@ -22,15 +22,27 @@ export default async function () {
 
     await page.setViewport({ width: 375, height: 812 })
 
-    await page.setGeolocation({ latitude: 25.2000789, longitude: 55.2720523 })
-
-    const recorder = await page.screencast({ path: "storage/record.webm" })
+    await page.setGeolocation({ latitude: 36.0605993, longitude: 103.8359516 })
 
     await page.goto("https://www.google.com/search?q=apple")
 
     await sleep(1000)
 
     await page.goto("https://www.google.com/")
+
+    const recorder = await page.screencast({ path: "storage/record.webm" })
+
+    const textarea = await page.$("textarea")
+
+    if (!textarea) throw new Error
+
+    await textarea.focus()
+
+    await textarea.type("Free vps")
+
+    await textarea.press("Enter")
+
+    await sleep(3000)
 
     await recorder.stop()
 
