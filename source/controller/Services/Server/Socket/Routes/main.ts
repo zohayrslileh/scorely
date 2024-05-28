@@ -29,10 +29,18 @@ export default new Router(function (main) {
         const role = await user.getRole()
 
         // Is judge
-        if (judge) client.socket.join("judges")
+        if (judge) {
+
+            // Join to judges
+            client.socket.join("judges")
+        }
 
         // Is admin
-        else if (role && role.name === "admin") client.socket.join("admins")
+        else if (role && role.name === "admin") {
+
+            // Join to admins
+            client.socket.join("admins")
+        }
 
         // Other
         else throw new WsException("You do not have standing to join")
