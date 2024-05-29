@@ -6,11 +6,19 @@ import styled from "@emotion/styled"
  * 
  * @returns 
  */
-export default function ({ children, ...props }: React.ComponentProps<typeof Container>) {
+export default function ({ isOpen, children, ...props }: Props) {
 
-    return <Container {...props}>
+    return isOpen ? <Container {...props}>
         {typeof children === "function" ? undefined : children}
-    </Container>
+    </Container> : null
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props extends React.ComponentProps<typeof Container> {
+    isOpen: boolean
 }
 
 /**

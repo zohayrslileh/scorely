@@ -19,7 +19,7 @@ export default function () {
 
     return <Container>
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
-        <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+        <Dialog isOpen={isOpen}>
             <h1>Hello World</h1>
         </Dialog>
     </Container>
