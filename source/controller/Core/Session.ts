@@ -209,7 +209,7 @@ export default class Session {
         if (!sessionEntity) throw new CoreException("Session entity was not found")
 
         // Get judge entity
-        const judgeEntity = await ParticipantEntity.findOneBy({ id: judge.id })
+        const judgeEntity = await JudgeEntity.findOneBy({ id: judge.id })
 
         // Check judge entity
         if (!judgeEntity) throw new CoreException("Judge entity was not found")
