@@ -11,7 +11,7 @@ import styled from "@emotion/styled"
 export default function ({ judge, onRemove }: Props) {
 
     return <Container>
-        <p>{judge.name} {judge.club && <b>({judge.club})</b>}</p>
+        <p>{judge.name}</p>
         <FiTrash2 id="delete" onClick={async () => await onRemove(judge)} />
     </Container>
 }

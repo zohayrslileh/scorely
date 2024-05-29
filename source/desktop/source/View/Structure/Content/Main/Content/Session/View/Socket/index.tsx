@@ -89,4 +89,5 @@ const Container = styled.div`
     gap: 10px;
     height: 100%;
     overflow: hidden;
+    user-select: none;
 `

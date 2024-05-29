@@ -33,7 +33,7 @@ export default function ({ judge, onSelect }: Props) {
     }, [judge])
 
     return isAppend ? null : <Container>
-        <p>{judge.name} {judge.club && <b>({judge.club})</b>}</p>
+        <p>{judge.name}</p>
         <Flex id="control">
             <LightButton onClick={append}><FiTrash2 /><Lang>Add</Lang></LightButton>
         </Flex>
