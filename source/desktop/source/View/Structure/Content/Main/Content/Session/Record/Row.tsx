@@ -33,7 +33,7 @@ export default function ({ session, dispatch }: Props) {
 
         dispatch(sessions => sessions.filter(item => item !== session))
 
-    }, [session])
+    }, [session, dispatch])
 
     return <Container className="animation">
         <p>{session.id}</p>

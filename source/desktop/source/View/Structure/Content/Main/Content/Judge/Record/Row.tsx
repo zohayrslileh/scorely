@@ -33,7 +33,7 @@ export default function ({ judge, dispatch }: Props) {
 
         dispatch(judges => judges.filter(item => item !== judge))
 
-    }, [judge])
+    }, [judge, dispatch])
 
     return <Container className="animation">
         <p>{judge.name}</p>

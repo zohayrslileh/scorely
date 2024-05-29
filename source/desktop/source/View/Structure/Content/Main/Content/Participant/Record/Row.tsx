@@ -33,7 +33,7 @@ export default function ({ participant, dispatch }: Props) {
 
         dispatch(participants => participants.filter(item => item !== participant))
 
-    }, [participant])
+    }, [participant, dispatch])
 
     return <Container className="animation">
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
