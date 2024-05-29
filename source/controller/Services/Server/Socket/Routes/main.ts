@@ -44,7 +44,7 @@ export default new Router(function (main) {
             client.socket.join("admins")
 
             // On add participant
-            client.on("add-participant", async function (_, participantId: unknown, sessionId: unknown) {
+            client.on("add-participant", async function (_, sessionId: unknown, participantId: unknown) {
 
                 // Session
                 const session = await Session.find(sessionId)
