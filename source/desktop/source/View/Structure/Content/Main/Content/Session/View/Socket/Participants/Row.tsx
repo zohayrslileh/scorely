@@ -1,6 +1,8 @@
+import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
 import { FiTrash2 } from "react-icons/fi"
+import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 
 /**
@@ -11,7 +13,8 @@ import styled from "@emotion/styled"
 export default function ({ participant, onRemove }: Props) {
 
     return <Container>
-        <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
+        <p>{participant.name} 4.3 (3)</p>
+        <Button><Lang>Ask rating</Lang></Button>
         <FiTrash2 id="delete" onClick={async () => await onRemove(participant)} />
     </Container>
 }
@@ -42,9 +45,17 @@ const Container = styled.div`
     min-height: 150px;
     height: 100%;
     position: relative;
+    line-height: 1;
+    align-content: center;
+    gap: 10px;
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
+        margin: 0;
+    }
+
+    > button {
+        padding: 10px 10px;
     }
 
     > #delete {

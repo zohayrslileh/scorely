@@ -24,5 +24,6 @@ export default {
     "Logout": "Se déconnecter",
     "Add participant": "Ajouter un participant",
     "Add judge": "Ajouter un juge",
-    "Add": "Ajouter"
+    "Add": "Ajouter",
+    "Ask rating": "Demander notes"
 }
