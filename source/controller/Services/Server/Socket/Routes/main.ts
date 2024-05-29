@@ -3,6 +3,7 @@ import Authentication from "@/Core/Authentication"
 import Participant from "@/Core/Participant"
 import Router from "@/Tools/Socket/Router"
 import Session from "@/Core/Session"
+import Judge from "@/Core/Judge"
 
 /*
 |-----------------------------
@@ -59,6 +60,24 @@ export default new Router(function (main) {
                 client.socket.broadcast.in("admins").emit("add-participant", participant)
 
                 return participant
+            })
+
+            // On add judge
+            client.on("add-judge", async function (_, sessionId: unknown, judgeId: unknown) {
+
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Judge
+                const judge = await Judge.find(judgeId)
+
+                // Add judge to session
+                await session.addJudge(judge)
+
+                // Emit to broadcast admins
+                client.socket.broadcast.in("admins").emit("add-judge", judge)
+
+                return judge
             })
         }
 

@@ -233,6 +233,27 @@ export default class Session {
 
         return participants.map(primitiveParticipant => new Participant(primitiveParticipant))
     }
+
+    /**
+     * Judges method
+     * 
+     * @returns
+     */
+    public async judges() {
+
+        // Judges
+        const judges = await JudgeEntity.find({
+            where: { sessions: [{ id: this.id }] },
+            relations: { user: true }
+        })
+
+        return judges.map(primitiveJudge => new Judge({
+            id: primitiveJudge.id,
+            name: primitiveJudge.name,
+            username: primitiveJudge.user.username,
+            password: undefined
+        }))
+    }
 }
 
 /**
