@@ -1,8 +1,10 @@
+import Participant, { PrimitiveParticipant } from "@/Core/Participant"
+import Namespace from "@/Tools/Socket/Namespace"
 import Dialog from "@/View/Components/Dialog"
+import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
-import { useState } from "react"
 import Search from "./Search"
 
 /**
@@ -10,7 +12,7 @@ import Search from "./Search"
  * 
  * @returns 
  */
-export default function () {
+export default function ({ namespace }: Props) {
 
     /**
      * Is open
@@ -18,12 +20,58 @@ export default function () {
      */
     const [isOpen, setIsOpen] = useState(false)
 
+    /**
+     * Participants
+     * 
+     */
+    const [participants, setParticipants] = useState<Participant[]>([])
+
+    /**
+     * On add participant
+     * 
+     */
+    namespace.useOn("add-participant", function (primitiveParticipant: PrimitiveParticipant) {
+
+        setParticipants(participants => [...participants, new Participant(primitiveParticipant)])
+    })
+
+    /**
+     * On remove participant
+     * 
+     */
+    namespace.useOn("remove-participant", function (id: number) {
+
+        setParticipants(participants => participants.filter(participant => participant.id !== id))
+    })
+
+    /**
+     * Add participant method
+     * 
+     * @returns
+     */
+    const addParticipant = useCallback(async function (participant: Participant) {
+
+        await namespace.ask("add-participant", participant.id)
+
+        setParticipants(participants => [...participants, participant])
+
+    }, [])
+
     return <Container>
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
+        <b>{participants.length}</b>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
-            <Search />
+            <Search onAddParticipant={addParticipant} />
         </Dialog>
     </Container>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    namespace: Namespace
 }
 
 /**

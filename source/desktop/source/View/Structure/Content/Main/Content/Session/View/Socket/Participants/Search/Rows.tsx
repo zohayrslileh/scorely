@@ -11,7 +11,7 @@ import Row from "./Row"
  * 
  * @returns 
  */
-export default function ({ filter }: Props) {
+export default function ({ filter, onAddParticipant }: Props) {
 
     /**
      * Record promise
@@ -26,7 +26,7 @@ export default function ({ filter }: Props) {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return record.solve.length ? <Grid columns="repeat(auto-fit, minmax(450px, auto))" gap="10px" style={{ overflow: "hidden" }}>
-        {record.solve.map(participant => <Row key={participant.id} participant={participant} />)}
+        {record.solve.map(participant => <Row key={participant.id} participant={participant} onSelect={onAddParticipant} />)}
     </Grid> : <Empty />
 }
 
@@ -36,4 +36,5 @@ export default function ({ filter }: Props) {
  */
 interface Props {
     filter: unknown
+    onAddParticipant: (participant: Participant) => void
 }

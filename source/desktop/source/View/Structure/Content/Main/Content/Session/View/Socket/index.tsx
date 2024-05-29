@@ -40,7 +40,7 @@ export default function ({ sessionId }: Props) {
     return <Container>
 
         {/** Participants */}
-        <Participants />
+        <Participants namespace={main} />
 
         {/** Judges */}
         <Judges />

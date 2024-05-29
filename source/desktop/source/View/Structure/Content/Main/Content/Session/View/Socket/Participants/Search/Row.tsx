@@ -12,7 +12,7 @@ import styled from "@emotion/styled"
  * 
  * @returns 
  */
-export default function ({ participant }: Props) {
+export default function ({ participant, onSelect }: Props) {
     /**
      * Is append
      * 
@@ -28,6 +28,8 @@ export default function ({ participant }: Props) {
 
         setIsAppend(true)
 
+        onSelect(participant)
+
     }, [participant])
 
     return isAppend ? null : <Container className="animation">
@@ -36,6 +38,15 @@ export default function ({ participant }: Props) {
             <LightButton onClick={append}><FiTrash2 /><Lang>Add</Lang></LightButton>
         </Flex>
     </Container>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    participant: Participant
+    onSelect: (participant: Participant) => void
 }
 
 /**
@@ -61,11 +72,3 @@ const Container = styled(Flex)`
         }
     }
 `
-
-/**
- * Props
- * 
- */
-interface Props {
-    participant: Participant
-}

@@ -1,5 +1,6 @@
 import TextInput from "@/View/Components/TextInput"
 import { Lang, useLang } from "@/Tools/Language"
+import Participant from "@/Core/Participant"
 import Title from "@/View/Components/Title"
 import Appearance from "@/View/Appearance"
 import Grid from "@/View/Components/Grid"
@@ -13,7 +14,7 @@ import Rows from "./Rows"
  * 
  * @returns 
  */
-export default function () {
+export default function ({ onAddParticipant }: Props) {
 
     /**
      * Lang
@@ -34,10 +35,18 @@ export default function () {
         </Grid>
         <div id="rows">
             <Exception>
-                <Rows filter={value} />
+                <Rows filter={value} onAddParticipant={onAddParticipant} />
             </Exception>
         </div>
     </Container>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    onAddParticipant: (participant: Participant) => void
 }
 
 /**
