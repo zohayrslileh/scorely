@@ -59,8 +59,10 @@ export default function ({ namespace, value }: Props) {
     }, [])
 
     return <Container>
-        <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
-        {participants.map(participant => <Row participant={participant} />)}
+        <div id="rows">
+            <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
+            {participants.map(participant => <Row participant={participant} />)}
+        </div>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddParticipant={addParticipant} participants={participants} />
         </Dialog>
@@ -84,29 +86,32 @@ const Container = styled.div`
     border: 2px solid ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border-radius: 7px;
     padding: 7px;
-    display: grid;
-    justify-items: center;
-    align-items: center;
+    overflow: auto;
+    height: 100%;
+    
+    > #rows {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+        grid-template-rows: initial;
+        gap: 10px;
 
-    > button {
-        color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
-        font-family: ${() => Appearance.schema.FONT_MEDIUM};
-        background-color: transparent;
-        border: 2px dashed;
-        border-radius: 7px;
-        cursor: pointer;
-        width: 200px;
-        height: 150px;
-        padding: 0;
-
-        &:hover {
-            color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
+        > button {
+            color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
+            font-family: ${() => Appearance.schema.FONT_MEDIUM};
+            background-color: transparent;
+            border: 2px dashed;
+            border-radius: 7px;
+            cursor: pointer;
+            height: 150px;
+            padding: 0;
+            width: -webkit-fill-available;
+            height: 110px;
+            
+            &:hover {
+                color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
+            }
         }
-    }
-
-    > #dialog {
-        position: fixed;
-        z-index: 99999;
-        background-color: red;
     }
 `

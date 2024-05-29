@@ -1,11 +1,6 @@
-import LightButton from "@/View/Components/LightButton"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
-import { FiTrash2 } from "react-icons/fi"
-import Flex from "@/View/Components/Flex"
-import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
-import { useCallback } from "react"
 
 /**
  * Row
@@ -14,20 +9,8 @@ import { useCallback } from "react"
  */
 export default function ({ participant }: Props) {
 
-    /**
-     * Append method
-     * 
-     * @returns
-     */
-    const append = useCallback(async function () {
-
-    }, [participant])
-
     return <Container>
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
-        <Flex id="control">
-            <LightButton onClick={append}><FiTrash2 /><Lang>Add</Lang></LightButton>
-        </Flex>
     </Container>
 }
 
@@ -43,22 +26,19 @@ interface Props {
  * Container
  * 
  */
-const Container = styled(Flex)`
+const Container = styled.div`
     background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
+    display: grid;
+    justify-items: center;
+    align-items: center;
     border-radius: 7px;
-    padding: 15px;
+    height: 150px;
+    margin: auto;
+    width: -webkit-fill-available;
+    height: 110px;
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
-    }
-
-    > #control > button {
-        border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
-
-        &#delete {
-            background-color: #e14343;
-            color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
-        }
     }
 `
