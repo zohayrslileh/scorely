@@ -59,7 +59,7 @@ export default function ({ namespace, value }: Props) {
     }, [])
 
     return <Container>
-        {participants.map(participant => <Row participant={participant} />)}
+        {participants.map(participant => <Row key={participant.id} participant={participant} />)}
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddParticipant={addParticipant} participants={participants} />
