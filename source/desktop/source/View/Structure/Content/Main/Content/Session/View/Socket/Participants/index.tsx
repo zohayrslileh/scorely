@@ -59,10 +59,8 @@ export default function ({ namespace, value }: Props) {
     }, [])
 
     return <Container>
-        <div id="rows">
-            <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
-            {participants.map(participant => <Row participant={participant} />)}
-        </div>
+        {participants.map(participant => <Row participant={participant} />)}
+        <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddParticipant={addParticipant} participants={participants} />
         </Dialog>
@@ -86,30 +84,33 @@ const Container = styled.div`
     border: 2px solid ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border-radius: 7px;
     padding: 7px;
-    
-    > #rows {
-        display: grid;
-        justify-items: center;
-        align-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(220px, auto));
-        grid-template-rows: initial;
-        gap: 10px;
+    overflow: auto;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+    grid-template-rows: initial;
+    gap: 10px;
 
-        > button {
-            color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
-            font-family: ${() => Appearance.schema.FONT_MEDIUM};
-            background-color: transparent;
-            border: 2px dashed;
-            border-radius: 7px;
-            cursor: pointer;
-            height: 150px;
-            padding: 0;
-            width: -webkit-fill-available;
-            min-height: 110px;
-            
-            &:hover {
-                color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
-            }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    > button {
+        color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
+        font-family: ${() => Appearance.schema.FONT_MEDIUM};
+        background-color: transparent;
+        border: 2px dashed;
+        border-radius: 7px;
+        cursor: pointer;
+        height: 150px;
+        padding: 0;
+        width: -webkit-fill-available;
+        min-height: 110px;
+        height: 100%;
+        
+        &:hover {
+            color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
         }
     }
 `

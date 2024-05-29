@@ -37,6 +37,7 @@ const Container = styled.div`
     margin: auto;
     width: -webkit-fill-available;
     min-height: 110px;
+    height: 100%;
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
