@@ -12,7 +12,7 @@ import Search from "./Search"
  * 
  * @returns 
  */
-export default function ({ namespace }: Props) {
+export default function ({ namespace, value }: Props) {
 
     /**
      * Is open
@@ -24,7 +24,7 @@ export default function ({ namespace }: Props) {
      * Participants
      * 
      */
-    const [participants, setParticipants] = useState<Participant[]>([])
+    const [participants, setParticipants] = useState<Participant[]>(value)
 
     /**
      * On add participant
@@ -61,7 +61,7 @@ export default function ({ namespace }: Props) {
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
         <b>{participants.length}</b>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
-            <Search onAddParticipant={addParticipant} />
+            <Search onAddParticipant={addParticipant} participants={participants} />
         </Dialog>
     </Container>
 }
@@ -72,6 +72,7 @@ export default function ({ namespace }: Props) {
  */
 interface Props {
     namespace: Namespace
+    value: Participant[]
 }
 
 /**

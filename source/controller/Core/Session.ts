@@ -1,10 +1,10 @@
 import ParticipantEntity from "@/Models/Database/Entities/Participant"
-import JudgeEntity from "@/Models/Database/Entities/Judge"
 import SessionEntity from "@/Models/Database/Entities/Session"
+import JudgeEntity from "@/Models/Database/Entities/Judge"
 import CoreException from "./Exception"
 import Participant from "./Participant"
-import zod from "zod"
 import Judge from "./Judge"
+import zod from "zod"
 
 /*
 |-----------------------------
@@ -219,6 +219,19 @@ export default class Session {
 
         // Remove judge entity from session entity
         await sessionQueryBuilder.relation("judges").of(sessionEntity).remove(judgeEntity)
+    }
+
+    /**
+     * Participants method
+     * 
+     * @returns
+     */
+    public async participants() {
+
+        // Participants
+        const participants = await ParticipantEntity.findBy({ sessions: [{ id: this.id }] })
+
+        return participants.map(primitiveParticipant => new Participant(primitiveParticipant))
     }
 }
 

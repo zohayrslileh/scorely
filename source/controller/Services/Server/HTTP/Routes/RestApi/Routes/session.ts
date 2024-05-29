@@ -107,6 +107,24 @@ export default Router.create<Environment>(function (session) {
 
         return context.json(undefined)
     })
+
+    /**
+     * Participants
+     * 
+     */
+    session.get("/:id/participants", async function (context) {
+
+        // Authentication verify
+        const user = await context.var.authentication.verify()
+
+        // Check role
+        if (!await user.hasRole("admin")) throw new HttpException("You do not have permission to perform this operation", 401)
+
+        // Get session
+        const session = await Session.find(+context.req.param("id"))
+
+        return context.json(await session.participants())
+    })
 })
 
 /**

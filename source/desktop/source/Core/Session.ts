@@ -1,5 +1,5 @@
+import Participant, { PrimitiveParticipant } from "./Participant"
 import request from "@/Models/Server/Request"
-import Participant from "./Participant"
 import zod from "zod"
 
 /*
@@ -124,6 +124,19 @@ export default class Session {
             method: "DELETE",
             url: `/session/${this.id}/${participant.id}`
         })
+    }
+
+    /**
+     * Participants method
+     * 
+     * @returns
+     */
+    public async participants() {
+
+        // Participants
+        const participants = await request<PrimitiveParticipant[]>({ url: `/session/${this.id}/participants` })
+
+        return participants.map(primitiveParticipant => new Participant(primitiveParticipant))
     }
 
 }

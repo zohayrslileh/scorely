@@ -14,7 +14,7 @@ import Rows from "./Rows"
  * 
  * @returns 
  */
-export default function ({ onAddParticipant }: Props) {
+export default function ({ onAddParticipant, participants }: Props) {
 
     /**
      * Lang
@@ -35,7 +35,7 @@ export default function ({ onAddParticipant }: Props) {
         </Grid>
         <div id="rows">
             <Exception>
-                <Rows filter={value} onAddParticipant={onAddParticipant} />
+                <Rows filter={value} onAddParticipant={onAddParticipant} participants={participants} />
             </Exception>
         </div>
     </Container>
@@ -47,6 +47,7 @@ export default function ({ onAddParticipant }: Props) {
  */
 interface Props {
     onAddParticipant: (participant: Participant) => void
+    participants: Participant[]
 }
 
 /**

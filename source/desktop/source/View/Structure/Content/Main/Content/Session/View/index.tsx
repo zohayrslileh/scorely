@@ -30,5 +30,5 @@ export default function () {
     // Exception status
     if (session.exception) return <Throw exception={session.exception.current} />
 
-    return <Socket sessionId={session.solve.id} />
+    return <Socket session={session.solve} />
 }
