@@ -75,9 +75,9 @@ export default new Router(function (main) {
                 await session.removeParticipant(participant)
 
                 // Emit to broadcast admins
-                client.socket.broadcast.in("admins").emit("remove-participant", participant)
+                client.socket.broadcast.in("admins").emit("remove-participant", participant.id)
 
-                return participant.id
+                return participant
             })
 
             // On add judge
@@ -111,9 +111,9 @@ export default new Router(function (main) {
                 await session.removeJudge(judge)
 
                 // Emit to broadcast admins
-                client.socket.broadcast.in("admins").emit("remove-judge", judge)
+                client.socket.broadcast.in("admins").emit("remove-judge", judge.id)
 
-                return judge.id
+                return judge
             })
         }
 
