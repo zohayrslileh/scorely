@@ -42,6 +42,6 @@ export default function ({ filter, onAddParticipant, participants }: Props) {
  */
 interface Props {
     filter: unknown
-    onAddParticipant: (participant: Participant) => void
+    onAddParticipant: (participant: Participant) => Promise<void>
     participants: Participant[]
 }

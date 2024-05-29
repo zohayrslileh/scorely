@@ -1,5 +1,6 @@
 import Judge, { PrimitiveJudge } from "@/Core/Judge"
 import Namespace from "@/Tools/Socket/Namespace"
+import compiler from "@/View/Exception/compiler"
 import Dialog from "@/View/Components/Dialog"
 import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
@@ -53,9 +54,18 @@ export default function ({ namespace, value, session }: Props) {
      */
     const addJudge = useCallback(async function (judge: Judge) {
 
-        await namespace.ask("add-judge", session.id, judge.id)
+        try {
 
-        setJudges(judges => [...judges, judge])
+            await namespace.ask("add-judge", session.id, judge.id)
+
+            setJudges(judges => [...judges, judge])
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+
+            throw exception
+        }
 
     }, [session])
 

@@ -1,4 +1,5 @@
 import Participant, { PrimitiveParticipant } from "@/Core/Participant"
+import compiler from "@/View/Exception/compiler"
 import Namespace from "@/Tools/Socket/Namespace"
 import Dialog from "@/View/Components/Dialog"
 import { useCallback, useState } from "react"
@@ -53,9 +54,18 @@ export default function ({ namespace, value, session }: Props) {
      */
     const addParticipant = useCallback(async function (participant: Participant) {
 
-        await namespace.ask("add-participant", session.id, participant.id)
+        try {
 
-        setParticipants(participants => [...participants, participant])
+            await namespace.ask("add-participant", session.id, participant.id)
+
+            setParticipants(participants => [...participants, participant])
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+
+            throw exception
+        }
 
     }, [session])
 

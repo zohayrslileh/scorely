@@ -26,9 +26,9 @@ export default function ({ participant, onSelect }: Props) {
      */
     const append = useCallback(async function () {
 
-        setIsAppend(true)
+        await onSelect(participant)
 
-        onSelect(participant)
+        setIsAppend(true)
 
     }, [participant])
 
@@ -46,7 +46,7 @@ export default function ({ participant, onSelect }: Props) {
  */
 interface Props {
     participant: Participant
-    onSelect: (participant: Participant) => void
+    onSelect: (participant: Participant) => Promise<void>
 }
 
 /**

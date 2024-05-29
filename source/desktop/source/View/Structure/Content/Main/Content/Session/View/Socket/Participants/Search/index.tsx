@@ -46,7 +46,7 @@ export default function ({ onAddParticipant, participants }: Props) {
  * 
  */
 interface Props {
-    onAddParticipant: (participant: Participant) => void
+    onAddParticipant: (participant: Participant) => Promise<void>
     participants: Participant[]
 }
 

@@ -26,9 +26,9 @@ export default function ({ judge, onSelect }: Props) {
      */
     const append = useCallback(async function () {
 
-        setIsAppend(true)
+        await onSelect(judge)
 
-        onSelect(judge)
+        setIsAppend(true)
 
     }, [judge])
 
@@ -46,7 +46,7 @@ export default function ({ judge, onSelect }: Props) {
  */
 interface Props {
     judge: Judge
-    onSelect: (judge: Judge) => void
+    onSelect: (judge: Judge) => Promise<void>
 }
 
 /**

@@ -42,6 +42,6 @@ export default function ({ filter, onAddJudge, judges }: Props) {
  */
 interface Props {
     filter: unknown
-    onAddJudge: (judge: Judge) => void
+    onAddJudge: (judge: Judge) => Promise<void>
     judges: Judge[]
 }

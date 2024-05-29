@@ -46,7 +46,7 @@ export default function ({ onAddJudge, judges }: Props) {
  * 
  */
 interface Props {
-    onAddJudge: (judge: Judge) => void
+    onAddJudge: (judge: Judge) => Promise<void>
     judges: Judge[]
 }
 
