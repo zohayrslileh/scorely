@@ -77,7 +77,7 @@ export default new Router(function (main) {
                 // Emit to broadcast admins
                 client.socket.broadcast.in("admins").emit("remove-participant", participant)
 
-                return participant
+                return participant.id
             })
 
             // On add judge
@@ -113,7 +113,7 @@ export default new Router(function (main) {
                 // Emit to broadcast admins
                 client.socket.broadcast.in("admins").emit("remove-judge", judge)
 
-                return judge
+                return judge.id
             })
         }
 
