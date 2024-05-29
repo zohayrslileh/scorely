@@ -38,7 +38,7 @@ export default class Judge {
      * Constructor method
      * 
      */
-    private constructor(primitiveJudge: PrimitiveJudge) {
+    public constructor(primitiveJudge: PrimitiveJudge) {
 
         // Set id
         this.id = primitiveJudge.id

@@ -1,6 +1,7 @@
 import Participant, { PrimitiveParticipant } from "./Participant"
 import request from "@/Models/Server/Request"
 import zod from "zod"
+import Judge, { PrimitiveJudge } from "./Judge"
 
 /*
 |-----------------------------
@@ -137,6 +138,19 @@ export default class Session {
         const participants = await request<PrimitiveParticipant[]>({ url: `/session/${this.id}/participants` })
 
         return participants.map(primitiveParticipant => new Participant(primitiveParticipant))
+    }
+
+    /**
+     * Judges method
+     * 
+     * @returns
+     */
+    public async judges() {
+
+        // Judges
+        const judges = await request<PrimitiveJudge[]>({ url: `/session/${this.id}/judges` })
+
+        return judges.map(primitiveJudge => new Judge(primitiveJudge))
     }
 
 }

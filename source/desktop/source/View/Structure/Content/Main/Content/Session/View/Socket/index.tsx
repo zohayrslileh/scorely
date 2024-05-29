@@ -39,6 +39,12 @@ export default function ({ session }: Props) {
      */
     const participants = usePromise(async () => await session.participants(), [])
 
+    /**
+     * Judges promise
+     * 
+     */
+    const judges = usePromise(async () => await session.judges(), [])
+
     // Error status
     if (error) return <Throw exception={new ViewException(error)} />
 
@@ -46,10 +52,13 @@ export default function ({ session }: Props) {
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
     // Pending status
-    if (participants.pending) return <Throw exception={new PendingException} />
+    if (participants.pending || judges.pending) return <Throw exception={new PendingException} />
 
     // Exception status
     if (participants.exception) return <Throw exception={participants.exception.current} />
+
+    // Exception status
+    if (judges.exception) return <Throw exception={judges.exception.current} />
 
     return <Container>
 
@@ -57,7 +66,7 @@ export default function ({ session }: Props) {
         <Participants namespace={main} value={participants.solve} session={session} />
 
         {/** Judges */}
-        <Judges />
+        <Judges namespace={main} value={judges.solve} session={session} />
 
     </Container>
 }
