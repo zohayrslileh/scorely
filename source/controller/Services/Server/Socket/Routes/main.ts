@@ -43,11 +43,11 @@ export default new Router(function (main) {
             // Join to admins
             client.socket.join("admins")
 
-            // Session
-            const session = await Session.find(client.socket.handshake.auth.sessionId)
-
             // On add participant
-            client.on("add-participant", async function (_, participantId: unknown) {
+            client.on("add-participant", async function (_, participantId: unknown, sessionId: unknown) {
+
+                // Session
+                const session = await Session.find(sessionId)
 
                 // Participant
                 const participant = await Participant.find(participantId)

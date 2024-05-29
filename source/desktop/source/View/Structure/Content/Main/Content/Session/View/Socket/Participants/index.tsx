@@ -5,6 +5,7 @@ import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import Session from "@/Core/Session"
 import Search from "./Search"
 import Row from "./Row"
 
@@ -13,7 +14,7 @@ import Row from "./Row"
  * 
  * @returns 
  */
-export default function ({ namespace, value }: Props) {
+export default function ({ namespace, value, session }: Props) {
 
     /**
      * Is open
@@ -52,11 +53,11 @@ export default function ({ namespace, value }: Props) {
      */
     const addParticipant = useCallback(async function (participant: Participant) {
 
-        await namespace.ask("add-participant", participant.id)
+        await namespace.ask("add-participant", session.id, participant.id)
 
         setParticipants(participants => [...participants, participant])
 
-    }, [])
+    }, [session])
 
     return <Container>
         {participants.map(participant => <Row key={participant.id} participant={participant} />)}
@@ -74,6 +75,7 @@ export default function ({ namespace, value }: Props) {
 interface Props {
     namespace: Namespace
     value: Participant[]
+    session: Session
 }
 
 /**

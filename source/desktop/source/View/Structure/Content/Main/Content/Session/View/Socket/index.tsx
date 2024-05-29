@@ -19,7 +19,7 @@ export default function ({ session }: Props) {
      * Main
      * 
      */
-    const main = manager.useNamespace("/main", { auth: { sessionId: session.id } })
+    const main = manager.useNamespace("/main")
 
     /**
      * Connected
@@ -54,7 +54,7 @@ export default function ({ session }: Props) {
     return <Container>
 
         {/** Participants */}
-        <Participants namespace={main} value={participants.solve} />
+        <Participants namespace={main} value={participants.solve} session={session} />
 
         {/** Judges */}
         <Judges />
