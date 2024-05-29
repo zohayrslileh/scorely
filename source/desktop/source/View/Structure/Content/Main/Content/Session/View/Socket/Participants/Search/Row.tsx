@@ -32,7 +32,7 @@ export default function ({ participant, onSelect }: Props) {
 
     }, [participant])
 
-    return isAppend ? null : <Container className="animation">
+    return isAppend ? null : <Container>
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
         <Flex id="control">
             <LightButton onClick={append}><FiTrash2 /><Lang>Add</Lang></LightButton>
