@@ -18,8 +18,6 @@ export default async function () {
 
     const page = await browser.newPage()
 
-    await page.authenticate({ username: "zhfklqek", password: "i7cz80j2bn8h" })
-
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
     await page.setViewport({ width: 375, height: 812 })
