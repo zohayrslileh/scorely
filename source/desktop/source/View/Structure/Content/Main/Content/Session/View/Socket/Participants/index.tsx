@@ -86,8 +86,6 @@ const Container = styled.div`
     border: 2px solid ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border-radius: 7px;
     padding: 7px;
-    overflow: auto;
-    height: 100%;
     
     > #rows {
         display: grid;
@@ -107,7 +105,7 @@ const Container = styled.div`
             height: 150px;
             padding: 0;
             width: -webkit-fill-available;
-            height: 110px;
+            min-height: 110px;
             
             &:hover {
                 color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
