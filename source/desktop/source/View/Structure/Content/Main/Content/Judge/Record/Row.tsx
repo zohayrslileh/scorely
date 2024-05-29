@@ -1,11 +1,12 @@
 import LightButton from "@/View/Components/LightButton"
 import { FiEdit2, FiTrash2 } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
-import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
 import Flex from "@/View/Components/Flex"
+import { Update } from "@/Tools/Updater"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import { useCallback } from "react"
 import Judge from "@/Core/Judge"
 
 /**
@@ -13,19 +14,13 @@ import Judge from "@/Core/Judge"
  * 
  * @returns 
  */
-export default function ({ judge }: Props) {
+export default function ({ judge, dispatch }: Props) {
 
     /**
      * Navigate
      * 
      */
     const navigate = useNavigate()
-
-    /**
-     * Is delete
-     * 
-     */
-    const [isDelete, setIsDelete] = useState(false)
 
     /**
      * Destroy method
@@ -36,11 +31,11 @@ export default function ({ judge }: Props) {
 
         await judge.delete()
 
-        setIsDelete(true)
+        dispatch(judges => judges.filter(item => item !== judge))
 
     }, [judge])
 
-    return isDelete ? null : <Container className="animation">
+    return <Container className="animation">
         <p>{judge.name}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${judge.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
@@ -79,4 +74,5 @@ const Container = styled(Flex)`
  */
 interface Props {
     judge: Judge
+    dispatch: Update<Judge[]>
 }

@@ -1,31 +1,26 @@
 import LightButton from "@/View/Components/LightButton"
 import { FiEye, FiTrash2 } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
-import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
 import Flex from "@/View/Components/Flex"
+import { Update } from "@/Tools/Updater"
 import { Lang } from "@/Tools/Language"
 import Session from "@/Core/Session"
 import styled from "@emotion/styled"
+import { useCallback } from "react"
 
 /**
  * Row
  * 
  * @returns 
  */
-export default function ({ session }: Props) {
+export default function ({ session, dispatch }: Props) {
 
     /**
      * Navigate
      * 
      */
     const navigate = useNavigate()
-
-    /**
-     * Is delete
-     * 
-     */
-    const [isDelete, setIsDelete] = useState(false)
 
     /**
      * Destroy method
@@ -36,11 +31,11 @@ export default function ({ session }: Props) {
 
         await session.delete()
 
-        setIsDelete(true)
+        dispatch(sessions => sessions.filter(item => item !== session))
 
     }, [session])
 
-    return isDelete ? null : <Container className="animation">
+    return <Container className="animation">
         <p>{session.id}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${session.id}`)}><FiEye /><Lang>View</Lang></LightButton>
@@ -79,4 +74,5 @@ const Container = styled(Flex)`
  */
 interface Props {
     session: Session
+    dispatch: Update<Session[]>
 }

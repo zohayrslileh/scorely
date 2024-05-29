@@ -26,6 +26,6 @@ export default function () {
     if (record.exception) return <Throw exception={record.exception.current} />
 
     return record.solve.length ? <Grid columns="repeat(auto-fit, minmax(450px, auto))" gap="10px" style={{ overflow: "hidden" }}>
-        {record.solve.map(session => <Row key={session.id} session={session} />)}
+        {record.solve.map(session => <Row key={session.id} session={session} dispatch={record.dispatch} />)}
     </Grid> : <Empty />
 }
