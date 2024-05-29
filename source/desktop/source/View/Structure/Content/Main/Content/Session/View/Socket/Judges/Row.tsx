@@ -1,7 +1,10 @@
-import Judge from "@/Core/Judge"
+import LightButton from "@/View/Components/LightButton"
 import Appearance from "@/View/Appearance"
+import Grid from "@/View/Components/Grid"
 import { FiTrash2 } from "react-icons/fi"
+import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import Judge from "@/Core/Judge"
 
 /**
  * Row
@@ -11,8 +14,10 @@ import styled from "@emotion/styled"
 export default function ({ judge, onRemove }: Props) {
 
     return <Container>
-        <p>{judge.name}</p>
-        <FiTrash2 id="delete" onClick={async () => await onRemove(judge)} />
+        <p>{judge.name} 4.3 (3)</p>
+        <Grid columns="1fr" gap="10px" id="control">
+            <LightButton onClick={async () => await onRemove(judge)} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
+        </Grid>
     </Container>
 }
 
@@ -33,26 +38,28 @@ const Container = styled.div`
     background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
     display: grid;
-    justify-items: center;
-    align-items: center;
     border-radius: 7px;
-    height: 150px;
-    margin: auto;
     width: -webkit-fill-available;
     min-height: 150px;
     height: 100%;
     position: relative;
+    gap: 10px;
+    grid-template-rows: 1fr auto;
+    padding: 15px;
+    box-sizing: border-box;
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
+        margin: auto;
     }
 
-    > #delete {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 16px;
-        cursor: pointer;
-        color: #e14343;
+    > #control > button {
+        border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
+        padding: 9px 15px;
+
+        &#delete {
+            background-color: #e14343;
+            color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
+        }
     }
 `

@@ -25,5 +25,6 @@ export default {
     "Add participant": "Ajouter un participant",
     "Add judge": "Ajouter un juge",
     "Add": "Ajouter",
-    "Ask rating": "Demander notes"
+    "Ask rating": "Demander notes",
+    "Rate": "Note"
 }

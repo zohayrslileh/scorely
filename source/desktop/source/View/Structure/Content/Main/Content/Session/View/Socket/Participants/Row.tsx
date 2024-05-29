@@ -1,8 +1,11 @@
+import LightButton from "@/View/Components/LightButton"
 import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
+import Grid from "@/View/Components/Grid"
 import { FiTrash2 } from "react-icons/fi"
 import { Lang } from "@/Tools/Language"
+import { LuStar } from "react-icons/lu"
 import styled from "@emotion/styled"
 
 /**
@@ -14,8 +17,10 @@ export default function ({ participant, onRemove }: Props) {
 
     return <Container>
         <p>{participant.name} 4.3 (3)</p>
-        <Button><Lang>Ask rating</Lang></Button>
-        <FiTrash2 id="delete" onClick={async () => await onRemove(participant)} />
+        <Grid columns="1fr 1fr" gap="10px" id="control">
+            <Button><LuStar /><Lang>Rate</Lang></Button>
+            <LightButton onClick={async () => await onRemove(participant)} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
+        </Grid>
     </Container>
 }
 
@@ -36,34 +41,28 @@ const Container = styled.div`
     background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
     display: grid;
-    justify-items: center;
-    align-items: center;
     border-radius: 7px;
-    height: 150px;
-    margin: auto;
     width: -webkit-fill-available;
     min-height: 150px;
     height: 100%;
     position: relative;
-    line-height: 1;
-    align-content: center;
     gap: 10px;
+    grid-template-rows: 1fr auto;
+    padding: 15px;
+    box-sizing: border-box;
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
-        margin: 0;
+        margin: auto;
     }
 
-    > button {
-        padding: 10px 10px;
-    }
+    > #control > button {
+        border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
+        padding: 9px 15px;
 
-    > #delete {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 16px;
-        cursor: pointer;
-        color: #e14343;
+        &#delete {
+            background-color: #e14343;
+            color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
+        }
     }
 `
