@@ -36,7 +36,7 @@ const Container = styled.div`
     height: 150px;
     margin: auto;
     width: -webkit-fill-available;
-    min-height: 110px;
+    min-height: 150px;
     height: 100%;
 
     > p {
