@@ -30,11 +30,13 @@ export default async function () {
 
     await page.goto("https://www.google.com/")
 
-    const recorder = await page.screencast({ path: "storage/record.webm" })
-
     const textarea = await page.$("textarea")
 
     if (!textarea) throw new Error
+
+    const recorder = await page.screencast({ path: "storage/record.webm" })
+
+    await sleep(2000)
 
     await textarea.focus()
 
