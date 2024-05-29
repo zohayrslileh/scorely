@@ -62,6 +62,24 @@ export default new Router(function (main) {
                 return participant
             })
 
+            // On remove participant
+            client.on("remove-participant", async function (_, sessionId: unknown, participantId: unknown) {
+
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Participant
+                const participant = await Participant.find(participantId)
+
+                // Remove participant to session
+                await session.removeParticipant(participant)
+
+                // Emit to broadcast admins
+                client.socket.broadcast.in("admins").emit("remove-participant", participant)
+
+                return participant
+            })
+
             // On add judge
             client.on("add-judge", async function (_, sessionId: unknown, judgeId: unknown) {
 
@@ -76,6 +94,24 @@ export default new Router(function (main) {
 
                 // Emit to broadcast admins
                 client.socket.broadcast.in("admins").emit("add-judge", judge)
+
+                return judge
+            })
+
+            // On remove judge
+            client.on("remove-judge", async function (_, sessionId: unknown, judgeId: unknown) {
+
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Judge
+                const judge = await Judge.find(judgeId)
+
+                // Remove judge to session
+                await session.removeJudge(judge)
+
+                // Emit to broadcast admins
+                client.socket.broadcast.in("admins").emit("remove-judge", judge)
 
                 return judge
             })
