@@ -1,6 +1,6 @@
 import Judge, { PrimitiveJudge } from "@/Core/Judge"
-import Namespace from "@/Tools/Socket/Namespace"
 import compiler from "@/View/Exception/compiler"
+import Namespace from "@/Tools/Socket/Namespace"
 import Dialog from "@/View/Components/Dialog"
 import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
@@ -69,8 +69,30 @@ export default function ({ namespace, value, session }: Props) {
 
     }, [session])
 
+    /**
+     * Remove judge method
+     * 
+     * @returns
+     */
+    const removeJudge = useCallback(async function (judge: Judge) {
+
+        try {
+
+            await namespace.ask("remove-judge", session.id, judge.id)
+
+            setJudges(judges => judges.filter(item => item.id !== judge.id))
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+
+            throw exception
+        }
+
+    }, [session])
+
     return <Container>
-        {judges.map(judge => <Row key={judge.id} judge={judge} />)}
+        {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} />)}
         <button onClick={() => setIsOpen(true)}><Lang>Add judge</Lang></button>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddJudge={addJudge} judges={judges} />

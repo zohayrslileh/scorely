@@ -1,18 +1,18 @@
+import Judge from "@/Core/Judge"
 import Appearance from "@/View/Appearance"
 import { FiTrash2 } from "react-icons/fi"
 import styled from "@emotion/styled"
-import Judge from "@/Core/Judge"
 
 /**
  * Row
  * 
  * @returns 
  */
-export default function ({ judge }: Props) {
+export default function ({ judge, onRemove }: Props) {
 
     return <Container>
-        <p>{judge.name}</p>
-        <FiTrash2 id="delete" />
+        <p>{judge.name} {judge.club && <b>({judge.club})</b>}</p>
+        <FiTrash2 id="delete" onClick={async () => await onRemove(judge)} />
     </Container>
 }
 
@@ -22,6 +22,7 @@ export default function ({ judge }: Props) {
  */
 interface Props {
     judge: Judge
+    onRemove: (judge: Judge) => Promise<void>
 }
 
 /**
