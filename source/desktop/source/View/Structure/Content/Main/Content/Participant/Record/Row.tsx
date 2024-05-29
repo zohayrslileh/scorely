@@ -1,31 +1,26 @@
 import LightButton from "@/View/Components/LightButton"
 import { FiEdit2, FiTrash2 } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
-import { useCallback, useState } from "react"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
 import Flex from "@/View/Components/Flex"
+import { Update } from "@/Tools/Updater"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import { useCallback } from "react"
 
 /**
  * Row
  * 
  * @returns 
  */
-export default function ({ participant }: Props) {
+export default function ({ participant, dispatch }: Props) {
 
     /**
      * Navigate
      * 
      */
     const navigate = useNavigate()
-
-    /**
-     * Is delete
-     * 
-     */
-    const [isDelete, setIsDelete] = useState(false)
 
     /**
      * Destroy method
@@ -36,11 +31,11 @@ export default function ({ participant }: Props) {
 
         await participant.delete()
 
-        setIsDelete(true)
+        dispatch(participants => participants.filter(item => item !== participant))
 
     }, [participant])
 
-    return isDelete ? null : <Container className="animation">
+    return <Container className="animation">
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${participant.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
@@ -79,4 +74,5 @@ const Container = styled(Flex)`
  */
 interface Props {
     participant: Participant
+    dispatch: Update<Participant[]>
 }
