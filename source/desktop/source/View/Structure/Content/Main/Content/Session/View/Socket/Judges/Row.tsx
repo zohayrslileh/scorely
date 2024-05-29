@@ -1,6 +1,7 @@
-import Judge from "@/Core/Judge"
 import Appearance from "@/View/Appearance"
+import { FiTrash2 } from "react-icons/fi"
 import styled from "@emotion/styled"
+import Judge from "@/Core/Judge"
 
 /**
  * Row
@@ -11,6 +12,7 @@ export default function ({ judge }: Props) {
 
     return <Container>
         <p>{judge.name}</p>
+        <FiTrash2 id="delete" />
     </Container>
 }
 
@@ -38,8 +40,18 @@ const Container = styled.div`
     width: -webkit-fill-available;
     min-height: 150px;
     height: 100%;
+    position: relative;
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
+    }
+
+    > #delete {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 16px;
+        cursor: pointer;
+        color: #e14343;
     }
 `
