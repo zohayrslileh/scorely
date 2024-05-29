@@ -1,4 +1,5 @@
 import { DependencyList, useCallback, useLayoutEffect, useState } from "react"
+import { Update, update } from "./Updater"
 
 /**
  * Promise hook with dependencies
@@ -53,6 +54,18 @@ export default function usePromise<Solve>(executor: Executor<Solve>, dependencie
         setSolve(undefined)
 
     }, [])
+
+    /**
+     * Dispatch method
+     * 
+     * @returns
+     */
+    const dispatch: Update<Solve> = useCallback(function (value) {
+
+        // Check solve
+        if (solve) setSolve({ current: update(value, solve.current) })
+
+    }, [solve])
 
     /**
      * Execute method
@@ -140,7 +153,7 @@ export default function usePromise<Solve>(executor: Executor<Solve>, dependencie
      */
     const promise = dependencies ? withDependencies : withoutDependencies
 
-    return { ...promise, execute }
+    return { ...promise, execute, dispatch }
 }
 
 /**
@@ -167,6 +180,7 @@ export type Reset = () => void
  */
 export type PromiseWithDependencies<Solve> = (SolveStatus<Solve> | ExceptionStatus | PendingStatus) & {
     execute: Execute<Solve>
+    dispatch: Update<Solve>
 }
 
 /**
@@ -207,6 +221,7 @@ export type PromiseWithoutDependencies<Solve> = {
     exception: Reference<unknown> | undefined
     solve: Reference<Solve> | undefined
     execute: Execute<Solve>
+    dispatch: Update<Solve>
     pending: boolean
     reset: Reset
 }
