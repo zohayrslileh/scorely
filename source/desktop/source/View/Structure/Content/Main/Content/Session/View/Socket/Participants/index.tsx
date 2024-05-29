@@ -3,6 +3,7 @@ import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import { useState } from "react"
+import Search from "./Search"
 
 /**
  * Participants
@@ -19,8 +20,8 @@ export default function () {
 
     return <Container>
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
-        <Dialog isOpen={isOpen}>
-            <h1>Hello World</h1>
+        <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
+            <Search />
         </Dialog>
     </Container>
 }

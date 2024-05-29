@@ -23,5 +23,6 @@ export default {
     "Open new session": "Ouvrir une nouvelle session",
     "Logout": "Se déconnecter",
     "Add participant": "Ajouter un participant",
-    "Add judge": "Ajouter un juge"
+    "Add judge": "Ajouter un juge",
+    "Add": "Ajouter"
 }
