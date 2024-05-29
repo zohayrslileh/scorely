@@ -12,7 +12,7 @@ export default function ({ participant }: Props) {
 
     return <Container>
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
-        <FiTrash2 id="delete" />
+        <FiTrash2 id="delete" onClick={() => alert("Delete")} />
     </Container>
 }
 
