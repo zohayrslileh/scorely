@@ -1,6 +1,5 @@
 import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
-import axios from "axios"
 
 /*
 |-----------------------------
@@ -13,28 +12,11 @@ export default async function () {
 
     const browser = await puppeteer.launch()
 
-    const context = await browser.createBrowserContext()
+    const context = browser.defaultBrowserContext()
 
     await context.overridePermissions("https://www.google.com", ["geolocation"])
 
     const page = await browser.newPage()
-
-    await page.setRequestInterception(true)
-
-    page.on("request", async function (request) {
-
-        const response = await axios({
-            method: request.method(),
-            url: request.url(),
-            headers: request.headers(),
-            data: request.postData()
-        })
-
-        await request.respond({
-            body: response.data
-        })
-
-    })
 
     await page.authenticate({ username: "zhfklqek", password: "i7cz80j2bn8h" })
 
@@ -54,15 +36,13 @@ export default async function () {
 
     const textarea = await page.$("textarea")
 
-    if (textarea) {
+    if (!textarea) throw new Error
 
-        await textarea.focus()
+    await textarea.focus()
 
-        await textarea.type("Free vps")
+    await textarea.type("Free vps")
 
-        await textarea.press("Enter")
-
-    }
+    await textarea.press("Enter")
 
     await sleep(3000)
 
@@ -71,6 +51,8 @@ export default async function () {
     await sleep(3000)
 
     await recorder.stop()
+
+    await browser.close()
 
     console.log("The test completed successfully 🧪 ")
 }
