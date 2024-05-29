@@ -8,11 +8,11 @@ import styled from "@emotion/styled"
  * 
  * @returns 
  */
-export default function ({ participant }: Props) {
+export default function ({ participant, onRemove }: Props) {
 
     return <Container>
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
-        <FiTrash2 id="delete" onClick={() => alert("Delete")} />
+        <FiTrash2 id="delete" onClick={async () => await onRemove(participant)} />
     </Container>
 }
 
@@ -22,6 +22,7 @@ export default function ({ participant }: Props) {
  */
 interface Props {
     participant: Participant
+    onRemove: (participant: Participant) => Promise<void>
 }
 
 /**

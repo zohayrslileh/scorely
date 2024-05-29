@@ -69,8 +69,30 @@ export default function ({ namespace, value, session }: Props) {
 
     }, [session])
 
+    /**
+     * Remove participant method
+     * 
+     * @returns
+     */
+    const removeParticipant = useCallback(async function (participant: Participant) {
+
+        try {
+
+            await namespace.ask("remove-participant", session.id, participant.id)
+
+            setParticipants(participants => participants.filter(item => item.id !== participant.id))
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+
+            throw exception
+        }
+
+    }, [session])
+
     return <Container>
-        {participants.map(participant => <Row key={participant.id} participant={participant} />)}
+        {participants.map(participant => <Row key={participant.id} participant={participant} onRemove={removeParticipant} />)}
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddParticipant={addParticipant} participants={participants} />
