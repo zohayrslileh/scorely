@@ -38,8 +38,7 @@ interface Props {
  * 
  */
 const Container = styled.div`
-    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
-    border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
+    background: ${() => Appearance.theme.schema.BACKGROUND_GRADIENT};
     display: grid;
     border-radius: 7px;
     width: -webkit-fill-available;
@@ -50,6 +49,11 @@ const Container = styled.div`
     grid-template-rows: 1fr auto;
     padding: 15px;
     box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(0.98);
+    }
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};

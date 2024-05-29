@@ -145,6 +145,7 @@ const Container = styled.div`
         
         &:hover {
             color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
+            transform: scale(0.98);
         }
     }
 `

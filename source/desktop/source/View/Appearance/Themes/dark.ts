@@ -12,5 +12,6 @@ export default {
 
     BACKGROUND_SECONDARY: new Color("#192130"),
     BACKGROUND_PRIMARY: schema.COLOR_DARK,
-    CONTENT_COLOR: schema.COLOR_LIGHT
+    CONTENT_COLOR: schema.COLOR_LIGHT,
+    BACKGROUND_GRADIENT: "linear-gradient(90deg, rgba(11,19,32,1) 0%, rgba(11,13,42,1) 100%)"
 }

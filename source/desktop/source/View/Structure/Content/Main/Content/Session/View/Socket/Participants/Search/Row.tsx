@@ -54,8 +54,7 @@ interface Props {
  * 
  */
 const Container = styled(Flex)`
-    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
-    border: 1px solid ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.1)};
+    background: ${() => Appearance.theme.schema.BACKGROUND_GRADIENT};
     border-radius: 7px;
     padding: 15px;
 
