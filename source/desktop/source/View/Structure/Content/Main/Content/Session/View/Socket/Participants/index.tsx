@@ -6,6 +6,7 @@ import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Search from "./Search"
+import Row from "./Row"
 
 /**
  * Participants
@@ -59,7 +60,7 @@ export default function ({ namespace, value }: Props) {
 
     return <Container>
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
-        <b>{participants.length}</b>
+        {participants.map(participant => <Row participant={participant} />)}
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddParticipant={addParticipant} participants={participants} />
         </Dialog>
