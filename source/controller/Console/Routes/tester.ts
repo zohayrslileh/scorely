@@ -18,6 +18,8 @@ export default async function () {
 
     const page = await browser.newPage()
 
+    page.setDefaultTimeout(0)
+
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
     await page.setViewport({ width: 375, height: 812 })
