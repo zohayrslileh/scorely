@@ -153,7 +153,7 @@ export default class Namespace {
         useEffect(() => {
 
             // Connect
-            this.socket.connect()
+            if (this.socket.disconnected) this.socket.connect()
 
             /**
              * After Effect
@@ -162,7 +162,7 @@ export default class Namespace {
             return () => {
 
                 // Disconnect
-                this.socket.disconnect()
+                if (this.socket.connected) this.socket.disconnect()
             }
 
         }, [])
