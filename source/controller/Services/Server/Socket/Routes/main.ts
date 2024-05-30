@@ -209,13 +209,16 @@ export default new Router(function (main) {
                 // Add judge to session
                 await session.addJudge(judge)
 
+                // Is online
+                const isOnline = !!judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
+
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-judge", judge)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-judge", judge, isOnline)
                 }
 
-                return judge
+                return isOnline
             })
 
             // On remove judge

@@ -50,12 +50,56 @@ export default function ({ namespace, value, session }: Props) {
     })
 
     /**
+     * On judge connect
+     * 
+     */
+    namespace.useOn("judge-connect", function (primitiveJudge: PrimitiveJudge) {
+
+        // Update Judges
+        setJudges(function (judges) {
+
+            return judges.map(function (judge) {
+
+                // Set is online
+                if (judge.id === primitiveJudge.id) judge.isOnline = true
+
+                return judge
+            })
+        })
+    })
+
+    /**
+     * On judge desconnect
+     * 
+     */
+    namespace.useOn("judge-desconnect", function (primitiveJudge: PrimitiveJudge) {
+
+        // Update Judges
+        setJudges(function (judges) {
+
+            return judges.map(function (judge) {
+
+                // Set is online
+                if (judge.id === primitiveJudge.id) judge.isOnline = false
+
+                return judge
+            })
+        })
+    })
+
+    /**
      * On add judge
      * 
      */
-    namespace.useOn("add-judge", function (primitiveJudge: PrimitiveJudge) {
+    namespace.useOn("add-judge", function (primitiveJudge: PrimitiveJudge, isOnline: boolean) {
 
-        setJudges(judges => [...judges, new Judge(primitiveJudge)])
+        // Create judge
+        const judge = new Judge(primitiveJudge)
+
+        // Set is online
+        judge.isOnline = isOnline
+
+        setJudges(judges => [...judges, judge])
     })
 
     /**
@@ -76,7 +120,9 @@ export default function ({ namespace, value, session }: Props) {
 
         try {
 
-            await namespace.ask("add-judge", session.id, judge.id)
+            const isOnline = await namespace.ask<boolean>("add-judge", session.id, judge.id)
+
+            judge.isOnline = isOnline
 
             setJudges(judges => [...judges, judge])
 
