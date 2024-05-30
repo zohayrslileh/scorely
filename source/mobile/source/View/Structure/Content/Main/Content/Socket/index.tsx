@@ -2,6 +2,7 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import ViewException from "@/View/Exception/Exceptions"
 import manager from "@/Models/Server/Socket"
 import { Throw } from "@/Tools/Exception"
+import Order from "./Order"
 import Logo from "./Logo"
 
 /**
@@ -27,7 +28,7 @@ export default function () {
      * Order
      * 
      */
-    const order = main.useState<unknown>("order")
+    const order = main.useState<object>("order")
 
     /**
      * Error
@@ -41,5 +42,5 @@ export default function () {
     // Pending status
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
-    return order ? <p>Order</p> : <Logo />
+    return order ? <Order value={order} /> : <Logo />
 }

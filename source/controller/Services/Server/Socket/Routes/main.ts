@@ -125,7 +125,7 @@ export default new Router(function (main) {
                 // Participant
                 const participant = await Participant.find(participantId)
 
-                client.socket.in("judges").emit("order", "order")
+                client.socket.in("judges").emit("order", { session, participant })
 
                 return { session, participant }
             })
