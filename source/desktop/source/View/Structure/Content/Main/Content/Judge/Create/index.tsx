@@ -1,4 +1,3 @@
-import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
 import { Lang, useLang } from "@/Tools/Language"
 import Button from "@/View/Components/Button"
@@ -35,9 +34,6 @@ export default function () {
      * 
      */
     const create = usePromise(async () => await Judge.create(value))
-
-    // Pending status
-    if (create.pending) return <Throw exception={new PendingException} />
 
     // Exception status
     if (create.exception) return <Throw exception={create.exception.current} />
