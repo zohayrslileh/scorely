@@ -4,6 +4,7 @@ import Namespace from "@/Tools/Socket/Namespace"
 import Dialog from "@/View/Components/Dialog"
 import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
+import usePromise from "@/Tools/Promise"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Session from "@/Core/Session"
@@ -18,6 +19,12 @@ import Row from "./Row"
 export default function ({ namespace, value, session }: Props) {
 
     /**
+     * Online judges
+     * 
+     */
+    const [onlineJudges, setOnlineJudges] = useState<Judge[]>([])
+
+    /**
      * Is open
      * 
      */
@@ -28,6 +35,15 @@ export default function ({ namespace, value, session }: Props) {
      * 
      */
     const [judges, setJudges] = useState<Judge[]>(value)
+
+    /**
+     * On online judges
+     * 
+     */
+    namespace.useOn("online-judges", function (onlineJudges: PrimitiveJudge[]) {
+
+        setOnlineJudges(onlineJudges.map(onlineJudge => new Judge(onlineJudge)))
+    })
 
     /**
      * On add judge
@@ -91,10 +107,16 @@ export default function ({ namespace, value, session }: Props) {
 
     }, [session])
 
+    /**
+     * Online judges promise
+     * 
+     */
+    usePromise(async () => await namespace.ask("online-judges", session.id), [])
+
     return <Container>
         <h4><Lang>Judges</Lang></h4>
         <div id="rows">
-            {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} />)}
+            {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} isOnline={!!onlineJudges.find(onlineJudge => onlineJudge.id === judge.id)} />)}
             <button onClick={() => setIsOpen(true)}><Lang>Add judge</Lang></button>
             <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
                 <Search onAddJudge={addJudge} judges={judges} />

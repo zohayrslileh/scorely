@@ -116,12 +116,34 @@ export default new Router(function (main) {
             // On join
             client.on("join", async function (_, sessionId: unknown) {
 
+                // Session
+                const session = await Session.find(sessionId)
+
                 // Append to admin sockets
                 if (!adminSockets.find(adminSocket => adminSocket.socket === client.socket)) adminSockets.push({
                     socket: client.socket,
-                    user: user,
-                    session: await Session.find(sessionId)
+                    session,
+                    user
                 })
+            })
+
+            // On online judges
+            client.on("online-judges", async function (_, sessionId: unknown) {
+
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Judges
+                const judges = await session.judges()
+
+                // Online judges
+                const onlineJudges = judges.filter(function (judge) {
+
+                    return !!judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
+                })
+
+                // Emit online judges
+                client.socket.emit("online-judges", onlineJudges)
             })
 
             // On disconnect 

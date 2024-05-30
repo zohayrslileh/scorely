@@ -26,5 +26,7 @@ export default {
     "Add judge": "Ajouter un juge",
     "Add": "Ajouter",
     "Ask rating": "Demander notes",
-    "Rate": "Note"
+    "Rate": "Note",
+    "Online": "En ligne",
+    "Offline": "Hors ligne"
 }

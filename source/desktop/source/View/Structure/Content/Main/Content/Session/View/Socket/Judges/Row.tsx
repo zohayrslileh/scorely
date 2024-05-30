@@ -11,9 +11,13 @@ import Judge from "@/Core/Judge"
  * 
  * @returns 
  */
-export default function ({ judge, onRemove }: Props) {
+export default function ({ judge, onRemove, isOnline }: Props) {
 
     return <Container>
+        <div id="status" className={isOnline ? "" : "offline"}>
+            <div id="style-dot"></div>
+            <p><Lang>{isOnline ? "Online" : "Offline"}</Lang></p>
+        </div>
         <p>{judge.name}</p>
         <Grid columns="1fr" gap="10px" id="control">
             <LightButton onClick={async () => await onRemove(judge)} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
@@ -28,6 +32,7 @@ export default function ({ judge, onRemove }: Props) {
 interface Props {
     judge: Judge
     onRemove: (judge: Judge) => Promise<void>
+    isOnline: boolean
 }
 
 /**
@@ -43,13 +48,38 @@ const Container = styled.div`
     height: 100%;
     position: relative;
     gap: 10px;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr auto;
     padding: 15px;
     box-sizing: border-box;
     cursor: pointer;
 
     &:hover {
         transform: scale(0.98);
+    }
+
+    > #status {
+        --color: #299c29;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        > #style-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--color);
+            border-radius: 50px;
+        }
+
+        > p {
+            margin: 0;
+            font-size: 12px;
+            font-family: ${() => Appearance.schema.FONT_MEDIUM};
+            color: var(--color);
+        }
+
+        &.offline {
+            --color: #6e6e6e;
+        }
     }
 
     > p {
