@@ -1,5 +1,6 @@
 import LightButton from "@/View/Components/LightButton"
 import { FiEdit2, FiTrash2 } from "react-icons/fi"
+import compiler from "@/View/Exception/compiler"
 import { useNavigate } from "react-router-dom"
 import Appearance from "@/View/Appearance"
 import Flex from "@/View/Components/Flex"
@@ -29,9 +30,16 @@ export default function ({ judge, dispatch }: Props) {
      */
     const destroy = useCallback(async function () {
 
-        await judge.delete()
+        try {
 
-        dispatch(judges => judges.filter(item => item !== judge))
+            await judge.delete()
+
+            dispatch(judges => judges.filter(item => item !== judge))
+
+        } catch (exception) {
+
+            alert(compiler(exception))
+        }
 
     }, [judge, dispatch])
 

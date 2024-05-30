@@ -1,4 +1,5 @@
 import LightButton from "@/View/Components/LightButton"
+import compiler from "@/View/Exception/compiler"
 import { FiEye, FiTrash2 } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
 import Appearance from "@/View/Appearance"
@@ -29,9 +30,16 @@ export default function ({ session, dispatch }: Props) {
      */
     const destroy = useCallback(async function () {
 
-        await session.delete()
+        try {
 
-        dispatch(sessions => sessions.filter(item => item !== session))
+            await session.delete()
+
+            dispatch(sessions => sessions.filter(item => item !== session))
+
+        } catch (exception) {
+
+            alert(compiler(exception))
+        }
 
     }, [session, dispatch])
 
