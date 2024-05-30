@@ -1,11 +1,11 @@
 import LightButton from "@/View/Components/LightButton"
 import { useCallback, useState } from "react"
-import Judge from "@/Core/Judge"
 import Appearance from "@/View/Appearance"
-import { FiTrash2 } from "react-icons/fi"
 import Flex from "@/View/Components/Flex"
 import { Lang } from "@/Tools/Language"
+import { FiPlus } from "react-icons/fi"
 import styled from "@emotion/styled"
+import Judge from "@/Core/Judge"
 
 /**
  * Row
@@ -35,7 +35,7 @@ export default function ({ judge, onSelect }: Props) {
     return isAppend ? null : <Container>
         <p>{judge.name}</p>
         <Flex id="control">
-            <LightButton onClick={append}><FiTrash2 /><Lang>Add</Lang></LightButton>
+            <LightButton onClick={append}><FiPlus /><Lang>Add</Lang></LightButton>
         </Flex>
     </Container>
 }

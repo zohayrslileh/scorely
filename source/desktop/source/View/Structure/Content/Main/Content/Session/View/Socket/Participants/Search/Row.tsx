@@ -2,9 +2,9 @@ import LightButton from "@/View/Components/LightButton"
 import { useCallback, useState } from "react"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
-import { FiTrash2 } from "react-icons/fi"
 import Flex from "@/View/Components/Flex"
 import { Lang } from "@/Tools/Language"
+import { FiPlus } from "react-icons/fi"
 import styled from "@emotion/styled"
 
 /**
@@ -35,7 +35,7 @@ export default function ({ participant, onSelect }: Props) {
     return isAppend ? null : <Container>
         <p>{participant.name} {participant.club && <b>({participant.club})</b>}</p>
         <Flex id="control">
-            <LightButton onClick={append}><FiTrash2 /><Lang>Add</Lang></LightButton>
+            <LightButton onClick={append}><FiPlus /><Lang>Add</Lang></LightButton>
         </Flex>
     </Container>
 }
