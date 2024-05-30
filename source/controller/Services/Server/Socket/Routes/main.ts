@@ -162,8 +162,11 @@ export default new Router(function (main) {
                 // Cancel orders
                 orders = orders.filter(order => !(order.judgeId === judge.id && order.sessionId === session.id))
 
-                // Empty order
-                if (judgeSocket) judgeSocket.socket.emit("order", undefined)
+                // Next order
+                const nextOrder = orders.find(order => order.judgeId = judge.id)
+
+                // Emit
+                if (judgeSocket) judgeSocket.socket.emit("order", nextOrder)
 
                 return judge
             })
