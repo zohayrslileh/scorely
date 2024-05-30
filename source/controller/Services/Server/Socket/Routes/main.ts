@@ -233,8 +233,6 @@ export default new Router(function (main) {
                         }
                     }
                 }
-
-                return { session, participant }
             })
         }
 
