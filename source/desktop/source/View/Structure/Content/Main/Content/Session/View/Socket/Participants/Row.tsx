@@ -16,7 +16,7 @@ import styled from "@emotion/styled"
 export default function ({ participant, onRemove, onAskRate }: Props) {
 
     return <Container>
-        <p>{participant.name} 4.3 (3)</p>
+        <p>{participant.name}</p>
         <Grid columns="1fr 1fr" gap="10px" id="control">
             <Button onClick={async () => await onAskRate(participant)}><LuStar /><Lang>Rate</Lang></Button>
             <LightButton onClick={async () => await onRemove(participant)} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>

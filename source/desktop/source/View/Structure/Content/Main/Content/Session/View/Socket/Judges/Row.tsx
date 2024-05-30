@@ -14,7 +14,7 @@ import Judge from "@/Core/Judge"
 export default function ({ judge, onRemove }: Props) {
 
     return <Container>
-        <p>{judge.name} 4.3 (3)</p>
+        <p>{judge.name}</p>
         <Grid columns="1fr" gap="10px" id="control">
             <LightButton onClick={async () => await onRemove(judge)} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
         </Grid>
