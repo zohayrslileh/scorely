@@ -29,6 +29,7 @@ const Container = styled.div`
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 10px;
+    margin: auto;
 `
 
 /**
