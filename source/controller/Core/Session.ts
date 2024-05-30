@@ -282,7 +282,11 @@ export default class Session {
         if (!judgeEntity) throw new CoreException("Judge entity was not found")
 
         // Create rating entity
-        const ratingEntity = new RatingEntity
+        const ratingEntity = await RatingEntity.findOneBy({
+            participant: { id: participantEntity.id },
+            session: { id: sessionEntity.id },
+            judge: { id: judgeEntity.id }
+        }) || new RatingEntity
 
         // Set score
         ratingEntity.score = zod.number().parse(score)
