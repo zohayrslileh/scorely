@@ -45,6 +45,12 @@ export default function ({ session }: Props) {
      */
     const judges = usePromise(async () => await session.judges(), [])
 
+    /**
+     * Join promise
+     * 
+     */
+    usePromise(async () => await main.ask("join", session.id), [])
+
     // Error status
     if (error) return <Throw exception={new ViewException(error)} />
 

@@ -48,8 +48,15 @@ export default new Router(function (main) {
         // Is admin
         else if (role && role.name === "admin") {
 
-            // Append to admin sockets
-            adminSockets.push({ socket: client.socket, id: user.id })
+            // On join
+            client.on("join", async function (event, sessionId: number) {
+
+                // Stop 
+                event.stopListening()
+
+                // Append to admin sockets
+                adminSockets.push({ socket: client.socket, id: user.id, sessionId })
+            })
 
             // On disconnect 
             client.onDisconnect(function () {
@@ -69,8 +76,14 @@ export default new Router(function (main) {
                 // Add participant to session
                 await session.addParticipant(participant)
 
+                // Emit to admins
+                for (const adminSocket of adminSockets) {
+
+                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-participant", participant.id)
+                }
+
                 // Emit to broadcast admins
-                client.socket.broadcast.in("admins").emit("add-participant", participant)
+                client.socket.broadcast.in("admins")
 
                 return participant
             })
@@ -87,8 +100,11 @@ export default new Router(function (main) {
                 // Remove participant to session
                 await session.removeParticipant(participant)
 
-                // Emit to broadcast admins
-                client.socket.broadcast.in("admins").emit("remove-participant", participant.id)
+                // Emit to admins
+                for (const adminSocket of adminSockets) {
+
+                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("remove-participant", participant.id)
+                }
 
                 return participant
             })
@@ -105,8 +121,11 @@ export default new Router(function (main) {
                 // Add judge to session
                 await session.addJudge(judge)
 
-                // Emit to broadcast admins
-                client.socket.broadcast.in("admins").emit("add-judge", judge)
+                // Emit to admins
+                for (const adminSocket of adminSockets) {
+
+                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-judge", judge.id)
+                }
 
                 return judge
             })
@@ -123,8 +142,11 @@ export default new Router(function (main) {
                 // Remove judge to session
                 await session.removeJudge(judge)
 
-                // Emit to broadcast admins
-                client.socket.broadcast.in("admins").emit("remove-judge", judge.id)
+                // Emit to admins
+                for (const adminSocket of adminSockets) {
+
+                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("remove-judge", judge.id)
+                }
 
                 return judge
             })
@@ -141,10 +163,10 @@ export default new Router(function (main) {
                 // Judges
                 const judges = await session.judges()
 
-                // Emit
-                for (const judgeSocket of judgeSockets.filter(judgeSocket => judges.find(judge => judge.id === judgeSocket.id))) {
+                // Emit to judges
+                for (const judgeSocket of judgeSockets) {
 
-                    judgeSocket.socket.emit("order", { session, participant })
+                    if (judges.find(judge => judge.id === judgeSocket.id)) judgeSocket.socket.emit("order", { session, participant })
                 }
 
                 return { session, participant }
@@ -175,6 +197,7 @@ var judgeSockets: JudgeSocket[] = []
 interface AdminSocket {
     socket: Socket
     id: number
+    sessionId: number
 }
 
 /**
