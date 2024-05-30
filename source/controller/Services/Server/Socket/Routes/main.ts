@@ -3,6 +3,7 @@ import Authentication from "@/Core/Authentication"
 import Participant from "@/Core/Participant"
 import Router from "@/Tools/Socket/Router"
 import Session from "@/Core/Session"
+import { Socket } from "socket.io"
 import Judge from "@/Core/Judge"
 
 /*
@@ -34,8 +35,14 @@ export default new Router(function (main) {
         // Is judge
         if (judge) {
 
-            // Join to judges
-            client.socket.join("judges")
+            // Append to judge sockets
+            judgeSockets.push({ socket: client.socket, id: judge.id })
+
+            // On disconnect 
+            client.onDisconnect(function () {
+
+                judgeSockets = judgeSockets.filter(judgeSocket => judgeSocket.socket !== client.socket)
+            })
         }
 
         // Is admin
@@ -125,7 +132,14 @@ export default new Router(function (main) {
                 // Participant
                 const participant = await Participant.find(participantId)
 
-                client.socket.in("judges").emit("order", { session, participant })
+                // Judges
+                const judges = await session.judges()
+
+                // Emit
+                for (const judgeSocket of judgeSockets.filter(judgeSocket => judges.find(judge => judge.id === judgeSocket.id))) {
+
+                    judgeSocket.socket.emit("order", { session, participant })
+                }
 
                 return { session, participant }
             })
@@ -135,3 +149,18 @@ export default new Router(function (main) {
         else throw new WsException("You do not have standing to join")
     })
 })
+
+/**
+ * Judge Socket
+ * 
+ */
+var judgeSockets: JudgeSocket[] = []
+
+/**
+ * Judge Socket
+ * 
+ */
+interface JudgeSocket {
+    socket: Socket
+    id: number
+}
