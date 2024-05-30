@@ -1,11 +1,11 @@
 import WsException from "@/Services/Server/Socket/Exception/Exceptions"
+import UserEntity from "@/Models/Database/Entities/User"
 import Authentication from "@/Core/Authentication"
 import Participant from "@/Core/Participant"
 import Router from "@/Tools/Socket/Router"
 import Session from "@/Core/Session"
 import { Socket } from "socket.io"
 import Judge from "@/Core/Judge"
-import zod from "zod"
 
 /*
 |-----------------------------
@@ -37,10 +37,10 @@ export default new Router(function (main) {
         if (judge) {
 
             // Append to judge sockets
-            judgeSockets.push({ socket: client.socket, judgeId: judge.id })
+            judgeSockets.push({ socket: client.socket, judge: await Judge.find(judge.id) })
 
             // Next order
-            const nextOrder = orders.find(order => order.judgeId = judge.id)
+            const nextOrder = orders.find(order => order.judge.id === judge.id)
 
             // Emit
             if (nextOrder) client.socket.emit("order", nextOrder)
@@ -56,13 +56,13 @@ export default new Router(function (main) {
         else if (role && role.name === "admin") {
 
             // On join
-            client.on("join", function (_, sessionId: unknown) {
+            client.on("join", async function (_, sessionId: unknown) {
 
                 // Append to admin sockets
                 if (!adminSockets.find(adminSocket => adminSocket.socket === client.socket)) adminSockets.push({
                     socket: client.socket,
-                    userId: user.id,
-                    sessionId: zod.number().parse(sessionId)
+                    user: user,
+                    session: await Session.find(sessionId)
                 })
             })
 
@@ -87,7 +87,7 @@ export default new Router(function (main) {
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-participant", participant)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-participant", participant)
                 }
 
                 // Emit to broadcast admins
@@ -111,7 +111,7 @@ export default new Router(function (main) {
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("remove-participant", participant.id)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("remove-participant", participant.id)
                 }
 
                 return participant
@@ -132,7 +132,7 @@ export default new Router(function (main) {
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-judge", judge)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-judge", judge)
                 }
 
                 return judge
@@ -153,17 +153,17 @@ export default new Router(function (main) {
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("remove-judge", judge.id)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("remove-judge", judge.id)
                 }
 
                 // Judge socket
-                const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judgeId === judge.id)
+                const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
 
                 // Cancel orders
-                orders = orders.filter(order => !(order.judgeId === judge.id && order.sessionId === session.id))
+                orders = orders.filter(order => !(order.judge.id === judge.id && order.session.id === session.id))
 
                 // Next order
-                const nextOrder = orders.find(order => order.judgeId = judge.id)
+                const nextOrder = orders.find(order => order.judge.id === judge.id)
 
                 // Emit
                 if (judgeSocket) judgeSocket.socket.emit("order", nextOrder)
@@ -184,22 +184,22 @@ export default new Router(function (main) {
                 for (const judge of await session.judges()) {
 
                     // Order order
-                    const oldOrder = orders.find(order => order.judgeId === judge.id && order.participantId === participant.id && order.sessionId === session.id)
+                    const oldOrder = orders.find(order => order.judge.id === judge.id && order.participant.id === participant.id && order.session.id === session.id)
 
                     // Check old order
                     if (oldOrder) continue
 
                     // Order
-                    const order: Order = { judgeId: judge.id, sessionId: session.id, participantId: participant.id }
+                    const order: Order = { session, judge, participant }
 
                     // Push to orders
                     orders.push(order)
 
                     // Judge socket
-                    const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judgeId === judge.id)
+                    const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
 
                     // Next order
-                    const nextOrder = orders.find(order => order.judgeId = judge.id)
+                    const nextOrder = orders.find(order => order.judge.id === judge.id)
 
                     // Emit to judge
                     if (judgeSocket && order === nextOrder) judgeSocket.socket.emit("order", order)
@@ -238,8 +238,8 @@ var orders: Order[] = []
  */
 interface AdminSocket {
     socket: Socket
-    userId: number
-    sessionId: number
+    user: UserEntity
+    session: Session
 }
 
 /**
@@ -248,7 +248,7 @@ interface AdminSocket {
  */
 interface JudgeSocket {
     socket: Socket
-    judgeId: number
+    judge: Judge
 }
 
 /**
@@ -256,7 +256,7 @@ interface JudgeSocket {
  * 
  */
 interface Order {
-    judgeId: number
-    sessionId: number
-    participantId: number
+    judge: Judge
+    session: Session
+    participant: Participant
 }
