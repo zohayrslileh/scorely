@@ -35,6 +35,12 @@ export default class Judge {
     public password: string | undefined
 
     /**
+     * Is online
+     * 
+     */
+    public isOnline?: boolean
+
+    /**
      * Constructor method
      * 
      */

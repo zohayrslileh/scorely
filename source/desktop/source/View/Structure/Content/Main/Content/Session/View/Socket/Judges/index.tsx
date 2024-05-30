@@ -19,12 +19,6 @@ import Row from "./Row"
 export default function ({ namespace, value, session }: Props) {
 
     /**
-     * Online judges
-     * 
-     */
-    const [onlineJudges, setOnlineJudges] = useState<Judge[]>([])
-
-    /**
      * Is open
      * 
      */
@@ -42,7 +36,17 @@ export default function ({ namespace, value, session }: Props) {
      */
     namespace.useOn("online-judges", function (onlineJudges: PrimitiveJudge[]) {
 
-        setOnlineJudges(onlineJudges.map(onlineJudge => new Judge(onlineJudge)))
+        // Update Judges
+        setJudges(function (judges) {
+
+            return judges.map(function (judge) {
+
+                // Set is online
+                judge.isOnline = !!onlineJudges.find(onlineJudge => onlineJudge.id === judge.id)
+
+                return judge
+            })
+        })
     })
 
     /**
@@ -116,7 +120,7 @@ export default function ({ namespace, value, session }: Props) {
     return <Container>
         <h4><Lang>Judges</Lang></h4>
         <div id="rows">
-            {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} isOnline={!!onlineJudges.find(onlineJudge => onlineJudge.id === judge.id)} />)}
+            {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} />)}
             <button onClick={() => setIsOpen(true)}><Lang>Add judge</Lang></button>
             <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
                 <Search onAddJudge={addJudge} judges={judges} />

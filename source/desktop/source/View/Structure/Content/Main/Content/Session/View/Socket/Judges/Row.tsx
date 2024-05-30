@@ -11,12 +11,12 @@ import Judge from "@/Core/Judge"
  * 
  * @returns 
  */
-export default function ({ judge, onRemove, isOnline }: Props) {
+export default function ({ judge, onRemove }: Props) {
 
     return <Container>
-        <div id="status" className={isOnline ? "" : "offline"}>
+        <div id="status" className={judge.isOnline ? "" : "offline"}>
             <div id="style-dot"></div>
-            <p><Lang>{isOnline ? "Online" : "Offline"}</Lang></p>
+            <p><Lang>{judge.isOnline ? "Online" : "Offline"}</Lang></p>
         </div>
         <p>{judge.name}</p>
         <Grid columns="1fr" gap="10px" id="control">
@@ -32,7 +32,6 @@ export default function ({ judge, onRemove, isOnline }: Props) {
 interface Props {
     judge: Judge
     onRemove: (judge: Judge) => Promise<void>
-    isOnline: boolean
 }
 
 /**
