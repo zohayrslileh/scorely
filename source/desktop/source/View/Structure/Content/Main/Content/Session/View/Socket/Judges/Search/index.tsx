@@ -60,6 +60,11 @@ const Container = styled(Grid)`
     flex-direction: column;
     gap: 10px;
 
+    > h2 {
+        margin-bottom: 7px;
+        margin-inline-start: 7px;
+    }
+
     > #rows {
         position: relative;
         overflow-y: auto;

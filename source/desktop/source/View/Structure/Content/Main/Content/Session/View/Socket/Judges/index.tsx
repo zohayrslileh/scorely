@@ -92,11 +92,14 @@ export default function ({ namespace, value, session }: Props) {
     }, [session])
 
     return <Container>
-        {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} />)}
-        <button onClick={() => setIsOpen(true)}><Lang>Add judge</Lang></button>
-        <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
-            <Search onAddJudge={addJudge} judges={judges} />
-        </Dialog>
+        <h4><Lang>Judges</Lang></h4>
+        <div id="rows">
+            {judges.map(judge => <Row key={judge.id} judge={judge} onRemove={removeJudge} />)}
+            <button onClick={() => setIsOpen(true)}><Lang>Add judge</Lang></button>
+            <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
+                <Search onAddJudge={addJudge} judges={judges} />
+            </Dialog>
+        </div>
     </Container>
 }
 
@@ -118,34 +121,47 @@ const Container = styled.div`
     border: 2px solid ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
     border-radius: 7px;
     padding: 7px;
-    overflow: auto;
     display: grid;
-    justify-items: center;
-    align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
-    grid-template-rows: initial;
     gap: 10px;
+    grid-template-rows: auto 1fr;
+    overflow: auto;
 
-    ::-webkit-scrollbar {
-        display: none;
+    > h4 {
+        margin: 7px;
+        font-size: 16px;
+        opacity: 0.5;
     }
 
-    > button {
-        color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
-        font-family: ${() => Appearance.schema.FONT_MEDIUM};
-        background-color: transparent;
-        border: 2px dashed;
-        border-radius: 7px;
-        cursor: pointer;
-        height: 150px;
-        padding: 0;
-        width: -webkit-fill-available;
-        min-height: 150px;
-        height: 100%;
-        
-        &:hover {
-            color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
-            transform: scale(0.98);
+    > #rows {
+        overflow: auto;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+        grid-template-rows: initial;
+        gap: 10px;
+
+        > button {
+            color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
+            font-family: ${() => Appearance.schema.FONT_MEDIUM};
+            background-color: transparent;
+            border: 2px dashed;
+            border-radius: 7px;
+            cursor: pointer;
+            height: 150px;
+            padding: 0;
+            width: -webkit-fill-available;
+            min-height: 150px;
+            height: 100%;
+            
+            &:hover {
+                color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.7)};
+                transform: scale(0.98);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
         }
     }
 `
