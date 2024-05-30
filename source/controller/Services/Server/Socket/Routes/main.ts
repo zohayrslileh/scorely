@@ -6,6 +6,7 @@ import Router from "@/Tools/Socket/Router"
 import Session from "@/Core/Session"
 import { Socket } from "socket.io"
 import Judge from "@/Core/Judge"
+import zod from "zod"
 
 /*
 |-----------------------------
@@ -59,6 +60,31 @@ export default new Router(function (main) {
 
                 // Check order
                 if (!order) throw new WsException("This order was not found")
+
+                // Update orders
+                orders = orders.filter(item => item !== order)
+
+                // Next order
+                const nextOrder = orders.find(order => order.judge.id === judge.id)
+
+                // Fetch judge sockets
+                for (const judgeSocket of judgeSockets.filter(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                    // Emit
+                    judgeSocket.socket.emit("order", nextOrder)
+                }
+            })
+
+            // On answer
+            client.on("answer", async function (_, sessionId: unknown, participantId: unknown, score: unknown) {
+
+                // Order
+                const order = orders.find(order => order.judge.id === judge.id && order.session.id === sessionId && order.participant.id === participantId)
+
+                // Check order
+                if (!order) throw new WsException("This order was not found")
+
+                console.log(zod.number().parse(score))
 
                 // Update orders
                 orders = orders.filter(item => item !== order)

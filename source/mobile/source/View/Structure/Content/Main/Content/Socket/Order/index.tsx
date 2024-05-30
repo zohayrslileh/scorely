@@ -44,7 +44,7 @@ export default function ({ namespace, value }: Props) {
      */
     const answer = useCallback(async function () {
 
-        await namespace.ask("answer", value.session.id, value.participant.id, score)
+        await namespace.ask("answer", value.session.id, value.participant.id, Number(score))
 
     }, [namespace, value, score])
 
