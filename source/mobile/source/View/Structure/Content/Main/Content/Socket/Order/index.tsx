@@ -1,10 +1,11 @@
-import JsonView from "@/View/Components/JsonView"
+import TextInput from "@/View/Components/TextInput"
 import Namespace from "@/Tools/Socket/Namespace"
+import { Lang, useLang } from "@/Tools/Language"
 import Button from "@/View/Components/Button"
 import { PrimitiveOrder } from "@/Core/Order"
-import { Lang } from "@/Tools/Language"
+import { useCallback, useState } from "react"
 import styled from "@emotion/styled"
-import { useCallback } from "react"
+import Header from "./Header"
 
 /**
  * Order
@@ -12,6 +13,18 @@ import { useCallback } from "react"
  * @returns 
  */
 export default function ({ namespace, value }: Props) {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
+
+    /**
+     * Score
+     * 
+     */
+    const [score, setScore] = useState<undefined | string>(undefined)
 
     /**
      * Skip method
@@ -24,9 +37,22 @@ export default function ({ namespace, value }: Props) {
 
     }, [namespace, value])
 
+    /**
+     * Answer method
+     * 
+     * @returns
+     */
+    const answer = useCallback(async function () {
+
+        await namespace.ask("answer", value.session.id, value.participant.id, score)
+
+    }, [namespace, value, score])
+
     return <Container>
-        <JsonView json={value} />
+        <Header sessionId={value.session.id} participantName={value.participant.name} />
+        <TextInput placeholder={lang("The score")} value={score || ""} onChange={score => setScore(score || undefined)} />
         <Button onClick={skip}><Lang>Skip</Lang></Button>
+        <Button onClick={answer}><Lang>Save</Lang></Button>
     </Container>
 }
 

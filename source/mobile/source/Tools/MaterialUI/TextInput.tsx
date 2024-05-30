@@ -14,6 +14,6 @@ export default function ({ value, onChange, ...props }: Props) {
  * 
  */
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {
-    value: string
+    value: string | number
     onChange: (value: string) => unknown
 }
