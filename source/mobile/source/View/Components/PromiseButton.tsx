@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react"
+import { ScaleLoader } from "react-spinners"
+import Appearance from "@/View/Appearance"
 
 /**
  * Promise Button
@@ -39,6 +41,6 @@ export default function ({ onClick, children, ...props }: React.HTMLAttributes<H
     }, [onClick, loading])
 
     return <button {...props} onClick={clickHandler} className={`${props.className} ${loading ? "disable" : undefined}`}>
-        {children}
+        {loading ? <ScaleLoader color={Appearance.theme.schema.CONTENT_COLOR.rgba()} height={12} width={1.8} /> : children}
     </button>
 }
