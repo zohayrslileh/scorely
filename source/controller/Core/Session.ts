@@ -261,6 +261,26 @@ export default class Session {
      * @returns
      */
     public async rating(judge: Judge, participant: Participant, score: unknown) {
+
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
+        // Get participant entity
+        const participantEntity = await ParticipantEntity.findOneBy({ id: participant.id })
+
+        // Check participant entity
+        if (!participantEntity) throw new CoreException("Participant entity was not found")
+
+        // Get judge entity
+        const judgeEntity = await JudgeEntity.findOneBy({ id: judge.id })
+
+        // Check judge entity
+        if (!judgeEntity) throw new CoreException("Judge entity was not found")
+
+        console.log(score)
     }
 }
 

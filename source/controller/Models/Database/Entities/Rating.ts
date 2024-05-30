@@ -15,11 +15,11 @@ import Judge from "./Judge"
 export default class Rating extends BaseEntity {
 
     /**
-     * Value
+     * Score
      * 
      */
     @Column({ type: "float", nullable: false })
-    declare public value: number
+    declare public score: number
 
     /**
      * Session
