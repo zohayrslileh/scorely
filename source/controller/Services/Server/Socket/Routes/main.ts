@@ -50,6 +50,29 @@ export default new Router(function (main) {
 
                 judgeSockets = judgeSockets.filter(judgeSocket => judgeSocket.socket !== client.socket)
             })
+
+            // On skip
+            client.on("skip", async function (_, sessionId: unknown, participantId: unknown) {
+
+                // Order
+                const order = orders.find(order => order.judge.id === judge.id && order.session.id === sessionId && order.participant.id === participantId)
+
+                // Check order
+                if (!order) throw new WsException("This order was not found")
+
+                // Update orders
+                orders = orders.filter(item => item !== order)
+
+                // Next order
+                const nextOrder = orders.find(order => order.judge.id === judge.id)
+
+                // Fetch judge sockets
+                for (const judgeSocket of judgeSockets.filter(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                    // Emit
+                    judgeSocket.socket.emit("order", nextOrder)
+                }
+            })
         }
 
         // Is admin

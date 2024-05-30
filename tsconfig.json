@@ -26,5 +26,5 @@
     },
     "include": [
         "source/controller"
-    ]
+, "source/mobile/source/Core/Order.ts"    ]
 }
