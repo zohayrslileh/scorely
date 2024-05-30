@@ -5,6 +5,7 @@ import Router from "@/Tools/Socket/Router"
 import Session from "@/Core/Session"
 import { Socket } from "socket.io"
 import Judge from "@/Core/Judge"
+import zod from "zod"
 
 /*
 |-----------------------------
@@ -49,13 +50,14 @@ export default new Router(function (main) {
         else if (role && role.name === "admin") {
 
             // On join
-            client.on("join", async function (event, sessionId: number) {
-
-                // Stop 
-                event.stopListening()
+            client.on("join", function (_, sessionId: unknown) {
 
                 // Append to admin sockets
-                adminSockets.push({ socket: client.socket, id: user.id, sessionId })
+                if (!adminSockets.find(adminSocket => adminSocket.socket === client.socket)) adminSockets.push({
+                    socket: client.socket,
+                    id: user.id,
+                    sessionId: zod.number().parse(sessionId)
+                })
             })
 
             // On disconnect 
