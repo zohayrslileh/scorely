@@ -115,6 +115,18 @@ export default new Router(function (main) {
 
                 return judge
             })
+
+            // On ask rate
+            client.on("ask-rate", async function (_, sessionId: unknown, participantId: unknown) {
+
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Participant
+                const participant = await Participant.find(participantId)
+
+                return { session, participant }
+            })
         }
 
         // Other

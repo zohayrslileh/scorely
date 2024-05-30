@@ -100,7 +100,9 @@ export default function ({ namespace, value, session }: Props) {
 
         try {
 
-            await namespace.ask("ask-rate", session.id, participant.id)
+            const response = await namespace.ask("ask-rate", session.id, participant.id)
+
+            console.log(response)
 
         } catch (exception) {
 
