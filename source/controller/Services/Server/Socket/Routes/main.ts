@@ -183,8 +183,14 @@ export default new Router(function (main) {
                 // Fetch judges
                 for (const judge of await session.judges()) {
 
+                    // Order order
+                    const oldOrder = orders.find(order => order.judgeId === judge.id && order.participantId === participant.id && order.sessionId === session.id)
+
+                    // Check old order
+                    if (oldOrder) continue
+
                     // Order
-                    const order: Order = { judgeId: judge.id, sessionId: session.id }
+                    const order: Order = { judgeId: judge.id, sessionId: session.id, participantId: participant.id }
 
                     // Push to orders
                     orders.push(order)
@@ -192,8 +198,11 @@ export default new Router(function (main) {
                     // Judge socket
                     const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judgeId === judge.id)
 
+                    // Next order
+                    const nextOrder = orders.find(order => order.judgeId = judge.id)
+
                     // Emit to judge
-                    if (judgeSocket) judgeSocket.socket.emit("order", order)
+                    if (judgeSocket && order === nextOrder) judgeSocket.socket.emit("order", order)
                 }
 
                 return { session, participant }
@@ -249,4 +258,5 @@ interface JudgeSocket {
 interface Order {
     judgeId: number
     sessionId: number
+    participantId: number
 }
