@@ -48,8 +48,14 @@ export default new Router(function (main) {
         // Is admin
         else if (role && role.name === "admin") {
 
-            // Join to admins
-            client.socket.join("admins")
+            // Append to admin sockets
+            adminSockets.push({ socket: client.socket, id: user.id })
+
+            // On disconnect 
+            client.onDisconnect(function () {
+
+                adminSockets = adminSockets.filter(adminSocket => adminSocket.socket !== client.socket)
+            })
 
             // On add participant
             client.on("add-participant", async function (_, sessionId: unknown, participantId: unknown) {
@@ -151,10 +157,25 @@ export default new Router(function (main) {
 })
 
 /**
+ * Admin Socket
+ * 
+ */
+var adminSockets: AdminSocket[] = []
+
+/**
  * Judge Socket
  * 
  */
 var judgeSockets: JudgeSocket[] = []
+
+/**
+ * Admin Socket
+ * 
+ */
+interface AdminSocket {
+    socket: Socket
+    id: number
+}
 
 /**
  * Judge Socket
