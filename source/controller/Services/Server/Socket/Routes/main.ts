@@ -39,6 +39,9 @@ export default new Router(function (main) {
             // Judge
             const judge = await Judge.find(judgeEntity.id)
 
+            // Emit to admins
+            for (const adminSocket of adminSockets) adminSocket.socket.emit("judge-connect", judge)
+
             // Append to judge sockets
             judgeSockets.push({ socket: client.socket, judge })
 
@@ -52,6 +55,9 @@ export default new Router(function (main) {
             client.onDisconnect(function () {
 
                 judgeSockets = judgeSockets.filter(judgeSocket => judgeSocket.socket !== client.socket)
+
+                // Emit to admins
+                for (const adminSocket of adminSockets) adminSocket.socket.emit("judge-desconnect", judge)
             })
 
             // On skip
