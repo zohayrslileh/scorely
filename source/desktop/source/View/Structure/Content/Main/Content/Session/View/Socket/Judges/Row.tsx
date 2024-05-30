@@ -19,7 +19,7 @@ export default function ({ judge, onRemove }: Props) {
                 <div id="style-dot"></div>
                 <p><Lang>{judge.isOnline ? "Online" : "Offline"}</Lang></p>
             </div>
-            <p id="pending-orders">{judge.pendingOrders || "..."}</p>
+            <p id="pending-orders">{judge.pendingOrders === undefined ? "..." : judge.pendingOrders}</p>
         </div>
         <p>{judge.name}</p>
         <Grid columns="1fr" gap="10px" id="control">
