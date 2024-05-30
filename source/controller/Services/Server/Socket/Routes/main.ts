@@ -56,8 +56,12 @@ export default new Router(function (main) {
 
                 judgeSockets = judgeSockets.filter(judgeSocket => judgeSocket.socket !== client.socket)
 
-                // Emit to admins
-                for (const adminSocket of adminSockets) adminSocket.socket.emit("judge-desconnect", judge)
+                // Check if desconnect
+                if (!judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                    // Emit to admins
+                    for (const adminSocket of adminSockets) adminSocket.socket.emit("judge-desconnect", judge)
+                }
             })
 
             // On skip
