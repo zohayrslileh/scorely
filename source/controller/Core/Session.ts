@@ -1,5 +1,6 @@
 import ParticipantEntity from "@/Models/Database/Entities/Participant"
 import SessionEntity from "@/Models/Database/Entities/Session"
+import RatingEntity from "@/Models/Database/Entities/Rating"
 import JudgeEntity from "@/Models/Database/Entities/Judge"
 import CoreException from "./Exception"
 import Participant from "./Participant"
@@ -280,7 +281,23 @@ export default class Session {
         // Check judge entity
         if (!judgeEntity) throw new CoreException("Judge entity was not found")
 
-        console.log(score)
+        // Create rating entity
+        const ratingEntity = new RatingEntity
+
+        // Set score
+        ratingEntity.score = zod.number().parse(score)
+
+        // Set session
+        ratingEntity.session = sessionEntity
+
+        // Set judge
+        ratingEntity.judge = judgeEntity
+
+        // Set participant
+        ratingEntity.participant = participantEntity
+
+        // Save
+        await ratingEntity.save()
     }
 }
 
