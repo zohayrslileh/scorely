@@ -254,6 +254,14 @@ export default class Session {
             password: undefined
         }))
     }
+
+    /**
+     * Rating method
+     * 
+     * @returns
+     */
+    public async rating(judge: Judge, participant: Participant, score: unknown) {
+    }
 }
 
 /**

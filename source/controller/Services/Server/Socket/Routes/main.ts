@@ -6,7 +6,6 @@ import Router from "@/Tools/Socket/Router"
 import Session from "@/Core/Session"
 import { Socket } from "socket.io"
 import Judge from "@/Core/Judge"
-import zod from "zod"
 
 /*
 |-----------------------------
@@ -28,17 +27,20 @@ export default new Router(function (main) {
         // User
         const user = await authentication.verify()
 
-        // Judge
-        const judge = await user.getJudge()
+        // Judge entity
+        const judgeEntity = await user.getJudge()
 
         // Role
         const role = await user.getRole()
 
         // Is judge
-        if (judge) {
+        if (judgeEntity) {
+
+            // Judge
+            const judge = await Judge.find(judgeEntity.id)
 
             // Append to judge sockets
-            judgeSockets.push({ socket: client.socket, judge: await Judge.find(judge.id) })
+            judgeSockets.push({ socket: client.socket, judge })
 
             // Next order
             const nextOrder = orders.find(order => order.judge.id === judge.id)
@@ -84,7 +86,14 @@ export default new Router(function (main) {
                 // Check order
                 if (!order) throw new WsException("This order was not found")
 
-                console.log(zod.number().parse(score))
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Participant
+                const participant = await Participant.find(participantId)
+
+                // Rating
+                await session.rating(judge, participant, score)
 
                 // Update orders
                 orders = orders.filter(item => item !== order)
