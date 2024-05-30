@@ -13,12 +13,12 @@ import styled from "@emotion/styled"
  * 
  * @returns 
  */
-export default function ({ participant, onRemove }: Props) {
+export default function ({ participant, onRemove, onAskRate }: Props) {
 
     return <Container>
         <p>{participant.name} 4.3 (3)</p>
         <Grid columns="1fr 1fr" gap="10px" id="control">
-            <Button><LuStar /><Lang>Rate</Lang></Button>
+            <Button onClick={async () => await onAskRate(participant)}><LuStar /><Lang>Rate</Lang></Button>
             <LightButton onClick={async () => await onRemove(participant)} id="delete"><FiTrash2 /><Lang>Delete</Lang></LightButton>
         </Grid>
     </Container>
@@ -31,6 +31,7 @@ export default function ({ participant, onRemove }: Props) {
 interface Props {
     participant: Participant
     onRemove: (participant: Participant) => Promise<void>
+    onAskRate: (participant: Participant) => Promise<void>
 }
 
 /**

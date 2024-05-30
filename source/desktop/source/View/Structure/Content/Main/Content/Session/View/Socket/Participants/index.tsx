@@ -91,8 +91,28 @@ export default function ({ namespace, value, session }: Props) {
 
     }, [session])
 
+    /**
+     * Ask rate method
+     * 
+     * @returns
+     */
+    const askRate = useCallback(async function (participant: Participant) {
+
+        try {
+
+            await namespace.ask("ask-rate", session.id, participant.id)
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+
+            throw exception
+        }
+
+    }, [session])
+
     return <Container>
-        {participants.map(participant => <Row key={participant.id} participant={participant} onRemove={removeParticipant} />)}
+        {participants.map(participant => <Row key={participant.id} participant={participant} onRemove={removeParticipant} onAskRate={askRate} />)}
         <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
         <Dialog isOpen={isOpen} onBackDropClick={() => setIsOpen(false)}>
             <Search onAddParticipant={addParticipant} participants={participants} />
