@@ -48,7 +48,7 @@ export default function ({ namespace, value }: Props) {
 
     }, [namespace, value, score])
 
-    return <Container>
+    return <Container className="animation">
         <Header sessionId={value.session.id} participantName={value.participant.name} />
         <TextInput placeholder={lang("The score")} value={score || ""} onChange={score => setScore(score || undefined)} />
         <Button onClick={skip}><Lang>Skip</Lang></Button>
