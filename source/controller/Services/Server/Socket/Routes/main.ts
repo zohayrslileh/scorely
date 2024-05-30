@@ -39,6 +39,12 @@ export default new Router(function (main) {
             // Append to judge sockets
             judgeSockets.push({ socket: client.socket, id: judge.id })
 
+            // Next order
+            const nextOrder = orders.find(order => order.judgeId = judge.id)
+
+            // Emit
+            if (nextOrder) client.socket.emit("order", nextOrder)
+
             // On disconnect 
             client.onDisconnect(function () {
 
@@ -153,7 +159,10 @@ export default new Router(function (main) {
                 // Judge socket
                 const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.id === judge.id)
 
-                // Cancel order
+                // Cancel orders
+                orders = orders.filter(order => order.judgeId !== judge.id)
+
+                // Empty order
                 if (judgeSocket) judgeSocket.socket.emit("order", undefined)
 
                 return judge
@@ -174,7 +183,14 @@ export default new Router(function (main) {
                 // Emit to judges
                 for (const judgeSocket of judgeSockets) {
 
-                    if (judges.find(judge => judge.id === judgeSocket.id)) judgeSocket.socket.emit("order", { session, participant })
+                    // Order
+                    const order: Order = { judgeId: judgeSocket.id }
+
+                    // Append to orders
+                    orders.push(order)
+
+                    // Emit to judge
+                    if (judges.find(judge => judge.id === judgeSocket.id)) judgeSocket.socket.emit("order", order)
                 }
 
                 return { session, participant }
@@ -199,6 +215,12 @@ var adminSockets: AdminSocket[] = []
 var judgeSockets: JudgeSocket[] = []
 
 /**
+ * Orders
+ * 
+ */
+var orders: Order[] = []
+
+/**
  * Admin Socket
  * 
  */
@@ -215,4 +237,12 @@ interface AdminSocket {
 interface JudgeSocket {
     socket: Socket
     id: number
+}
+
+/**
+ * Order
+ * 
+ */
+interface Order {
+    judgeId: number
 }
