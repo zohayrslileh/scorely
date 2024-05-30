@@ -156,17 +156,18 @@ export default new Router(function (main) {
                     if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("remove-judge", judge.id)
                 }
 
-                // Judge socket
-                const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
-
                 // Cancel orders
                 orders = orders.filter(order => !(order.judge.id === judge.id && order.session.id === session.id))
 
                 // Next order
                 const nextOrder = orders.find(order => order.judge.id === judge.id)
 
-                // Emit
-                if (judgeSocket) judgeSocket.socket.emit("order", nextOrder)
+                // Fetch judge sockets
+                for (const judgeSocket of judgeSockets.filter(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                    // Emit
+                    judgeSocket.socket.emit("order", nextOrder)
+                }
 
                 return judge
             })
@@ -195,14 +196,19 @@ export default new Router(function (main) {
                     // Push to orders
                     orders.push(order)
 
-                    // Judge socket
-                    const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
-
                     // Next order
                     const nextOrder = orders.find(order => order.judge.id === judge.id)
 
-                    // Emit to judge
-                    if (judgeSocket && order === nextOrder) judgeSocket.socket.emit("order", order)
+                    // Is current order
+                    if (order === nextOrder) {
+
+                        // Fetch judge sockets
+                        for (const judgeSocket of judgeSockets.filter(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                            // Emit
+                            judgeSocket.socket.emit("order", order)
+                        }
+                    }
                 }
 
                 return { session, participant }
