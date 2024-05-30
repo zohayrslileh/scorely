@@ -79,7 +79,7 @@ export default new Router(function (main) {
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-participant", participant.id)
+                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-participant", participant)
                 }
 
                 // Emit to broadcast admins
@@ -124,7 +124,7 @@ export default new Router(function (main) {
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-judge", judge.id)
+                    if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("add-judge", judge)
                 }
 
                 return judge
