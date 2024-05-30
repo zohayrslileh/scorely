@@ -1,7 +1,7 @@
 import Participant, { PrimitiveParticipant } from "./Participant"
+import Judge, { PrimitiveJudge } from "./Judge"
 import request from "@/Models/Server/Request"
 import zod from "zod"
-import Judge, { PrimitiveJudge } from "./Judge"
 
 /*
 |-----------------------------
