@@ -150,6 +150,12 @@ export default new Router(function (main) {
                     if (adminSocket.socket !== client.socket && adminSocket.sessionId === session.id) adminSocket.socket.emit("remove-judge", judge.id)
                 }
 
+                // Judge socket
+                const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.id === judge.id)
+
+                // Cancel order
+                if (judgeSocket) judgeSocket.socket.emit("order", undefined)
+
                 return judge
             })
 
