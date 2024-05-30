@@ -76,7 +76,7 @@ export default new Router(function (main) {
                 for (const adminSocket of adminSockets) {
 
                     // Emit pending orders
-                    if (adminSocket.session.id === sessionId) client.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
+                    adminSocket.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
                 }
 
                 // Next order
@@ -115,7 +115,7 @@ export default new Router(function (main) {
                 for (const adminSocket of adminSockets) {
 
                     // Emit pending orders
-                    if (adminSocket.session.id === sessionId) client.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
+                    adminSocket.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
                 }
 
                 // Next order
@@ -273,7 +273,7 @@ export default new Router(function (main) {
                 for (const adminSocket of adminSockets) {
 
                     // Emit pending orders
-                    if (adminSocket.session.id === sessionId) client.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
+                    adminSocket.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
                 }
 
                 // Next order
