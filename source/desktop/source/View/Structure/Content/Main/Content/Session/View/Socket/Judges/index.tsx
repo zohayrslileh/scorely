@@ -110,13 +110,16 @@ export default function ({ namespace, value, session }: Props) {
      * On add judge
      * 
      */
-    namespace.useOn("add-judge", function (primitiveJudge: PrimitiveJudge, isOnline: boolean) {
+    namespace.useOn("add-judge", function (primitiveJudge: PrimitiveJudge, isOnline: boolean, pendingOrders: number) {
 
         // Create judge
         const judge = new Judge(primitiveJudge)
 
         // Set is online
         judge.isOnline = isOnline
+
+        // Set pending orders
+        judge.pendingOrders = pendingOrders
 
         setJudges(judges => [...judges, judge])
     })
@@ -139,9 +142,11 @@ export default function ({ namespace, value, session }: Props) {
 
         try {
 
-            const isOnline = await namespace.ask<boolean>("add-judge", session.id, judge.id)
+            const [isOnline, pendingOrders] = await namespace.ask<[boolean, number]>("add-judge", session.id, judge.id)
 
             judge.isOnline = isOnline
+
+            judge.pendingOrders = pendingOrders
 
             setJudges(judges => [...judges, judge])
 

@@ -243,13 +243,16 @@ export default new Router(function (main) {
                 // Is online
                 const isOnline = !!judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)
 
+                // Pending orders
+                const pendingOrders = orders.filter(order => order.judge.id === judge.id).length
+
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-judge", judge, isOnline)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-judge", judge, isOnline, pendingOrders)
                 }
 
-                return isOnline
+                return [isOnline, pendingOrders]
             })
 
             // On remove judge
