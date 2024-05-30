@@ -177,20 +177,20 @@ export default new Router(function (main) {
                 // Participant
                 const participant = await Participant.find(participantId)
 
-                // Judges
-                const judges = await session.judges()
-
-                // Emit to judges
-                for (const judgeSocket of judgeSockets) {
+                // Fetch judges
+                for (const judge of await session.judges()) {
 
                     // Order
-                    const order: Order = { judgeId: judgeSocket.id }
+                    const order: Order = { judgeId: judge.id }
 
-                    // Append to orders
+                    // Push to orders
                     orders.push(order)
 
+                    // Judge socket
+                    const judgeSocket = judgeSockets.find(judgeSocket => judgeSocket.id === judge.id)
+
                     // Emit to judge
-                    if (judges.find(judge => judge.id === judgeSocket.id)) judgeSocket.socket.emit("order", order)
+                    if (judgeSocket) judgeSocket.socket.emit("order", order)
                 }
 
                 return { session, participant }
