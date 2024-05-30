@@ -50,6 +50,25 @@ export default function ({ namespace, value, session }: Props) {
     })
 
     /**
+     * On pending orders
+     * 
+     */
+    namespace.useOn("pending-orders", function (primitiveJudge: PrimitiveJudge, pendingOrders: number) {
+
+        // Update Judges
+        setJudges(function (judges) {
+
+            return judges.map(function (judge) {
+
+                // Set pending orders
+                if (primitiveJudge.id === judge.id) judge.pendingOrders = pendingOrders
+
+                return judge
+            })
+        })
+    })
+
+    /**
      * On judge connect
      * 
      */
@@ -158,10 +177,10 @@ export default function ({ namespace, value, session }: Props) {
     }, [session])
 
     /**
-     * Online judges promise
+     * Initialize judges promise
      * 
      */
-    usePromise(async () => await namespace.ask("online-judges", session.id), [])
+    usePromise(async () => await namespace.ask("initialize-judges", session.id), [])
 
     return <Container>
         <h4><Lang>Judges</Lang></h4>

@@ -14,9 +14,12 @@ import Judge from "@/Core/Judge"
 export default function ({ judge, onRemove }: Props) {
 
     return <Container>
-        <div id="status" className={judge.isOnline ? "" : "offline"}>
-            <div id="style-dot"></div>
-            <p><Lang>{judge.isOnline ? "Online" : "Offline"}</Lang></p>
+        <div id="header">
+            <div id="status" className={judge.isOnline ? "" : "offline"}>
+                <div id="style-dot"></div>
+                <p><Lang>{judge.isOnline ? "Online" : "Offline"}</Lang></p>
+            </div>
+            <p id="pending-orders">{judge.pendingOrders || "..."}</p>
         </div>
         <p>{judge.name}</p>
         <Grid columns="1fr" gap="10px" id="control">
@@ -56,28 +59,41 @@ const Container = styled.div`
         transform: scale(0.98);
     }
 
-    > #status {
-        --color: #299c29;
+    > #header {
         display: flex;
         align-items: center;
-        gap: 5px;
+        justify-content: space-between;
 
-        > #style-dot {
-            width: 7px;
-            height: 7px;
-            background-color: var(--color);
-            border-radius: 50px;
+        > #status {
+            --color: #299c29;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            > #style-dot {
+                width: 7px;
+                height: 7px;
+                background-color: var(--color);
+                border-radius: 50px;
+            }
+
+            > p {
+                margin: 0;
+                font-size: 12px;
+                font-family: ${() => Appearance.schema.FONT_MEDIUM};
+                color: var(--color);
+            }
+
+            &.offline {
+                --color: #6e6e6e;
+            }
         }
 
-        > p {
+        > #pending-orders {
             margin: 0;
             font-size: 12px;
             font-family: ${() => Appearance.schema.FONT_MEDIUM};
-            color: var(--color);
-        }
-
-        &.offline {
-            --color: #6e6e6e;
+            color: ${() => Appearance.schema.COLOR_BLUE.rgba()};
         }
     }
 

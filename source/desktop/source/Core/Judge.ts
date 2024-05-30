@@ -41,6 +41,12 @@ export default class Judge {
     public isOnline?: boolean
 
     /**
+     * Pending orders
+     * 
+     */
+    public pendingOrders?: number
+
+    /**
      * Constructor method
      * 
      */

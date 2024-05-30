@@ -133,8 +133,8 @@ export default new Router(function (main) {
                 })
             })
 
-            // On online judges
-            client.on("online-judges", async function (_, sessionId: unknown) {
+            // On initialize judges
+            client.on("initialize-judges", async function (_, sessionId: unknown) {
 
                 // Session
                 const session = await Session.find(sessionId)
@@ -150,6 +150,13 @@ export default new Router(function (main) {
 
                 // Emit online judges
                 client.socket.emit("online-judges", onlineJudges)
+
+                // Fetch judges
+                for (const judge of judges) {
+
+                    // Emit pending orders
+                    client.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
+                }
             })
 
             // On disconnect 
