@@ -1,5 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import Authentication from "@/Core/Authentication"
+import { appWindow } from "@tauri-apps/api/window"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
@@ -7,6 +8,8 @@ import { AxiosError } from "axios"
 import Content from "./Content"
 import Sidebar from "./Sidebar"
 import Navbar from "./Navbar"
+
+appWindow.maximize()
 
 /**
  * Main

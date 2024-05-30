@@ -1,7 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
 import ErrorCard from "@/View/Components/ErrorCard"
-import { appWindow } from "@tauri-apps/api/window"
 import Authentication from "@/Core/Authentication"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
@@ -12,7 +11,6 @@ import { Throw } from "@/Tools/Exception"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
-import { useEffect } from "react"
 
 /**
  * Login
@@ -44,17 +42,6 @@ export default function () {
      * 
      */
     const error = login.exception ? compiler(login.exception.current) : undefined
-
-    /**
-     * On solve
-     * 
-     */
-    useEffect(function () {
-
-        // Maximize
-        if (login.solve) appWindow.maximize()
-
-    }, [login.solve])
 
     // Pending status
     if (login.pending) return <Throw exception={new PendingException} />
