@@ -9,6 +9,7 @@ import styled from "@emotion/styled"
 import Session from "@/Core/Session"
 import Search from "./Search"
 import Row from "./Row"
+import usePromise from "@/Tools/Promise"
 
 /**
  * Participants
@@ -33,7 +34,13 @@ export default function ({ namespace, value, session }: Props) {
      * On add participant
      * 
      */
-    namespace.useOn("add-participant", function (primitiveParticipant: PrimitiveParticipant) {
+    namespace.useOn("add-participant", function (primitiveParticipant: PrimitiveParticipant, rating: [number, number]) {
+
+        // Create participant
+        const participant = new Participant(primitiveParticipant)
+
+        // Set rating
+        participant.rating = rating
 
         setParticipants(participants => [...participants, new Participant(primitiveParticipant)])
     })
@@ -45,6 +52,25 @@ export default function ({ namespace, value, session }: Props) {
     namespace.useOn("remove-participant", function (id: number) {
 
         setParticipants(participants => participants.filter(participant => participant.id !== id))
+    })
+
+    /**
+     * On rating
+     * 
+     */
+    namespace.useOn("rating", function (primitiveParticipant: PrimitiveParticipant, rating: [number, number]) {
+
+        // Update Participants
+        setParticipants(function (participants) {
+
+            return participants.map(function (participant) {
+
+                // Set rating
+                if (primitiveParticipant.id === participant.id) participant.rating = rating
+
+                return participant
+            })
+        })
     })
 
     /**
@@ -112,6 +138,12 @@ export default function ({ namespace, value, session }: Props) {
         }
 
     }, [session])
+
+    /**
+     * Initialize participants promise
+     * 
+     */
+    usePromise(async () => await namespace.ask("initialize-participants", session.id), [])
 
     return <Container>
         <h4><Lang>Participants</Lang></h4>

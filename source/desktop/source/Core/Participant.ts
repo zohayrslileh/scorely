@@ -29,6 +29,12 @@ export default class Participant {
     public club: string | null
 
     /**
+     * Rating
+     * 
+     */
+    public rating: [number, number] = [0, 0]
+
+    /**
      * Constructor method
      * 
      */

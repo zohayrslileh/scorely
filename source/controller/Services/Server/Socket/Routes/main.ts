@@ -1,4 +1,5 @@
 import WsException from "@/Services/Server/Socket/Exception/Exceptions"
+import ParticipantEntity from "@/Models/Database/Entities/Participant"
 import UserEntity from "@/Models/Database/Entities/User"
 import Authentication from "@/Core/Authentication"
 import Participant from "@/Core/Participant"
@@ -50,19 +51,6 @@ export default new Router(function (main) {
 
             // Emit
             if (nextOrder) client.socket.emit("order", nextOrder)
-
-            // On disconnect 
-            client.onDisconnect(function () {
-
-                judgeSockets = judgeSockets.filter(judgeSocket => judgeSocket.socket !== client.socket)
-
-                // Check if desconnect
-                if (!judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)) {
-
-                    // Emit to admins
-                    for (const adminSocket of adminSockets) adminSocket.socket.emit("judge-desconnect", judge)
-                }
-            })
 
             // On skip
             client.on("skip", async function (_, sessionId: unknown, participantId: unknown) {
@@ -132,6 +120,19 @@ export default new Router(function (main) {
                     judgeSocket.socket.emit("order", nextOrder)
                 }
             })
+
+            // On disconnect 
+            client.onDisconnect(function () {
+
+                judgeSockets = judgeSockets.filter(judgeSocket => judgeSocket.socket !== client.socket)
+
+                // Check if desconnect
+                if (!judgeSockets.find(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                    // Emit to admins
+                    for (const adminSocket of adminSockets) adminSocket.socket.emit("judge-desconnect", judge)
+                }
+            })
         }
 
         // Is admin
@@ -177,10 +178,33 @@ export default new Router(function (main) {
                 }
             })
 
-            // On disconnect 
-            client.onDisconnect(function () {
+            // On initialize judges
+            client.on("initialize-participants", async function (_, sessionId: unknown) {
 
-                adminSockets = adminSockets.filter(adminSocket => adminSocket.socket !== client.socket)
+                // Session
+                const session = await Session.find(sessionId)
+
+                // Participants
+                const participants = await ParticipantEntity.find({
+                    where: {
+                        sessions: [{ id: session.id }],
+                        ratings: [{ session: { id: session.id } }]
+                    },
+                    relations: { ratings: true }
+                })
+
+                // Fetch participants
+                for (const participant of participants) {
+
+                    // Ratings count
+                    const ratingsCount = participant.ratings.length
+
+                    // Average
+                    const average = participant.ratings.reduce((prev, current) => prev + current.score, 0) / ratingsCount
+
+                    // Emit rating
+                    client.socket.emit("rating", participant, [ratingsCount, average])
+                }
             })
 
             // On add participant
@@ -195,14 +219,36 @@ export default new Router(function (main) {
                 // Add participant to session
                 await session.addParticipant(participant)
 
+                // Rating
+                var rating: [number, number] = [0, 0]
+
+                // Participant entity
+                const participantEntity = await ParticipantEntity.findOne({
+                    where: {
+                        id: participant.id,
+                        ratings: [{ session: { id: session.id } }]
+                    },
+                    relations: { ratings: true }
+                })
+
+                // Check participant entity
+                if (participantEntity) {
+
+                    // Ratings count
+                    const ratingsCount = participantEntity.ratings.length
+
+                    // Average
+                    const average = participantEntity.ratings.reduce((prev, current) => prev + current.score, 0) / ratingsCount
+
+                    // Set rating
+                    rating = [ratingsCount, average]
+                }
+
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
-                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-participant", participant)
+                    if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-participant", participant, rating)
                 }
-
-                // Emit to broadcast admins
-                client.socket.broadcast.in("admins")
 
                 return participant
             })
@@ -341,6 +387,12 @@ export default new Router(function (main) {
                         }
                     }
                 }
+            })
+
+            // On disconnect 
+            client.onDisconnect(function () {
+
+                adminSockets = adminSockets.filter(adminSocket => adminSocket.socket !== client.socket)
             })
         }
 
