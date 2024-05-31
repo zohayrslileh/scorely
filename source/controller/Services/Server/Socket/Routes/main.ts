@@ -166,19 +166,21 @@ export default new Router(function (main) {
         // Is admin
         else if (role && role.name === "admin") {
 
-            // On join
-            client.on("join", async function (_, sessionId: unknown) {
+            // Session id
+            const sessionId = await client.ask("session-id")
 
-                // Session
-                const session = await Session.find(sessionId)
+            // Session
+            const session = await Session.find(sessionId)
 
-                // Append to admin sockets
-                if (!adminSockets.find(adminSocket => adminSocket.socket === client.socket)) adminSockets.push({
-                    socket: client.socket,
-                    session,
-                    user
-                })
+            // Append to admin sockets
+            if (!adminSockets.find(adminSocket => adminSocket.socket === client.socket)) adminSockets.push({
+                socket: client.socket,
+                session,
+                user
             })
+
+            // Emit joined
+            client.socket.emit("joined", true)
 
             // On initialize judges
             client.on("initialize-judges", async function (_, sessionId: unknown) {

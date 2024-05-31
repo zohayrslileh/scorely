@@ -34,6 +34,18 @@ export default function ({ session }: Props) {
     const error = main.useError()
 
     /**
+     * Joined
+     * 
+     */
+    const joined = main.useState<boolean>("joined")
+
+    /**
+     * On session id
+     * 
+     */
+    main.useOn("session-id", () => session.id)
+
+    /**
      * Participants promise
      * 
      */
@@ -45,12 +57,6 @@ export default function ({ session }: Props) {
      */
     const judges = usePromise(async () => await session.judges(), [])
 
-    /**
-     * Join promise
-     * 
-     */
-    const join = usePromise(async () => await main.ask("join", session.id), [])
-
     // Error status
     if (error) return <Throw exception={new ViewException(error)} />
 
@@ -58,16 +64,13 @@ export default function ({ session }: Props) {
     if (!connected) return <Throw exception={new PendingException("connecting")} />
 
     // Pending status
-    if (participants.pending || judges.pending || join.pending) return <Throw exception={new PendingException} />
+    if (participants.pending || judges.pending || !joined) return <Throw exception={new PendingException} />
 
     // Exception status
     if (participants.exception) return <Throw exception={participants.exception.current} />
 
     // Exception status
     if (judges.exception) return <Throw exception={judges.exception.current} />
-
-    // Exception status
-    if (join.exception) return <Throw exception={join.exception.current} />
 
     return <Container>
 
