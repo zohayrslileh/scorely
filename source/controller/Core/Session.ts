@@ -5,6 +5,7 @@ import JudgeEntity from "@/Models/Database/Entities/Judge"
 import CoreException from "./Exception"
 import Participant from "./Participant"
 import Judge from "./Judge"
+import excel from "xlsx"
 import zod from "zod"
 
 /*
@@ -420,7 +421,16 @@ export default class Session {
             }
         }
 
-        return sortRows
+        // Convert the data to a worksheet
+        const worksheet = excel.utils.json_to_sheet(sortRows)
+
+        // Create a new workbook
+        const workbook = excel.utils.book_new()
+
+        // Append the worksheet to the workbook
+        excel.utils.book_append_sheet(workbook, worksheet, "Sheet1")
+
+        return excel.write(workbook, { type: "buffer", bookType: "xlsx" })
     }
 }
 
