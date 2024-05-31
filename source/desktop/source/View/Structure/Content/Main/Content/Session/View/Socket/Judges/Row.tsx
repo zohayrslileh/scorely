@@ -13,7 +13,7 @@ import Judge from "@/Core/Judge"
  */
 export default function ({ judge, onRemove }: Props) {
 
-    return <Container>
+    return <Container className={`animation ${judge.primary ? "primary" : ""}`}>
         <div id="header">
             <div id="status" className={judge.isOnline ? "" : "offline"}>
                 <div id="style-dot"></div>
@@ -54,6 +54,10 @@ const Container = styled.div`
     padding: 15px;
     box-sizing: border-box;
     cursor: pointer;
+
+    &.primary {
+        border: 2px solid ${() => Appearance.theme.schema.FORCE_COLOR.rgba()};
+    }
 
     &:hover {
         transform: scale(0.98);

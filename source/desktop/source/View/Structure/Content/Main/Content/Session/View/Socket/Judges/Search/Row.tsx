@@ -32,7 +32,7 @@ export default function ({ judge, onSelect }: Props) {
 
     }, [judge])
 
-    return isAppend ? null : <Container>
+    return isAppend ? null : <Container className={`${judge.primary ? "primary" : ""}`}>
         <p>{judge.name}</p>
         <Flex id="control">
             <LightButton onClick={append}><FiPlus /><Lang>Add</Lang></LightButton>
@@ -57,6 +57,10 @@ const Container = styled(Flex)`
     background: ${() => Appearance.theme.schema.BACKGROUND_GRADIENT};
     border-radius: 7px;
     padding: 15px;
+
+    &.primary {
+        border: 2px solid ${() => Appearance.theme.schema.FORCE_COLOR.rgba()};
+    }
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};

@@ -43,7 +43,7 @@ export default function ({ judge, dispatch }: Props) {
 
     }, [judge, dispatch])
 
-    return <Container className="animation">
+    return <Container className={`animation ${judge.primary ? "primary" : ""}`}>
         <p>{judge.name}</p>
         <Flex id="control">
             <LightButton onClick={() => navigate(`${judge.id}/edit`)}><FiEdit2 /><Lang>Edit</Lang></LightButton>
@@ -60,6 +60,10 @@ const Container = styled(Flex)`
     background: ${() => Appearance.theme.schema.BACKGROUND_GRADIENT};
     border-radius: 7px;
     padding: 15px;
+
+    &.primary {
+        border: 2px solid ${() => Appearance.theme.schema.FORCE_COLOR.rgba()};
+    }
 
     > p {
         font-family: ${() => Appearance.schema.FONT_MEDIUM};
