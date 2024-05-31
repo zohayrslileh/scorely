@@ -262,7 +262,7 @@ export default class Session {
      * 
      * @returns
      */
-    public async rating(judge: Judge, participant: Participant, score: unknown) {
+    public async rating(judge: Judge, participant: Participant, score: unknown, penalties?: unknown) {
 
         // Get session entity
         const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
@@ -291,6 +291,9 @@ export default class Session {
 
         // Set score
         ratingEntity.score = zod.number().parse(score)
+
+        // Set penalties
+        if (judgeEntity.primary) ratingEntity.penalties = zod.number().parse(penalties)
 
         // Set session
         ratingEntity.session = sessionEntity

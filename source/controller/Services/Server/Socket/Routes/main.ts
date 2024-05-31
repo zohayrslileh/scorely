@@ -86,7 +86,7 @@ export default new Router(function (main) {
             })
 
             // On answer
-            client.on("answer", async function (_, sessionId: unknown, participantId: unknown, score: unknown) {
+            client.on("answer", async function (_, sessionId: unknown, participantId: unknown, score: unknown, penalties: unknown) {
 
                 // Order
                 const order = orders.find(order => order.judge.id === judge.id && order.session.id === sessionId && order.participant.id === participantId)
@@ -101,7 +101,7 @@ export default new Router(function (main) {
                 const participant = await Participant.find(participantId)
 
                 // Rating
-                await session.rating(judge, participant, score)
+                await session.rating(judge, participant, score, penalties)
 
                 // Update orders
                 orders = orders.filter(item => item !== order)
