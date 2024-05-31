@@ -33,8 +33,8 @@ export default function ({ participant, onRemove, onAskRate }: Props) {
         <div id="header">
             <div id="average">
                 <LuStar size={12} />
-                <p id="value">{average}</p>
-                {hide ? <LuEye onClick={() => setHide(false)} /> : <LuEyeOff onClick={() => setHide(true)} />}
+                <p id="value" className={hide ? "hide" : ""}>{average}</p>
+                {hide ? <LuEyeOff onClick={() => setHide(false)} id="eye" /> : <LuEye onClick={() => setHide(true)} id="eye" />}
             </div>
             <p id="ratings-count">{ratingsCount}</p>
         </div>
@@ -88,13 +88,22 @@ const Container = styled.div`
         p {
             margin: 0;
             font-family: ${() => Appearance.schema.FONT_MEDIUM};
-            font-size: 12px;
+            font-size: 13px;
         }
 
         > #average {
             display: flex;
             align-items: center;
             gap: 5px;
+
+            > #eye {
+                color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba(0.5)};
+                margin-inline-start: 10px;
+            }
+
+            > #value.hide {
+                filter: blur(3px);
+            }
         }
 
         > #ratings-count {

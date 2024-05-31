@@ -64,6 +64,12 @@ const Container = styled.div`
         align-items: center;
         justify-content: space-between;
 
+        p {
+            margin: 0;
+            font-family: ${() => Appearance.schema.FONT_MEDIUM};
+            font-size: 13px;
+        }
+
         > #status {
             --color: #299c29;
             display: flex;
@@ -78,9 +84,6 @@ const Container = styled.div`
             }
 
             > p {
-                margin: 0;
-                font-size: 12px;
-                font-family: ${() => Appearance.schema.FONT_MEDIUM};
                 color: var(--color);
             }
 
@@ -90,9 +93,6 @@ const Container = styled.div`
         }
 
         > #pending-orders {
-            margin: 0;
-            font-size: 12px;
-            font-family: ${() => Appearance.schema.FONT_MEDIUM};
             color: ${() => Appearance.schema.COLOR_BLUE.rgba()};
         }
     }
