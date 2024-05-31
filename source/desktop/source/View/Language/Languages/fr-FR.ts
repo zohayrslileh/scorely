@@ -28,5 +28,6 @@ export default {
     "Ask rating": "Demander notes",
     "Rate": "Note",
     "Online": "En ligne",
-    "Offline": "Hors ligne"
+    "Offline": "Hors ligne",
+    "Primary": "Principal"
 }
