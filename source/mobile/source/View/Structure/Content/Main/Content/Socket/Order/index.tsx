@@ -98,6 +98,8 @@ export default function ({ namespace, value }: Props) {
 
         setScore(undefined)
 
+        setPenalties(undefined)
+
     }, [value])
 
     return <Container className="animation">
