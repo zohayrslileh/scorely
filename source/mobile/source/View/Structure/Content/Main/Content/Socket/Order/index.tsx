@@ -117,8 +117,8 @@ const Container = styled.div`
 
             > #value {
                 text-align: center;
-                font-family: ${() => Appearance.schema.FONT_MEDIUM};
-                font-size: 20px;
+                font-family: ${() => Appearance.schema.FONT_BOLD};
+                font-size: 22px;
                 line-height: 0;
                 color: green;
             }

@@ -33,7 +33,7 @@ export default function ({ participant, onRemove, onAskRate }: Props) {
         <div id="header">
             <div id="average">
                 <LuStar size={12} />
-                <p id="value" className={hide ? "hide" : ""}>{average}</p>
+                <p id="value" className={hide ? "hide" : ""}>{average.toFixed(2)}</p>
                 {hide ? <LuEyeOff onClick={() => setHide(false)} id="eye" /> : <LuEye onClick={() => setHide(true)} id="eye" />}
             </div>
             <p id="ratings-count">{ratingsCount}</p>
