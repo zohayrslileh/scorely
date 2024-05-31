@@ -357,16 +357,16 @@ export default class Session {
             const unprimaryRating = participant.ratings.filter(rating => !rating.judge.primary)
 
             // Row
-            const row: Record<string, string | number | null> & { scoreFinal?: number | null } = {}
+            const row: Record<string, string | number | null> & { ["Note finale"]?: number | null } = {}
 
             // Set name
-            row.name = participant.name
+            row["Nom et prénom"] = participant.name
 
             // Set club
-            row.club = participant.club
+            row["Club"] = participant.club
 
             // Set primary score
-            row.primaryScore = primaryRating ? primaryRating.score : null
+            row["Note D"] = primaryRating ? primaryRating.score : null
 
             // Fetch unprimary judges
             for (const unprimaryJudge of unprimaryJudges) {
@@ -379,16 +379,16 @@ export default class Session {
             }
 
             // Set average
-            row.average = unprimaryRating.reduce((prev, current) => prev + current.score, 0) / unprimaryRating.length
+            row["Moyenne E"] = unprimaryRating.reduce((prev, current) => prev + current.score, 0) / unprimaryRating.length
 
             // Set score e
-            row.scoreE = 10 - row.average
+            row["Note E"] = 10 - row["Moyenne E"]
 
             // Set penalties
-            row.penalties = primaryRating && primaryRating.penalties ? primaryRating.penalties : null
+            row["Pénalités"] = primaryRating && primaryRating.penalties ? primaryRating.penalties : null
 
             // Set score final
-            row.scoreFinal = row.primaryScore && row.penalties ? row.primaryScore + row.scoreE - row.penalties : null
+            row["Note finale"] = row["Note D"] && row["Pénalités"] ? row["Note D"] + row["Note E"] - row["Pénalités"] : null
 
             return row
         })
@@ -396,11 +396,11 @@ export default class Session {
         // Sort rows
         const sortRows = rows.sort(function (rowA, rowB) {
 
-            if (rowA.scoreFinal === null || rowA.scoreFinal === undefined) return 1
+            if (rowA["Note finale"] === null || rowA["Note finale"] === undefined) return 1
 
-            if (rowB.scoreFinal === null || rowB.scoreFinal === undefined) return -1
+            if (rowB["Note finale"] === null || rowB["Note finale"] === undefined) return -1
 
-            return rowB.scoreFinal - rowA.scoreFinal
+            return rowB["Note finale"] - rowA["Note finale"]
         })
 
         // Last rank
@@ -412,13 +412,13 @@ export default class Session {
         // Fetch sort rows
         for (const sortRow of sortRows) {
 
-            if (!sortRow.scoreFinal) sortRow.rank = null
+            if (!sortRow["Note finale"]) sortRow["classe"] = null
 
             else {
 
-                if (lastRankedRow && lastRankedRow.scoreFinal! > sortRow.scoreFinal) lastRank++
+                if (lastRankedRow && lastRankedRow["Note finale"]! > sortRow["Note finale"]) lastRank++
 
-                sortRow.rank = lastRank
+                sortRow["classe"] = lastRank
 
                 lastRankedRow = sortRow
             }
