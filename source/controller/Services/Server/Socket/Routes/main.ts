@@ -129,6 +129,7 @@ export default new Router(function (main) {
 
                     // Average
                     const average = needRatings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / needRatings.length
+                    
                     // Set rating
                     rating = [ratingsCount, average]
                 }
@@ -284,6 +285,7 @@ export default new Router(function (main) {
 
                     // Average
                     const average = needRatings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / needRatings.length
+                    
                     // Set rating
                     rating = [ratingsCount, average]
                 }
