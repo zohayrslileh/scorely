@@ -103,11 +103,39 @@ export default new Router(function (main) {
                 // Update orders
                 orders = orders.filter(item => item !== order)
 
+                // Rating
+                var rating: [number, number] = [0, 0]
+
+                // Participant entity
+                const participantEntity = await ParticipantEntity.findOne({
+                    where: {
+                        id: participant.id,
+                        ratings: [{ session: { id: session.id } }]
+                    },
+                    relations: { ratings: true }
+                })
+
+                // Check participant entity
+                if (participantEntity) {
+
+                    // Ratings count
+                    const ratingsCount = participantEntity.ratings.length
+
+                    // Average
+                    const average = participantEntity.ratings.reduce((prev, current) => prev + current.score, 0) / ratingsCount
+
+                    // Set rating
+                    rating = [ratingsCount, average]
+                }
+
                 // Emit to admins
                 for (const adminSocket of adminSockets) {
 
                     // Emit pending orders
                     adminSocket.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
+
+                    // Emit rating
+                    client.socket.emit("rating", participant, rating)
                 }
 
                 // Next order
@@ -250,7 +278,7 @@ export default new Router(function (main) {
                     if (adminSocket.socket !== client.socket && adminSocket.session.id === session.id) adminSocket.socket.emit("add-participant", participant, rating)
                 }
 
-                return participant
+                return rating
             })
 
             // On remove participant

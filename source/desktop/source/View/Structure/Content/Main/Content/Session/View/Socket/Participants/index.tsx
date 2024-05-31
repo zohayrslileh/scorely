@@ -82,7 +82,9 @@ export default function ({ namespace, value, session }: Props) {
 
         try {
 
-            await namespace.ask("add-participant", session.id, participant.id)
+            const rating = await namespace.ask<[number, number]>("add-participant", session.id, participant.id)
+
+            participant.rating = rating
 
             setParticipants(participants => [...participants, participant])
 
