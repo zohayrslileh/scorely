@@ -330,7 +330,88 @@ export default class Session {
             relations: { ratings: { judge: true } }
         })
 
-        return participants
+        // Judges
+        const judges = participants.reduce<JudgeEntity[]>(function (judges, participant) {
+
+            // Rest ratings
+            const ratings = participant.ratings.filter(rating => !judges.find(judge => judge.id === rating.judge.id))
+
+            // Push to judges
+            judges.push(...ratings.map(rating => rating.judge))
+
+            return judges
+
+        }, [])
+
+        // Unprimary judges
+        const unprimaryJudges = judges.filter(judge => !judge.primary)
+
+        // Rows
+        const rows = participants.map(function (participant) {
+
+            // Primary rating
+            const primaryRating = participant.ratings.find(rating => rating.judge.primary)
+
+            // Unprimary rating
+            const unprimaryRating = participant.ratings.filter(rating => !rating.judge.primary)
+
+            // Row
+            const row: Record<string, string | number | null> & { scoreFinal: number | null } = { scoreFinal: null }
+
+            // Set name
+            row.name = participant.name
+
+            // Set club
+            row.club = participant.club
+
+            // Set primary score
+            row.primaryScore = primaryRating ? primaryRating.score : null
+
+            // Fetch unprimary judges
+            for (const unprimaryJudge of unprimaryJudges) {
+
+                // Rating
+                const rating = participant.ratings.find(rating => rating.judge.id === unprimaryJudge.id)
+
+                // Set judge
+                row[unprimaryJudge.name] = rating ? rating.score : null
+            }
+
+            // Set average
+            row.average = unprimaryRating.reduce((prev, current) => prev + current.score, 0) / unprimaryRating.length
+
+            // Set score e
+            row.scoreE = 10 - row.average
+
+            // Set penalties
+            row.penalties = primaryRating && primaryRating.penalties ? primaryRating.penalties : null
+
+            // Set score final
+            row.scoreFinal = row.primaryScore && row.penalties ? row.primaryScore + row.scoreE - row.penalties : null
+
+            return row
+        })
+
+        // Sort rows
+        const sortRows = rows.sort(function (rowA, rowB) {
+
+            if (rowA.scoreFinal === null) return 1
+
+            if (rowB.scoreFinal === null) return -1
+
+            return rowB.scoreFinal - rowA.scoreFinal
+        })
+
+        let rank = 1
+
+        for (let i = 0; i < sortRows.length; i++) {
+
+            if (i > 0 && sortRows[i].scoreFinal !== sortRows[i - 1].scoreFinal) rank = i + 1
+
+            sortRows[i].rank = sortRows[i].scoreFinal !== null ? rank : null
+        }
+
+        return sortRows
     }
 }
 
