@@ -124,9 +124,11 @@ export default new Router(function (main) {
                     // Ratings count
                     const ratingsCount = participantEntity.ratings.length
 
-                    // Average
-                    const average = participantEntity.ratings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / ratingsCount
+                    // Need ratings
+                    const needRatings = participantEntity.ratings.filter(rating => !rating.judge.primary)
 
+                    // Average
+                    const average = needRatings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / needRatings.length
                     // Set rating
                     rating = [ratingsCount, average]
                 }
@@ -235,8 +237,11 @@ export default new Router(function (main) {
                     // Ratings count
                     const ratingsCount = participant.ratings.length
 
+                    // Need ratings
+                    const needRatings = participant.ratings.filter(rating => !rating.judge.primary)
+
                     // Average
-                    const average = participant.ratings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / ratingsCount
+                    const average = needRatings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / needRatings.length
 
                     // Emit rating
                     client.socket.emit("rating", participant, [ratingsCount, average])
@@ -273,9 +278,12 @@ export default new Router(function (main) {
                     // Ratings count
                     const ratingsCount = participantEntity.ratings.length
 
-                    // Average
-                    const average = participantEntity.ratings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / ratingsCount
 
+                    // Need ratings
+                    const needRatings = participantEntity.ratings.filter(rating => !rating.judge.primary)
+
+                    // Average
+                    const average = needRatings.reduce((prev, current) => prev + (current.judge.primary ? 0 : current.score), 0) / needRatings.length
                     // Set rating
                     rating = [ratingsCount, average]
                 }
