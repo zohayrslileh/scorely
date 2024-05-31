@@ -77,6 +77,9 @@ export default new Router(function (main) {
                 // Fetch judge sockets
                 for (const judgeSocket of judgeSockets.filter(judgeSocket => judgeSocket.judge.id === judge.id)) {
 
+                    // Emit empty
+                    judgeSocket.socket.emit("order", undefined)
+
                     // Emit
                     judgeSocket.socket.emit("order", nextOrder)
                 }
@@ -143,6 +146,9 @@ export default new Router(function (main) {
 
                 // Fetch judge sockets
                 for (const judgeSocket of judgeSockets.filter(judgeSocket => judgeSocket.judge.id === judge.id)) {
+
+                    // Emit empty
+                    judgeSocket.socket.emit("order", undefined)
 
                     // Emit
                     judgeSocket.socket.emit("order", nextOrder)
