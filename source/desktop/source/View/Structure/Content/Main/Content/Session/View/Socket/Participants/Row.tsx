@@ -1,4 +1,5 @@
 import LightButton from "@/View/Components/LightButton"
+import { LuEye, LuEyeOff } from "react-icons/lu"
 import Button from "@/View/Components/Button"
 import Participant from "@/Core/Participant"
 import Appearance from "@/View/Appearance"
@@ -7,6 +8,7 @@ import { FiTrash2 } from "react-icons/fi"
 import { Lang } from "@/Tools/Language"
 import { LuStar } from "react-icons/lu"
 import styled from "@emotion/styled"
+import { useState } from "react"
 
 /**
  * Row
@@ -15,8 +17,27 @@ import styled from "@emotion/styled"
  */
 export default function ({ participant, onRemove, onAskRate }: Props) {
 
+    /**
+     * Hide state
+     * 
+     */
+    const [hide, setHide] = useState(true)
+
+    /**
+     * Rating
+     * 
+     */
+    const [ratingsCount, average] = participant.rating
+
     return <Container>
-        <p>{JSON.stringify(participant.rating)}</p>
+        <div id="header">
+            <div id="average">
+                <LuStar size={12} />
+                <p id="value">{average}</p>
+                {hide ? <LuEye onClick={() => setHide(false)} /> : <LuEyeOff onClick={() => setHide(true)} />}
+            </div>
+            <p id="ratings-count">{ratingsCount}</p>
+        </div>
         <p>{participant.name}</p>
         <Grid columns="1fr 1fr" gap="10px" id="control">
             <Button onClick={async () => await onAskRate(participant)}><LuStar /><Lang>Rate</Lang></Button>
@@ -48,13 +69,37 @@ const Container = styled.div`
     height: 100%;
     position: relative;
     gap: 10px;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr auto;
     padding: 15px;
     box-sizing: border-box;
     cursor: pointer;
 
     &:hover {
         transform: scale(0.98);
+    }
+
+    > #header {
+        color: #299c29;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: space-between;
+
+        p {
+            margin: 0;
+            font-family: ${() => Appearance.schema.FONT_MEDIUM};
+            font-size: 12px;
+        }
+
+        > #average {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        > #ratings-count {
+            color: ${() => Appearance.schema.COLOR_BLUE.rgba()};
+        }
     }
 
     > p {
