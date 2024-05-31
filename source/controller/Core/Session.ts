@@ -314,7 +314,7 @@ export default class Session {
      * 
      * @returns
      */
-    public async export() {
+    public async export(): Promise<ArrayBuffer> {
 
         // Get session entity
         const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
@@ -357,7 +357,7 @@ export default class Session {
             const unprimaryRating = participant.ratings.filter(rating => !rating.judge.primary)
 
             // Row
-            const row: Record<string, string | number | null> & { scoreFinal: number | null } = { scoreFinal: null }
+            const row: Record<string, string | number | null> & { scoreFinal?: number | null } = {}
 
             // Set name
             row.name = participant.name
@@ -396,17 +396,20 @@ export default class Session {
         // Sort rows
         const sortRows = rows.sort(function (rowA, rowB) {
 
-            if (rowA.scoreFinal === null) return 1
+            if (rowA.scoreFinal === null || rowA.scoreFinal === undefined) return 1
 
-            if (rowB.scoreFinal === null) return -1
+            if (rowB.scoreFinal === null || rowB.scoreFinal === undefined) return -1
 
             return rowB.scoreFinal - rowA.scoreFinal
         })
 
+        // Last rank
         var lastRank = 1
 
+        // Last ranked row
         var lastRankedRow: typeof sortRows[0] | undefined
 
+        // Fetch sort rows
         for (const sortRow of sortRows) {
 
             if (!sortRow.scoreFinal) sortRow.rank = null

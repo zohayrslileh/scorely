@@ -159,7 +159,7 @@ export default Router.create<Environment>(function (session) {
         // Get session
         const session = await Session.find(+context.req.param("id"))
 
-        return context.json(await session.export())
+        return context.body(await session.export())
     })
 })
 
