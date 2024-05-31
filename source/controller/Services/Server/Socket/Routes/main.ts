@@ -135,7 +135,7 @@ export default new Router(function (main) {
                     adminSocket.socket.emit("pending-orders", judge, orders.filter(order => order.judge.id === judge.id).length)
 
                     // Emit rating
-                    client.socket.emit("rating", participant, rating)
+                    adminSocket.socket.emit("rating", participant, rating)
                 }
 
                 // Next order
