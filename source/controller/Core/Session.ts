@@ -402,13 +402,22 @@ export default class Session {
             return rowB.scoreFinal - rowA.scoreFinal
         })
 
-        let rank = 1
+        var lastRank = 1
 
-        for (let i = 0; i < sortRows.length; i++) {
+        var lastRankedRow: typeof sortRows[0] | undefined
 
-            if (i > 0 && sortRows[i].scoreFinal !== sortRows[i - 1].scoreFinal) rank = i + 1
+        for (const sortRow of sortRows) {
 
-            sortRows[i].rank = sortRows[i].scoreFinal !== null ? rank : null
+            if (!sortRow.scoreFinal) sortRow.rank = null
+
+            else {
+
+                if (lastRankedRow && lastRankedRow.scoreFinal! > sortRow.scoreFinal) lastRank++
+
+                sortRow.rank = lastRank
+
+                lastRankedRow = sortRow
+            }
         }
 
         return sortRows

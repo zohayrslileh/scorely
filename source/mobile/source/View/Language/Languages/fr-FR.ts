@@ -23,5 +23,6 @@ export default {
     "Open new session": "Ouvrir une nouvelle session",
     "Logout": "Se déconnecter",
     "Skip": "Ignorer",
-    "Score": "Note"
+    "Score": "Note",
+    "Penalties": "Pénalités"
 }
