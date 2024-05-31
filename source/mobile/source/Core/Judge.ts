@@ -166,6 +166,7 @@ export default class Judge {
 export interface PrimitiveJudge {
     id: number
     name: string
+    primary: boolean
     username: string
     password: string | undefined
 }
