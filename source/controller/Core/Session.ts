@@ -251,6 +251,7 @@ export default class Session {
         return judges.map(primitiveJudge => new Judge({
             id: primitiveJudge.id,
             name: primitiveJudge.name,
+            primary: primitiveJudge.primary,
             username: primitiveJudge.user.username,
             password: undefined
         }))

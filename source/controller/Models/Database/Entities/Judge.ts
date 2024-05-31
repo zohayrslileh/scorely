@@ -22,6 +22,13 @@ export default class Judge extends BaseEntity {
     declare public name: string
 
     /**
+     * Primary
+     * 
+     */
+    @Column({ type: "boolean", nullable: false, default: false })
+    declare public primary: boolean
+
+    /**
      * Sessions
      * 
      */

@@ -26,6 +26,12 @@ export default class Judge {
     public name: string
 
     /**
+     * Primary
+     * 
+     */
+    public primary: boolean
+
+    /**
      * Username
      * 
      */
@@ -48,6 +54,9 @@ export default class Judge {
 
         // Set name
         this.name = primitiveJudge.name
+
+        // Set primary
+        this.primary = primitiveJudge.primary
 
         // Set username
         this.username = primitiveJudge.username
@@ -97,6 +106,7 @@ export default class Judge {
         return new this({
             id: entity.id,
             name: entity.name,
+            primary: entity.primary,
             username: entity.user.username,
             password: undefined
         })
@@ -128,6 +138,7 @@ export default class Judge {
         return entities.map(entity => new this({
             id: entity.id,
             name: entity.name,
+            primary: entity.primary,
             username: entity.user.username,
             password: undefined
         }))
@@ -155,6 +166,7 @@ export default class Judge {
         return new this({
             id: entity.id,
             name: entity.name,
+            primary: entity.primary,
             username: entity.user.username,
             password: undefined
         })
@@ -239,6 +251,7 @@ export default class Judge {
 export interface PrimitiveJudge {
     id: number
     name: string
+    primary: boolean
     username: string
     password: string | undefined
 }
