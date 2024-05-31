@@ -1,13 +1,15 @@
 import Participant, { PrimitiveParticipant } from "@/Core/Participant"
 import LightButton from "@/View/Components/LightButton"
+import { writeBinaryFile } from "@tauri-apps/api/fs"
 import { RiFileExcel2Line } from "react-icons/ri"
 import compiler from "@/View/Exception/compiler"
 import Namespace from "@/Tools/Socket/Namespace"
+import * as dialog from "@tauri-apps/api/dialog"
+import { Lang, useLang } from "@/Tools/Language"
 import Dialog from "@/View/Components/Dialog"
 import { useCallback, useState } from "react"
 import Appearance from "@/View/Appearance"
 import usePromise from "@/Tools/Promise"
-import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Session from "@/Core/Session"
 import Search from "./Search"
@@ -19,6 +21,12 @@ import Row from "./Row"
  * @returns 
  */
 export default function ({ namespace, value, session }: Props) {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Is open
@@ -152,9 +160,20 @@ export default function ({ namespace, value, session }: Props) {
 
         try {
 
-            const response = await session.exportExcel()
+            // Excel
+            const excel = await session.exportExcel()
 
-            console.log(response)
+            // Ask save path
+            const path = await dialog.save({
+                title: lang("Export"),
+                defaultPath: `${lang("Session")} ${session.id}.xlsx`
+            })
+
+            // Check path
+            if (!path) throw new Error("Path is Empty")
+
+            // Save
+            await writeBinaryFile(path, excel)
 
         } catch (exception) {
 

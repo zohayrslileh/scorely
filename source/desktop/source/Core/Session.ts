@@ -160,7 +160,7 @@ export default class Session {
      */
     public async exportExcel() {
 
-        return await request<unknown>({ url: `/session/${this.id}/export` })
+        return await request<ArrayBuffer>({ url: `/session/${this.id}/export`, responseType: "arraybuffer" })
     }
 
 }
