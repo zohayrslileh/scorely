@@ -307,6 +307,22 @@ export default class Session {
         // Save
         await ratingEntity.save()
     }
+
+    /**
+     * Export method
+     * 
+     * @returns
+     */
+    public async export() {
+
+        // Get session entity
+        const sessionEntity = await SessionEntity.findOneBy({ id: this.id })
+
+        // Check session entity
+        if (!sessionEntity) throw new CoreException("Session entity was not found")
+
+        return sessionEntity
+    }
 }
 
 /**

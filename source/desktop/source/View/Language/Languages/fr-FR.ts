@@ -29,5 +29,6 @@ export default {
     "Rate": "Note",
     "Online": "En ligne",
     "Offline": "Hors ligne",
-    "Primary": "Principal"
+    "Primary": "Principal",
+    "Export": "Exporter"
 }

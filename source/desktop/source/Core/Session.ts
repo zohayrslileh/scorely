@@ -153,6 +153,16 @@ export default class Session {
         return judges.map(primitiveJudge => new Judge(primitiveJudge))
     }
 
+    /**
+     * Export excel method
+     * 
+     * @returns
+     */
+    public async exportExcel() {
+
+        return await request<unknown>({ url: `/session/${this.id}/export` })
+    }
+
 }
 
 /**

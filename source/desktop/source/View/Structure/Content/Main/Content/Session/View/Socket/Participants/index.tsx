@@ -1,4 +1,6 @@
 import Participant, { PrimitiveParticipant } from "@/Core/Participant"
+import LightButton from "@/View/Components/LightButton"
+import { RiFileExcel2Line } from "react-icons/ri"
 import compiler from "@/View/Exception/compiler"
 import Namespace from "@/Tools/Socket/Namespace"
 import Dialog from "@/View/Components/Dialog"
@@ -142,13 +144,38 @@ export default function ({ namespace, value, session }: Props) {
     }, [session])
 
     /**
+     * Export excel method
+     * 
+     * @returns
+     */
+    const exportExcel = useCallback(async function () {
+
+        try {
+
+            const response = await session.exportExcel()
+
+            console.log(response)
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+
+            throw exception
+        }
+
+    }, [session])
+
+    /**
      * Initialize participants promise
      * 
      */
     usePromise(async () => await namespace.ask("initialize-participants", session.id), [])
 
     return <Container>
-        <h4><Lang>Participants</Lang></h4>
+        <div id="header">
+            <h4><Lang>Participants</Lang></h4>
+            <LightButton onClick={exportExcel}><RiFileExcel2Line /><Lang>Export</Lang></LightButton>
+        </div>
         <div id="rows">
             {participants.map(participant => <Row key={participant.id} participant={participant} onRemove={removeParticipant} onAskRate={askRate} />)}
             <button onClick={() => setIsOpen(true)}><Lang>Add participant</Lang></button>
@@ -182,10 +209,16 @@ const Container = styled.div`
     grid-template-rows: auto 1fr;
     overflow: auto;
 
-    > h4 {
-        margin: 7px;
-        font-size: 16px;
-        opacity: 0.5;
+    > #header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > h4 {
+            margin: 7px;
+            font-size: 16px;
+            opacity: 0.5;
+        }
     }
 
     > #rows {
