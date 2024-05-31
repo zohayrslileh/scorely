@@ -47,6 +47,10 @@ export default function () {
             <TextInput placeholder={lang("Name")} type="text" value={value.name || ""} onChange={value => update.name(value || undefined)} />
             <TextInput placeholder={lang("Username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
+            <label>
+                <input type="checkbox" checked={value.primary} onChange={event => update.primary(event.target.checked)} />
+                <Lang>Primary</Lang>
+            </label>
             <Button onClick={create.execute}><Lang>Save</Lang></Button>
         </Grid>
     </Container>
@@ -71,6 +75,12 @@ class JudgeForm {
      * 
      */
     public name: string | undefined
+
+    /**
+     * Primary
+     * 
+     */
+    public primary: boolean = false
 
     /**
      * Username

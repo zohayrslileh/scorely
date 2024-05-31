@@ -76,17 +76,21 @@ export default class Judge {
         const schema = zod.object({
             name: zod.string().max(50),
             username: zod.string().max(50),
-            password: zod.string().max(50)
+            password: zod.string().max(50),
+            primary: zod.boolean()
         })
 
         // Validate data
-        const { name, username, password } = schema.parse(data)
+        const { name, primary, username, password } = schema.parse(data)
 
         // Create entity
         const entity = new JudgeEntity
 
         // Set name
         entity.name = name
+
+        // Set primary
+        entity.primary = primary
 
         // Set user
         entity.user = new User
