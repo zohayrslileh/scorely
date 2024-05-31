@@ -22,6 +22,13 @@ export default class Rating extends BaseEntity {
     declare public score: number
 
     /**
+     * Penalties
+     * 
+     */
+    @Column({ type: "float", nullable: true })
+    declare public penalties: number
+
+    /**
      * Session
      * 
      */
