@@ -61,7 +61,14 @@ export default function ({ namespace, value }: Props) {
      */
     const skip = useCallback(async function () {
 
-        await namespace.ask("skip", value.session.id, value.participant.id)
+        try {
+
+            await namespace.ask("skip", value.session.id, value.participant.id)
+
+        } catch (exception) {
+
+            alert(compiler(exception).message)
+        }
 
     }, [namespace, value])
 

@@ -293,7 +293,7 @@ export default class Session {
         ratingEntity.score = zod.number().parse(score)
 
         // Set penalties
-        if (judgeEntity.primary && penalties !== undefined) ratingEntity.penalties = zod.number().parse(penalties)
+        if (judgeEntity.primary && penalties !== undefined && penalties !== null) ratingEntity.penalties = zod.number().parse(penalties)
 
         // Set session
         ratingEntity.session = sessionEntity
