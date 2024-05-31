@@ -26,7 +26,7 @@ export default class Rating extends BaseEntity {
      * 
      */
     @Column({ type: "float", nullable: true })
-    declare public penalties: number
+    declare public penalties: number | null
 
     /**
      * Session

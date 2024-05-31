@@ -125,7 +125,7 @@ export default new Router(function (main) {
                     const ratingsCount = participantEntity.ratings.length
 
                     // Average
-                    const average = participantEntity.ratings.reduce((prev, current) => prev + current.score, 0) / ratingsCount
+                    const average = participantEntity.ratings.reduce((prev, current) => prev + (current.penalties === null ? current.score : 0), 0) / ratingsCount
 
                     // Set rating
                     rating = [ratingsCount, average]
@@ -236,7 +236,7 @@ export default new Router(function (main) {
                     const ratingsCount = participant.ratings.length
 
                     // Average
-                    const average = participant.ratings.reduce((prev, current) => prev + current.score, 0) / ratingsCount
+                    const average = participant.ratings.reduce((prev, current) => prev + (current.penalties === null ? current.score : 0), 0) / ratingsCount
 
                     // Emit rating
                     client.socket.emit("rating", participant, [ratingsCount, average])
@@ -274,7 +274,7 @@ export default new Router(function (main) {
                     const ratingsCount = participantEntity.ratings.length
 
                     // Average
-                    const average = participantEntity.ratings.reduce((prev, current) => prev + current.score, 0) / ratingsCount
+                    const average = participantEntity.ratings.reduce((prev, current) => prev + (current.penalties === null ? current.score : 0), 0) / ratingsCount
 
                     // Set rating
                     rating = [ratingsCount, average]
