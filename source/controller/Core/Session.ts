@@ -321,7 +321,16 @@ export default class Session {
         // Check session entity
         if (!sessionEntity) throw new CoreException("Session entity was not found")
 
-        return sessionEntity
+        // Participants
+        const participants = await ParticipantEntity.find({
+            where: {
+                sessions: [{ id: this.id }],
+                ratings: [{ session: { id: this.id } }]
+            },
+            relations: { ratings: { judge: true } }
+        })
+
+        return participants
     }
 }
 
