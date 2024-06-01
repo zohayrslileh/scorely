@@ -1,11 +1,6 @@
-import Terminal from "@/Tools/Console/Terminal"
 import { stream } from "hono/streaming"
 import { createReadStream } from "fs"
 import { Context } from "hono"
-
-const terminal = new Terminal
-
-terminal.execute("ffmpeg -y -r 15 -f gdigrab -i desktop -pix_fmt yuv420p storage/output.mp4")
 
 /*
 |-----------------------------
@@ -20,7 +15,7 @@ export default async function (context: Context) {
 
     return stream(context, async function (stream) {
 
-        const vedio = createReadStream("storage/record.webm")
+        const vedio = createReadStream("storage/record.mkv")
 
         await new Promise<void>(function (resolve) {
 
