@@ -13,7 +13,7 @@ export default new Router(async function (stream) {
 
         const screenshot = await screenshotDesktop()
 
-        stream.namespace.emit("screenshot", screenshot)
+        stream.namespace.emit("screenshot", screenshot.toString("base64"))
 
     } while (true)
 })
