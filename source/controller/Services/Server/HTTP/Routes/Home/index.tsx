@@ -1,5 +1,4 @@
-import { stream } from "hono/streaming"
-import { createReadStream } from "fs"
+import Download from "./Download"
 import { Context } from "hono"
 
 /*
@@ -11,18 +10,5 @@ import { Context } from "hono"
 */
 export default async function (context: Context) {
 
-    context.set("Content-Type", "video/webm")
-
-    return stream(context, async function (stream) {
-
-        const vedio = createReadStream("storage/record.mkv")
-
-        await new Promise<void>(function (resolve) {
-
-            vedio.on("data", data => stream.write(data))
-
-            vedio.on("end", resolve)
-        })
-
-    })
+    return context.html(<Download />)
 }
