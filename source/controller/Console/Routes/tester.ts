@@ -10,7 +10,9 @@ import sleep from "@/Tools/Sleep"
 */
 export default async function () {
 
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    })
 
     const context = browser.defaultBrowserContext()
 
