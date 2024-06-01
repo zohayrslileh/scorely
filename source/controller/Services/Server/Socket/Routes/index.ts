@@ -1,4 +1,5 @@
 import Router from "@/Tools/Socket/Router"
+import stream from "./stream"
 import main from "./main"
 
 /*
@@ -14,5 +15,11 @@ export default new Router(function (routes) {
      * 
      */
     routes.route("/main", main)
+
+    /**
+     * Stream
+     * 
+     */
+    routes.route("/stream", stream)
 
 })
