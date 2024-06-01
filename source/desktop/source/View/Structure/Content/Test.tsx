@@ -1,3 +1,4 @@
+import manager from "@/Models/Server/Socket"
 import styled from "@emotion/styled"
 
 /**
@@ -6,6 +7,20 @@ import styled from "@emotion/styled"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Stream
+     * 
+     */
+    const stream = manager.useNamespace("/stream")
+
+    /**
+     * Screenshot
+     * 
+     */
+    const screenshot = stream.useState<unknown>("screenshot")
+
+    console.log(screenshot)
 
     return <Container>
         TEST
