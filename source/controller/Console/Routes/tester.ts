@@ -11,7 +11,11 @@ import sleep from "@/Tools/Sleep"
 export default async function () {
 
     const browser = await puppeteer.launch({
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--proxy-server=geo.iproyal.com:12321"
+        ]
     })
 
     const context = browser.defaultBrowserContext()
@@ -21,6 +25,8 @@ export default async function () {
     const page = await browser.newPage()
 
     page.setDefaultTimeout(0)
+
+    await page.authenticate({ username: "SakgJrSFBOfk57YM", password: "BlIyd29h7g1HiYZq_country-ca" })
 
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
