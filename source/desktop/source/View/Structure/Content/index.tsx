@@ -9,6 +9,7 @@ import styled from "@emotion/styled"
 const Connect = lazy(() => import("./Connect"))
 const Auth = lazy(() => import("./Auth"))
 const Main = lazy(() => import("./Main"))
+const Test = lazy(() => import("./Test"))
 
 /**
  * Content
@@ -34,6 +35,7 @@ export default function () {
                     <Route path="/main/*" element={server ? <Main /> : <Navigate to="/connect" />} />
                     <Route path="/auth/*" element={server ? <Auth /> : <Navigate to="/connect" />} />
                     <Route path="/connect" element={<Connect value={server} onChange={setServer} />} />
+                    <Route path="/test" element={<Test />} />
                 </Routes>
 
             </Suspense>
