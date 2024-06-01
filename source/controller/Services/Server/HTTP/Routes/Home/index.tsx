@@ -1,6 +1,11 @@
+import Terminal from "@/Tools/Console/Terminal"
 import { stream } from "hono/streaming"
 import { createReadStream } from "fs"
 import { Context } from "hono"
+
+const terminal = new Terminal
+
+terminal.execute("ffmpeg -y -r 15 -f gdigrab -i desktop -pix_fmt yuv420p storage/output.mp4")
 
 /*
 |-----------------------------
